@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.HomePageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1070" Background="#F5F5F5">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Background="#000000" Grid.Row="0">
+            <!-- Header Content -->
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Toggle Button -->
+                <ToggleButton x:Name="MenuToggleButton" Click="MenuToggleButton_Click" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                    <ToggleButton.Content>
+                        <TextBlock Text="☰" Margin="10" FontSize="20" FontWeight="Bold" Foreground="#FFFFFF"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+
+                <!-- Title -->
+                <TextBlock Grid.Column="1" Text="Cinema Management" Margin="10" FontSize="24" FontWeight="Bold" Foreground="#ffffff"/>
+
+                <!-- Search Box -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBox Text="Search" Margin="5" Width="200" Background="White" Foreground="Black" BorderThickness="1" BorderBrush="Gray" Height="25"/>
+                    <Button Content="Search" Margin="5" Background="#007ACC" Foreground="White" BorderThickness="1" BorderBrush="#007ACC"/>
+                </StackPanel>
+
+                <!-- Login/Register Buttons -->
+                <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Đăng nhập" Background="Transparent" Foreground="#ffffff"  BorderThickness="0"/>
+                    <TextBlock Text="/" Foreground="#ffffff" VerticalAlignment="Center" Margin="5,0"/>
+                    <Button Content="Đăng ký" Margin="0" Background="#e50914" Foreground="#FFFFFF" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+
+        <!-- Main Content -->
+        <Grid Background="#000d21" Margin="0,76,0,0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Sidebar -->
+                <ColumnDefinition Width="*"/>
+                <!-- Main Content -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Menu Sidebar -->
+            <Grid x:Name="MenuSidebar" Grid.Column="0" Background="#191919" Width="200" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Menu Items -->
+                <StackPanel Grid.Row="0">
+                    <Button x:Name="PhimButton" Content="Phim" Margin="20,30,20,5" Foreground="#ffffff" Background="Transparent" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" BorderThickness="0"/>
+                    <Button x:Name="GocDienAnhButton" Content="Góc điện ảnh" Margin="20,10,20,5" Foreground="#ffffff" Background="Transparent" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" BorderThickness="0"/>
+                    <Button x:Name="SuKienButton" Content="Sự kiện" Margin="20,10,20,5" Foreground="#ffffff" Background="Transparent" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" BorderThickness="0"/>
+                    <Button x:Name="RapGiaVeButton" Content="Rạp/Giá vé" Margin="20,10,20,20" Foreground="#ffffff" Background="Transparent" MouseEnter="MenuItem_MouseEnter" MouseLeave="MenuItem_MouseLeave" BorderThickness="0"/>
+                </StackPanel>
+
+                <!-- Additional buttons -->
+                <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+                    <Button Content="Exit" Margin="20,0,20,10" Foreground="#ffffff" Background="#e50914"/>
+                    <Button Content="Options" Margin="20,0,20,10" Foreground="#ffffff" Background="#0078d7"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Background="#000d21" x:Name="DashboardPanel" Grid.Column="1" Margin="20">
+                <Grid>
+                    <!-- Image control for displaying slideshow in the center -->
+                    <Image x:Name="SlideshowImage" Stretch="Uniform"/>
+
+                    <!-- Previous button in the top-left corner -->
+                    <Image Source="/MVVM/Images/left.png" Margin="5,0,5,0" Width="32" Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" MouseDown="PreviousImage_MouseDown" Opacity="0.7"/>
+
+                    <!-- Next button in the top-right corner -->
+                    <Image Source="/MVVM/Images/right.png" Margin="5,0,5,0" Width="32" Height="32" VerticalAlignment="Center" HorizontalAlignment="Right" MouseDown="NextImage_MouseDown" Opacity="0.7"/>
+                </Grid>
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
