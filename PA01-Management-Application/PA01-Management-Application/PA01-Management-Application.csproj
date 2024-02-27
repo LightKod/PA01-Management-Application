@@ -9,4 +9,37 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="MVVM\Images\1.jpg" />
+    <None Remove="MVVM\Images\2.jpg" />
+    <None Remove="MVVM\Images\3.jpg" />
+    <None Remove="MVVM\Images\4.jpg" />
+    <None Remove="MVVM\Images\5.jpg" />
+    <None Remove="MVVM\Images\6.jpg" />
+    <None Remove="MVVM\Images\7.jpg" />
+    <None Remove="MVVM\Images\8.jpg" />
+    <None Remove="MVVM\Images\left.png" />
+    <None Remove="MVVM\Images\right.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MVVM\Images\2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="MVVM\Images\1.jpg" />
+    <Resource Include="MVVM\Images\3.jpg" />
+    <Resource Include="MVVM\Images\4.jpg" />
+    <Resource Include="MVVM\Images\5.jpg" />
+    <Resource Include="MVVM\Images\6.jpg" />
+    <Resource Include="MVVM\Images\7.jpg" />
+    <Resource Include="MVVM\Images\8.jpg" />
+    <Resource Include="MVVM\Images\left.png" />
+    <Resource Include="MVVM\Images\right.png" />
+  </ItemGroup>
+
 </Project>
