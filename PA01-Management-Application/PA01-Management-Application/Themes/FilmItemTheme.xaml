@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="PA01_Management_Application.Themes.FilmItemTheme"
+                    x:ClassModifier="public">
+    <DataTemplate x:Key="FilmItemTheme">
+        <Border Width="150" Height="200" ClipToBounds="True" Background="Black" Margin="0, 0, 10, 0" MouseEnter="border_MouseEnter" MouseLeave="border_MouseLeave">
+            <Grid>
+                <MediaElement Source="{Binding FilmTrailer}" LoadedBehavior="Manual"/>
+                <Image x:Name="image" Source="{Binding FilmPoster}" Stretch="UniformToFill"/>
+                <StackPanel Opacity="0" VerticalAlignment="Bottom" Margin="5, 0, 0, 5">
+                    <TextBlock Text="{Binding FilmName}" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Text="{Binding FilmGenre}" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>
