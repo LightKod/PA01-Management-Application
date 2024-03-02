@@ -4,9 +4,8 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="FilmSliderTest.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
@@ -20,6 +19,9 @@
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomePageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MovieDetailViewModel}">
+                <views:MovieDetailPageView/>
             </DataTemplate>
         </ResourceDictionary>
 

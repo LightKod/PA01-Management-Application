@@ -30,7 +30,10 @@ namespace PA01_Management_Application.MVVM.Commands
             {
                 viewModel.SelectedViewModel = new HomeViewModel();
             }
-            
+            else if (parameter.ToString() == "MovieDetails")
+            {
+                viewModel.SelectedViewModel = new MovieDetailViewModel();
+            }
         }
     }
 }

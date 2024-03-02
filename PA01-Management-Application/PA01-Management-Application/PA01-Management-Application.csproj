@@ -20,6 +20,8 @@
     <None Remove="MVVM\Images\8.jpg" />
     <None Remove="MVVM\Images\left.png" />
     <None Remove="MVVM\Images\right.png" />
+    <None Remove="Resources\Icons\fa6-regular.otf" />
+    <None Remove="Resources\Icons\fa6-solid.otf" />
     <None Remove="Videos\video.mp4" />
   </ItemGroup>
 
@@ -34,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
   </ItemGroup>
 
@@ -47,6 +50,16 @@
     <Resource Include="MVVM\Images\8.jpg" />
     <Resource Include="MVVM\Images\left.png" />
     <Resource Include="MVVM\Images\right.png" />
+    <Resource Include="Resources\Icons\fa6-regular.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\fa6-solid.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
 
 </Project>

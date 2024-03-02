@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.MovieDetailPageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+      xmlns:fa="http://schemas.fontawesome.io/icons/" 
+      mc:Ignorable="d" 
+      d:DesignHeight="3000" d:DesignWidth="1900"
+      Background="#141414">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Buttons/ButtonGerne.xaml"/>
+                <ResourceDictionary Source="/Themes/Buttons/ButtonBase.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  Background="#141414">
+            <Grid Margin="48,48,48,48">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160"></RowDefinition>
+                    <RowDefinition Height="600"></RowDefinition>
+                    <RowDefinition Height="90"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!--Title Grid-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" >
+                        <Label
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold" FontSize="64" Foreground="#FFFFFF">
+                            Dune: Part Two
+                        </Label>
+                        <Label Margin="0,5,0,0" 
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa">
+                            2024 · PG-13 · 2h 46m
+                        </Label>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" 
+                                Orientation="Vertical">
+                        <Label Margin="0,10,0,0" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa">
+                            IMDb RATING
+                        </Label>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <fa:FontAwesome
+                                VerticalAlignment="Center"
+                                Icon="Star"
+                                FontSize="32"
+                                Foreground="#f5c518"
+                                HorizontalAlignment="Center"
+                            />
+                            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="9" FontSize="32" Foreground="#FFFFFF" VerticalAlignment="Top"/>
+                                <TextBlock Text ="/10" FontSize="28" Foreground="#aaaaaa" VerticalAlignment="Bottom"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
+                <!--Preview Grid -->
+                <Grid Grid.Row="1" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" 
+                           Source="https://upload.wikimedia.org/wikipedia/vi/9/94/Dune_2_VN_poster.jpg"
+                           />
+                    <MediaElement Grid.Column="1" Source="Videos/video.mp4"/>
+                    <StackPanel Grid.Column="2" Orientation="Vertical" Width="240">
+                        <Button Style="{StaticResource ButtonBase}" Height="100" Background="#FFFFFF">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome
+                                    VerticalAlignment="Center"
+                                    Icon="Ticket"
+                                    FontSize="32"
+                                    Foreground="#000000"
+                                    HorizontalAlignment="Center"
+                                />
+                                <Label FontSize="30">Book now!</Label>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <!--Gernes Grid -->
+                <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="#aaaaaa">
+                    <Grid Margin="0, 20, 0, 20" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Margin="0,0,15,0" Style="{StaticResource ButtonGerne}" Content="Adventure"/>
+                            <Button Margin="0,0,15,0" Style="{StaticResource ButtonGerne}" Content="Adventure"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <!--Details Grid -->
+                <StackPanel Grid.Row="3">
+                    <!---Plot-->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                        <StackPanel Orientation="Vertical" Margin="0, 20,0,20">
+                            <Label
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
+                                Movie Plots:
+                            </Label>
+                            <Label
+                               VerticalAlignment="Center"
+                               FontWeight="Regular" FontSize="20" Foreground="#AAAAAA">
+                                Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                    <!---Director-->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                        <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
+                            <Label
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
+                                Directors:
+                            </Label>
+                            <Label
+                                Margin="2,4,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="Regular" FontSize="24" Foreground="#0078d7">
+                                Denis Villeneuve
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                    <!---Writers-->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                        <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
+                            <Label
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
+                                Writers:
+                            </Label>
+                            <Label
+                                Margin="2,4,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="Regular" FontSize="24" Foreground="#0078d7">
+                                Denis Villeneuve · Jon Spaihts · Frank Herbert
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                    <!---Stars-->
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                        <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
+                            <Label
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">           
+                                Stars:
+                            </Label>
+                            <Label
+                                Margin="2,4,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="Regular" FontSize="24" Foreground="#0078d7">
+                                Timothée Chalamet · Zendaya · Rebecca Ferguson
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
