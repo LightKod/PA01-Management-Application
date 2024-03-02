@@ -20,6 +20,13 @@
     <None Remove="MVVM\Images\8.jpg" />
     <None Remove="MVVM\Images\left.png" />
     <None Remove="MVVM\Images\right.png" />
+    <None Remove="Videos\video.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Videos\video.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
