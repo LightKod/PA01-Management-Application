@@ -36,9 +36,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Row="0" Grid.Column="0" >
                         <Label
+                            Content="{Binding Film.FilmName}"
                                VerticalAlignment="Center"
                                FontWeight="SemiBold" FontSize="64" Foreground="#FFFFFF">
-                            Dune: Part Two
                         </Label>
                         <Label Margin="0,5,0,0" 
                                    VerticalAlignment="Center"
@@ -76,10 +76,30 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" 
+
+                    <Image Name="imagePoster" Grid.Column="0" 
                            Source="https://upload.wikimedia.org/wikipedia/vi/9/94/Dune_2_VN_poster.jpg"
                            />
-                    <MediaElement Grid.Column="1" Source="Videos/video.mp4"/>
+                    <Grid Grid.Column="1">
+                        <Image x:Name="imageBanner" Stretch="Uniform"/>
+                        <MediaElement Name="mediaBanner" Grid.Column="1" Source="Videos/video.mp4"/>
+                        <fa:FontAwesome
+                            Icon="AngleLeft"
+                            FontSize="72"
+                            Foreground="#aaaaaa"
+                            Margin="30,0,30,0" 
+                            VerticalAlignment="Center" HorizontalAlignment="Left" 
+                            MouseDown="PreviousImage_MouseDown"
+                        />
+                        <fa:FontAwesome
+                            Icon="AngleRight"
+                            FontSize="72"
+                            Foreground="#aaaaaa"
+                            Margin="30,0,30,0" 
+                            VerticalAlignment="Center" HorizontalAlignment="Right" 
+                            MouseDown="NextImage_MouseDown"
+                        />
+                    </Grid>
                     <StackPanel Grid.Column="2" Orientation="Vertical" Width="240">
                         <Button Style="{StaticResource ButtonBase}" Height="100" Background="#FFFFFF">
                             <StackPanel Orientation="Horizontal">

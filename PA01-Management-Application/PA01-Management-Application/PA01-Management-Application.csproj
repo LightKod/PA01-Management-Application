@@ -22,6 +22,7 @@
     <None Remove="MVVM\Images\right.png" />
     <None Remove="Resources\Icons\fa6-regular.otf" />
     <None Remove="Resources\Icons\fa6-solid.otf" />
+    <None Remove="Resources\Images\avatar_placeholder.jpg" />
     <None Remove="Videos\video.mp4" />
   </ItemGroup>
 
@@ -56,10 +57,7 @@
     <Resource Include="Resources\Icons\fa6-solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <Resource Include="Resources\Images\avatar_placeholder.jpg" />
   </ItemGroup>
 
 </Project>

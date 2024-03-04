@@ -27,15 +27,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                 for (int j = 0; j < 10; j++)
                 {
-                    filmList.Add(new Film()
-                    {
-                        FilmName = $"Shrek {i}-{j}",
-                        FilmGenre = $"Genre {i}-{j}",
-                        FilmDuration = 69 + i + j,
-                        FilmRating = 4.96,
-                        FilmPoster = "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
-                        FilmTrailer = "Videos/video.mp4"
-                    });
+                    filmList.Add(new Film
+                    (
+                        $"Shrek {i}-{j}",
+                       [$"Genre {i}-{j}"],
+                        69 + i + j,
+                        4.96,
+                        "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
+                         "Videos/video.mp4",
+                        []
+                    ));
                 }
 
                 FilmSets.Add(new FilmSet()
