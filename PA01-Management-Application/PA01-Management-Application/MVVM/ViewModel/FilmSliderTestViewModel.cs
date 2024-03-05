@@ -35,7 +35,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                         4.96,
                         "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
                          "Videos/video.mp4",
-                        []
+                        [], [], [], []
                     ));
                 }
 

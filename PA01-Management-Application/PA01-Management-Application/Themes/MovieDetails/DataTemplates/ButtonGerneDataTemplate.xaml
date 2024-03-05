@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/MovieDetails/Buttons/ButtonGerne.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <DataTemplate x:Key="ButtonGerneDataTemplate">
+        <Button Margin="0,0,10,0" Style="{StaticResource ButtonGerne}" Content="{Binding}">
+        </Button>
+    </DataTemplate>
+</ResourceDictionary>

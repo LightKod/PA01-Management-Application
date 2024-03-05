@@ -6,7 +6,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Border x:Name="ButtonBorder" Background="#141414" CornerRadius="28" BorderBrush="#FFFFFF" BorderThickness="1">
-                            <ContentPresenter Margin="15,2,15,2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <ContentPresenter Content="{Binding}" Margin="15,2,15,2" HorizontalAlignment="Center" VerticalAlignment="Center"
                                               TextBlock.FontSize="20"/>
                         </Border>
                     </Grid>

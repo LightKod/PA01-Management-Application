@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1070" Background="#F5F5F5">
+             d:DesignHeight="450" d:DesignWidth="1070" Background="#141414">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Background="#000000" Grid.Row="0">
+        <Grid Background="#141414" Grid.Row="0">
             <!-- Header Content -->
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
 
 
         <!-- Main Content -->
-        <Grid Background="#000d21" Margin="0,76,0,0" Grid.RowSpan="2">
+        <Grid Background="#141414" Margin="0,76,0,0" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <!-- Sidebar -->
@@ -81,7 +81,7 @@
                 </StackPanel>
             </Grid>
 
-            <StackPanel Background="#000d21" x:Name="DashboardPanel" Grid.Column="1" Margin="20">
+            <StackPanel Background="#141414" x:Name="DashboardPanel" Grid.Column="1" Margin="20">
                 <Grid>
                     <!-- Image control for displaying slideshow in the center -->
                     <Image x:Name="SlideshowImage" Stretch="Uniform"/>

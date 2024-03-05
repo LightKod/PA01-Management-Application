@@ -23,7 +23,10 @@ namespace PA01_Management_Application.MVVM.View
                     "/MVVM/Images/1.jpg",
                     "/MVVM/Images/2.jpg",
                     "/MVVM/Images/3.jpg"
-                ]
+                ],
+                ["Denis Villeneuve"],
+                ["Denis Villeneuve", "Jon Spaihts", "Frank Herbert"],
+                ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson"]
                 );
         List<string> mediaUrls;
         int index = 0;
