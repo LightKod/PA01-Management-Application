@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.LoginPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             >
+    <Grid  Name="container">
+        <Grid Background="#75000000">
+            <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" >
+            <Image Source="pack://application:,,,/MVVM/Images/logo.png"  Width="168"  Height="auto" HorizontalAlignment="Left" Margin="20,20,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="#75000000" CornerRadius="4" Margin="20" Width="300" >
+            <StackPanel Margin="20">
+
+                <TextBlock Text="Sign In"  Foreground="White" FontSize="24" Margin="0,0,0,20"/>
+                <TextBox  Foreground="#b3b3b3" Text="Email or phone number"   Style="{StaticResource TextBoxStyle}" Margin="0,0,0,10" VerticalContentAlignment="Center"/>
+                <TextBox Foreground="#b3b3b3" Text="Password" Style="{StaticResource TextBoxStyle}" Margin="0,0,0,10" VerticalContentAlignment="Center"/>
+                <Button Content="Sign In"  Style="{StaticResource ButtonStyle}" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <CheckBox Margin="0,0,10,0"/>
+                    <TextBlock Text="Remember me"  Foreground="#8c8c8c"/>
+                    <TextBlock Text="Need help?" Foreground="White"  Margin="20,0,0,0"/>
+                </StackPanel>
+                <TextBlock Text="New to Netflix? Sign up now" Foreground="White"/>
+                <TextBlock Text="This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more." Foreground="#b3b3b3" Margin="0,20,0,0"/>
+            </StackPanel>
+        </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="MVVM/View/HomePageView.xaml">
+             StartupUri="MVVM/View/LoginPageView.xaml">
     <Application.Resources>
 
         <ResourceDictionary>
@@ -13,11 +13,12 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="/Themes/TextBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <views:HomePageView/>
-            </DataTemplate>
+            </DataTemplate>-->
         </ResourceDictionary>
 
     </Application.Resources>

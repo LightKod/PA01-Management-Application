@@ -18,7 +18,9 @@
     <None Remove="MVVM\Images\6.jpg" />
     <None Remove="MVVM\Images\7.jpg" />
     <None Remove="MVVM\Images\8.jpg" />
+    <None Remove="MVVM\Images\hero-img.jpg" />
     <None Remove="MVVM\Images\left.png" />
+    <None Remove="MVVM\Images\logo.png" />
     <None Remove="MVVM\Images\right.png" />
   </ItemGroup>
 
@@ -38,7 +40,9 @@
     <Resource Include="MVVM\Images\6.jpg" />
     <Resource Include="MVVM\Images\7.jpg" />
     <Resource Include="MVVM\Images\8.jpg" />
+    <Resource Include="MVVM\Images\hero-img.jpg" />
     <Resource Include="MVVM\Images\left.png" />
+    <Resource Include="MVVM\Images\logo.png" />
     <Resource Include="MVVM\Images\right.png" />
   </ItemGroup>
 
