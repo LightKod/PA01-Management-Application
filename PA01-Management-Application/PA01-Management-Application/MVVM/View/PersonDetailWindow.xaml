@@ -1,0 +1,27 @@
+﻿<Window x:Class="PA01_Management_Application.MVVM.View.PersonDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+        mc:Ignorable="d"
+        Title="PersonDetailWindow" Height="600" Width="400"
+        Background="#141414">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+        <StackPanel>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Foreground="#FFFFFF" FontWeight="Bold" FontSize="28"
+               Margin="0, 20, 0, 0">
+                Ryan Gosling
+            </Label>
+            <Image Margin="0, 20, 0, 0" Height="300" Source="https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg"></Image>
+            <TextBlock Margin="20, 20, 20, 20" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Foreground="#FFFFFF" FontSize="14" TextAlignment="Justify"
+                    TextWrapping="WrapWithOverflow"
+                    Text="Born Ryan Thomas Gosling on November 12, 1980, in London, Ontario, Canada, he is the son of Donna (Wilson), a secretary, and Thomas Ray Gosling, a traveling salesman. Ryan was the second of their two children, with an older sister, Mandi. His ancestry is French-Canadian, as well as English, Scottish, and Irish. The Gosling family moved to Cornwall, Ontario, where Ryan grew up and was home-schooled by his mother. He also attended Gladstone Public School and Cornwall Collegiate Vocational School, where he excelled in Drama and Fine Arts. The family then relocated to Burlington, Ontario, where Ryan attended Lester B. Pearson High School.">
+                
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>

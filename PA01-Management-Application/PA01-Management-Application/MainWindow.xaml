@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PA01_Management_Application"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="MainWindow" Height="450" Width="1070">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,6 +19,7 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Margin="10" Width="200" Content="Home" Command="{Binding UpdateViewCommand}" CommandParameter="Home"/>
             <Button Margin="10" Width="200" Content="Account" Command="{Binding UpdateViewCommand}" CommandParameter="Account"/>
+            <Button Margin="10" Width="200" Content="Movie Details" Command="{Binding UpdateViewCommand}" CommandParameter="MovieDetails"/>
         </StackPanel>
     </Grid>
 </Window>
