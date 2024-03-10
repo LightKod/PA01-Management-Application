@@ -34,6 +34,10 @@ namespace PA01_Management_Application.MVVM.Commands
             {
                 viewModel.SelectedViewModel = new MovieDetailViewModel();
             }
+            else if (parameter.ToString() == "Account")
+            {
+                viewModel.SelectedViewModel = new AccountViewModel();
+            }
         }
     }
 }

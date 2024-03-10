@@ -24,6 +24,8 @@
     <None Remove="MVVM\Images\right.png" />
     <None Remove="Resources\Icons\fa6-regular.otf" />
     <None Remove="Resources\Icons\fa6-solid.otf" />
+    <None Remove="Resources\Icons\icon.png" />
+    <None Remove="Resources\Icons\qrcode.png" />
     <None Remove="Resources\Images\avatar_placeholder.jpg" />
     <None Remove="Videos\video.mp4" />
   </ItemGroup>
@@ -61,6 +63,8 @@
     <Resource Include="Resources\Icons\fa6-solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Icons\icon.png" />
+    <Resource Include="Resources\Icons\qrcode.png" />
     <Resource Include="Resources\Images\avatar_placeholder.jpg" />
   </ItemGroup>
 
