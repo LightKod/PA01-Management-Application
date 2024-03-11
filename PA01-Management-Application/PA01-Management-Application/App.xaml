@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="MainWindow.xaml">
+             StartupUri="AppWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,6 +12,10 @@
 
                 <ResourceDictionary Source="./Themes/FilmItemTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/FilmSetTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/FilmSearchItemTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/ScrollBarTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/SearchTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
@@ -24,6 +28,9 @@
                 <views:AccountPageView/>
             </DataTemplate>
             
+            <DataTemplate DataType="{x:Type viewmodels:SearchViewModel}">
+                <views:SearchView/>
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
