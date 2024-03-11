@@ -9,11 +9,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     class AppWindowViewModel : ObservableObject
     {
-        //public RelayCommand HomeViewCommand { get; set; }
+        // Commands to change CurrentView (see AppWindow.xaml, the part with RadioButtons and their Command property)
+        public RelayCommand HomeViewCommand { get; set; }
 
         public RelayCommand SearchViewCommand { get; set; }
 
-        //public HomeViewModel HomeVM { get; set; }
+        // Possible view models that can be called from this screen
+        public HomeViewModel HomeVM { get; set; }
 
         public SearchViewModel SearchVM { get; set; }
 
@@ -31,14 +33,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public AppWindowViewModel()
         {
-            //HomeVM = new HomeViewModel();
+            // Initialize views and their view models
+            HomeVM = new HomeViewModel();
             SearchVM = new SearchViewModel();
-            CurrentView = SearchVM;
+            CurrentView = HomeVM;
 
-            /*HomeViewCommand = new RelayCommand(o =>
+            // Handle the command calls
+            HomeViewCommand = new RelayCommand(o =>
             {
                 CurrentView = HomeVM;
-            });*/
+            });
 
             SearchViewCommand = new RelayCommand(o =>
             {

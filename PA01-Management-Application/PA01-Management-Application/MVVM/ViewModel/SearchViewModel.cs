@@ -164,7 +164,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                         4.96,
                         "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
                          "Videos/video.mp4",
-                        [], [], [], []
+                        [], ["Meo meo bruh", "Huhu"], [], []
                     ));
             for (int j = 0; j < 9; j++)
             {
@@ -176,7 +176,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
                         4.96,
                         "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
                          "Videos/video.mp4",
-                        [], [], [], []
+                        [],
+                        j % 2 == 0 ? ["Pickle", $"{(j % 3 == 0 ? "Bruh" : "Lmao")}"] : ["Doggy", $"{(j % 3 == 0 ? "Lmao" : "Bruh")}"],
+                        [], []
                     ));
             }
             SearchResultList = new ObservableCollection<Film>();
