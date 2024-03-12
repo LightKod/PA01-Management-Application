@@ -38,6 +38,10 @@ namespace PA01_Management_Application.MVVM.Commands
             {
                 viewModel.SelectedViewModel = new AccountViewModel();
             }
+            else if (parameter.ToString() == "Seat")
+            {
+                viewModel.SelectedViewModel = new SeatSelectionViewModel();
+            }
         }
     }
 }

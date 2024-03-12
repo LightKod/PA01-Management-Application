@@ -20,6 +20,7 @@
             <Button Margin="10" Width="200" Content="Home" Command="{Binding UpdateViewCommand}" CommandParameter="Home"/>
             <Button Margin="10" Width="200" Content="Account" Command="{Binding UpdateViewCommand}" CommandParameter="Account"/>
             <Button Margin="10" Width="200" Content="Movie Details" Command="{Binding UpdateViewCommand}" CommandParameter="MovieDetails"/>
+            <Button Margin="10" Width="200" Content="Seat" Command="{Binding UpdateViewCommand}" CommandParameter="Seat"/>
         </StackPanel>
     </Grid>
 </Window>

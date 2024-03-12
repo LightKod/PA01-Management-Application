@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.SeatSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             xmlns:fa="http://schemas.fontawesome.io/icons/" 
+             mc:Ignorable="d" 
+             d:DesignHeight="3000" d:DesignWidth="1900"
+             Background="#141414">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Seats/SeatItem.xaml"/>
+                <ResourceDictionary Source="/Themes/Seats/SeatGuideDataTemplate.xaml"/>
+                <ResourceDictionary Source="/Themes/MovieDetails/Buttons/ButtonBase.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0"
+            Content="Select your seats"
+            VerticalAlignment="Center" HorizontalAlignment="Center"
+            FontWeight="SemiBold" FontSize="64" Foreground="#FFFFFF">
+        </Label>
+        <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+            ItemsSource="{Binding DisplayRoom.Seats}" Margin="0,30,0,0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding DisplayRoom.Rows}" Columns="{Binding DisplayRoom.Columns}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}" Style="{StaticResource SeatItem}" Margin="5">
+                        <Button.Command>
+                            <Binding Path="DataContext.ButtonClickCommand" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
+                        </Button.Command>
+                        <Button.CommandParameter>
+                            <Binding RelativeSource="{RelativeSource Self}"/>
+                        </Button.CommandParameter>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Grid.Row="2" Margin="20" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ItemsControl Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                ItemsSource="{Binding SampleSeats}" ItemTemplate="{StaticResource SeatGuideDataTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Button Grid.Column="1" Style="{StaticResource ButtonBase}" 
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                    Height="80" Width="200" Background="#FFFFFF"
+                    Command="{Binding DataContext.ConfirmClickCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                    >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome
+                        VerticalAlignment="Center"
+                        Icon="Check"
+                        FontSize="32"
+                        Foreground="#000000"
+                        HorizontalAlignment="Center"
+                    />
+                    <Label FontSize="30">Confirm</Label>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+
+</UserControl>

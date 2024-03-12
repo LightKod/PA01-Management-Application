@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="AppWindow.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -30,6 +30,14 @@
             
             <DataTemplate DataType="{x:Type viewmodels:SearchViewModel}">
                 <views:SearchView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:SeatSelectionViewModel}">
+                <views:SeatSelectionView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:FoodSelectionViewModel}">
+                <views:FoodSelectionView/>
             </DataTemplate>
         </ResourceDictionary>
 
