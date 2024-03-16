@@ -9,6 +9,7 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
+        WindowState="Maximized"
         Title="AppWindow" Height="450" Width="800">
     <Window.DataContext>
         <viewModel:AppWindowViewModel/>

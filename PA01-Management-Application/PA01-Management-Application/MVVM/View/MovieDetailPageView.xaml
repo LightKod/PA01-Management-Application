@@ -18,119 +18,100 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  Background="#141414">
-            <Grid Margin="48,48,48,48">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  Background="#141414">
+        <Grid Margin="48,48,48,48">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="160"></RowDefinition>
+                <RowDefinition Height="600"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Title Grid-->
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="160"></RowDefinition>
-                    <RowDefinition Height="600"></RowDefinition>
-                    <RowDefinition Height="90"></RowDefinition>
-                    <RowDefinition Height="1*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <!--Title Grid-->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="0" Grid.Column="0" >
-                        <Label
+                <StackPanel Grid.Row="0" Grid.Column="0" >
+                    <Label
                             Content="{Binding Film.FilmName}"
                                VerticalAlignment="Center"
                                FontWeight="SemiBold" FontSize="64" Foreground="#FFFFFF">
-                        </Label>
-                        <Label Margin="0,5,0,0" 
+                    </Label>
+                    <Label Margin="0,5,0,0" 
                                    VerticalAlignment="Center"
                                    FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa">
-                            2024 · PG-13 · 2h 46m
-                        </Label>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" 
+                        2024 · PG-13 · 2h 46m
+                    </Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" 
                                 Orientation="Vertical">
-                        <Label Margin="0,10,0,0" 
+                    <Label Margin="0,10,0,0" 
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
                                    FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa">
-                            IMDb RATING
-                        </Label>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <fa:FontAwesome
+                        IMDb RATING
+                    </Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <fa:FontAwesome
                                 VerticalAlignment="Center"
                                 Icon="Star"
                                 FontSize="32"
                                 Foreground="#f5c518"
                                 HorizontalAlignment="Center"
                             />
-                            <StackPanel Margin="10,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <TextBlock Text="9" FontSize="32" Foreground="#FFFFFF" VerticalAlignment="Top"/>
-                                <TextBlock Text ="/10" FontSize="28" Foreground="#aaaaaa" VerticalAlignment="Bottom"/>
-                            </StackPanel>
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="9" FontSize="32" Foreground="#FFFFFF" VerticalAlignment="Top"/>
+                            <TextBlock Text ="/10" FontSize="28" Foreground="#aaaaaa" VerticalAlignment="Bottom"/>
                         </StackPanel>
-
                     </StackPanel>
-                </Grid>
-                <!--Preview Grid -->
-                <Grid Grid.Row="1" Margin="0,20,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="7*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <Image Name="imagePoster" Grid.Column="0" 
+                </StackPanel>
+            </Grid>
+            <!---Trailer Grid-->
+            <Grid Grid.Row="1">
+                <Image x:Name="imageBanner" Stretch="Uniform"/>
+                <MediaElement Name="mediaBanner" Grid.Column="1" Source="Videos/video.mp4"/>
+                <fa:FontAwesome
+            Icon="AngleLeft"
+            FontSize="72"
+            Foreground="#aaaaaa"
+            Margin="30,0,30,0" 
+            VerticalAlignment="Center" HorizontalAlignment="Left" 
+            MouseDown="PreviousImage_MouseDown"
+        />
+                <fa:FontAwesome
+            Icon="AngleRight"
+            FontSize="72"
+            Foreground="#aaaaaa"
+            Margin="30,0,30,0" 
+            VerticalAlignment="Center" HorizontalAlignment="Right" 
+            MouseDown="NextImage_MouseDown"
+        />
+            </Grid>
+            <!--Preview Grid -->
+            <Grid Grid.Row="2" Margin="0,40,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Name="imagePoster" Grid.Column="0" 
                            Source="{Binding Film.FilmPoster}"
                            />
-                    <Grid Grid.Column="1">
-                        <Image x:Name="imageBanner" Stretch="Uniform"/>
-                        <MediaElement Name="mediaBanner" Grid.Column="1" Source="Videos/video.mp4"/>
-                        <fa:FontAwesome
-                            Icon="AngleLeft"
-                            FontSize="72"
-                            Foreground="#aaaaaa"
-                            Margin="30,0,30,0" 
-                            VerticalAlignment="Center" HorizontalAlignment="Left" 
-                            MouseDown="PreviousImage_MouseDown"
-                        />
-                        <fa:FontAwesome
-                            Icon="AngleRight"
-                            FontSize="72"
-                            Foreground="#aaaaaa"
-                            Margin="30,0,30,0" 
-                            VerticalAlignment="Center" HorizontalAlignment="Right" 
-                            MouseDown="NextImage_MouseDown"
-                        />
-                    </Grid>
-                    <StackPanel Grid.Column="2" Orientation="Vertical" Width="240">
-                        <Button Style="{StaticResource ButtonBase}" Height="100" Background="#FFFFFF">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:FontAwesome
-                                    VerticalAlignment="Center"
-                                    Icon="Ticket"
-                                    FontSize="32"
-                                    Foreground="#000000"
-                                    HorizontalAlignment="Center"
-                                />
-                                <Label FontSize="30">Book now!</Label>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-                <!--Gernes Grid -->
-                <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="#aaaaaa">
-                    <Grid Margin="0, 20, 0, 20" HorizontalAlignment="Left">
-                        <ItemsControl ItemsSource="{Binding Film.FilmGenres}" ItemTemplate="{StaticResource ButtonGerneDataTemplate}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </Grid>
-                </Border>
-                <!--Details Grid -->
-                <StackPanel Grid.Row="3">
+                <StackPanel Grid.Column="1" Margin="30,0,0,0">
+                    <Border Grid.Row="2" Height="90" BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                        <Grid Margin="0, 20, 0, 20" HorizontalAlignment="Left">
+                            <ItemsControl ItemsSource="{Binding Film.FilmGenres}" ItemTemplate="{StaticResource ButtonGerneDataTemplate}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
                     <!---Plot-->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Vertical" Margin="0, 20,0,20">
@@ -139,20 +120,20 @@
                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Movie Plots:
                             </Label>
-                            <Label
+                            <TextBlock TextWrapping="Wrap"
                                VerticalAlignment="Center"
                                FontWeight="Regular" FontSize="20" Foreground="#AAAAAA">
                                 Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.
-                            </Label>
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                     <!---Director-->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
                             <Label
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Directors:
                             </Label>
                             <ItemsControl ItemsSource="{Binding Film.Directors}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
@@ -168,9 +149,9 @@
                     <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
                             <Label
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Writers:
                             </Label>
                             <ItemsControl ItemsSource="{Binding Film.Writers}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
@@ -186,9 +167,9 @@
                     <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
                             <Label
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">           
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Stars:
                             </Label>
                             <ItemsControl ItemsSource="{Binding Film.Stars}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
@@ -201,7 +182,22 @@
                         </StackPanel>
                     </Border>
                 </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="20,0,20,0">
+                    <Button Style="{StaticResource ButtonBase}" Height="100" Background="#FFFFFF"
+                            Command="{Binding BookClickCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                    VerticalAlignment="Center"
+                                    Icon="Ticket"
+                                    FontSize="32"
+                                    Foreground="#000000"
+                                    HorizontalAlignment="Center"
+                                />
+                            <Label FontSize="30">Book now!</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

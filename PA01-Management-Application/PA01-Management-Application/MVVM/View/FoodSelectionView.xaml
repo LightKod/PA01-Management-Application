@@ -29,13 +29,44 @@
             VerticalAlignment="Center" HorizontalAlignment="Center"
             FontWeight="SemiBold" FontSize="64" Foreground="#FFFFFF">
         </Label>
-        <ItemsControl Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                ItemsSource="{Binding FoodAmountCollection}" ItemTemplate="{StaticResource FoodDataTemplate}" Margin="0,30,0,0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="4"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                ItemsSource="{Binding FoodAmountCollection}" ItemTemplate="{StaticResource FoodDataTemplate}" Margin="32">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid Grid.Row="2" Margin="20" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Foreground="#FFFFFF" FontWeight="Bold"
+                   HorizontalAlignment="Left" FontSize="24" VerticalAlignment="Center">
+                Total Price: $10.000
+            </Label>
+            <Button Grid.Column="1" Style="{StaticResource ButtonBase}" 
+            VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+            Height="80" Background="#FFFFFF"
+            Command="{Binding DataContext.ConfirmClickCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+            >
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome
+                VerticalAlignment="Center"
+                Icon="Check"
+                FontSize="32"
+                Foreground="#000000"
+                HorizontalAlignment="Center"
+            />
+                    <Label FontSize="30">Confirm</Label>
+                </StackPanel>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

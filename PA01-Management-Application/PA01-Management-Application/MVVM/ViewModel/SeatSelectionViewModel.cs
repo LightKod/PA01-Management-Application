@@ -2,6 +2,7 @@
 using PA01_Management_Application.MVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
@@ -17,9 +18,12 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public Room room; //Point of ref, dont change
         private Room _displayRoom; //The view will be displaying this
 
-        private List<Seat> _sampleSeats;
+        private ObservableCollection<Seat> _sampleSeats;
 
-        public List<Seat> SampleSeats
+        List<Seat> selectedSeats;
+
+
+        public ObservableCollection<Seat> SampleSeats
         {
             get { return _sampleSeats; }
             set 
@@ -43,8 +47,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public SeatSelectionViewModel() 
         {
             CreateSampleSeat();
+            selectedSeats = new();
+
             ButtonClickCommand = new RelayCommand(ButtonClickCommandExecute);
             ConfirmClickCommand = new RelayCommand(ConfirmClickCommandExecute);
+
         }
 
         private void ButtonClickCommandExecute(object parameter)
@@ -59,13 +66,22 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                     SeatType baseType = room.Seats.Find(x => x.Name == SelectedSeat.Name).Type;
 
+                    if (baseType == SeatType.None) return;
+
                     SelectedSeat.Type = SelectedSeat.Type == SeatType.Picked ? baseType : SeatType.Picked;
+
+                    if(SelectedSeat.Type == SeatType.Picked)
+                    {
+                        selectedSeats.Add(SelectedSeat);
+                    }
+                    else
+                    {
+                        if(selectedSeats.Contains(SelectedSeat)) selectedSeats.Remove(SelectedSeat);
+                    }
 
                     int index = DisplayRoom.Seats.FindIndex(x => x.Name == SelectedSeat.Name);
                     cpyRoom.Seats[index] = SelectedSeat;
 
-                    //Force update (For some reason??)
-                    DisplayRoom = null;
                     DisplayRoom = cpyRoom;
 
                     Debug.WriteLine($"{SelectedSeat.Name} - {SelectedSeat.Type}");
@@ -81,7 +97,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         private void ConfirmClickCommandExecute(object parameter)
         {
-            (Application.Current.MainWindow.DataContext as MainViewModel).SelectedViewModel = new FoodSelectionViewModel(room, DisplayRoom);
+            Debug.WriteLine($"Booked: {selectedSeats.Count} seats");
+            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new FoodSelectionViewModel(room, DisplayRoom);
         }
 
         void CreateSampleSeat()
