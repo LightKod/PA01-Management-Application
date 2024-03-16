@@ -26,6 +26,7 @@
     <None Remove="Resources\Icons\fa6-solid.otf" />
     <None Remove="Resources\Icons\icon.png" />
     <None Remove="Resources\Icons\qrcode.png" />
+    <None Remove="Resources\Images\app_logo.png" />
     <None Remove="Resources\Images\avatar_placeholder.jpg" />
     <None Remove="Videos\video.mp4" />
   </ItemGroup>
@@ -65,6 +66,7 @@
     </Resource>
     <Resource Include="Resources\Icons\icon.png" />
     <Resource Include="Resources\Icons\qrcode.png" />
+    <Resource Include="Resources\Images\app_logo.png" />
     <Resource Include="Resources\Images\avatar_placeholder.jpg" />
   </ItemGroup>
 

@@ -14,6 +14,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public RelayCommand SearchViewCommand { get; set; }
 
+        public RelayCommand SearchCommand { get; set; }
+
         // Possible view models that can be called from this screen
         public HomeViewModel HomeVM { get; set; }
 
@@ -27,6 +29,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
             set
             {
                 _currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isAdmin;
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                _isAdmin = value;
                 OnPropertyChanged();
             }
         }
@@ -48,6 +62,14 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 CurrentView = SearchVM;
             });
+
+            SearchCommand = new RelayCommand(o =>
+            {
+                CurrentView = SearchVM;
+                SearchVM.SearchByName();
+            });
+
+            IsAdmin = true;
         }
     }
 }

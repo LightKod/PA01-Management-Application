@@ -142,6 +142,23 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public RelayCommand SearchByNameCommand { get; set; }
         public RelayCommand PreviousPageCommand { get; set; }
         public RelayCommand NextPageCommand { get; set; }
+        public RelayCommand AdvancedSearchCommand { get; set; }
+
+        public ObservableCollection<String> ComboBoxOptions { get; set; }
+
+        private string _selectedSort;
+
+        public string SelectedSort
+        {
+            get { return _selectedSort; }
+            set
+            {
+                _selectedSort = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand SortCommand { get; set; }
 
         public SearchViewModel()
         {
@@ -154,6 +171,10 @@ namespace PA01_Management_Application.MVVM.ViewModel
             SearchResult = string.Empty;
             CurrentPage = 0;
             MaxPage = 0;
+
+            ComboBoxOptions = new ObservableCollection<String>() { "Name, A-Z", "Name, Z-A",
+                                                                   "Duration, Ascending", "Duration, Descending",
+                                                                   "Rating, Ascending", "Rating, Descending" };
 
             DummyFilmList = new ObservableCollection<Film>();
             DummyFilmList.Add(new Film
@@ -172,9 +193,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     (
                         $"Shrek {j}",
                        [$"Genre {j}"],
-                        69 + j,
-                        4.96,
-                        "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
+                        69 - j,
+                        4.96 + j*0.1,
+                        j % 3 == 0 ? "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png" : "https://www.elle.vn/wp-content/uploads/2023/12/06/560540/poster-Mai-scaled.jpg",
                          "Videos/video.mp4",
                         [],
                         j % 2 == 0 ? ["Pickle", $"{(j % 3 == 0 ? "Bruh" : "Lmao")}"] : ["Doggy", $"{(j % 3 == 0 ? "Lmao" : "Bruh")}"],
@@ -185,24 +206,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             SearchByNameCommand = new RelayCommand(o =>
             {
-                if (NameSearch != string.Empty)
-                {
-                    SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase)).ToList());
-                    if (SearchResultList.Count > 0)
-                    {
-                        SearchResult = $"Found {SearchResultList.Count} film{(SearchResultList.Count > 1 ? "s" : "")}";
-                        MaxPage = (int)Math.Ceiling((double)SearchResultList.Count / _maxItemsPerPage);
-                        CurrentPage = 1;
-                        FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
-                    }
-                    else
-                    {
-                        SearchResult = "There are no films matched the search";
-                        FilmList = new ObservableCollection<Film>();
-                        MaxPage = 0;
-                        CurrentPage = 0;
-                    }
-                }
+                SearchByName();
             });
 
             PreviousPageCommand = new RelayCommand(o =>
@@ -216,6 +220,86 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 CurrentPage++;
                 FilmList = new ObservableCollection<Film>(SearchResultList.Skip((CurrentPage - 1) * _maxItemsPerPage).Take(_maxItemsPerPage).ToList());
             });
+
+            AdvancedSearchCommand = new RelayCommand(o =>
+            {
+                SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase) &&
+                                                                                              (film.Directors != null && film.Directors.Any(director => director.Contains(DirectorSearch, StringComparison.OrdinalIgnoreCase))))
+                                                                               .OrderBy(film => film.FilmName)
+                                                                               .ToList());
+                SelectedSort = "Name, A-Z";
+                if (SearchResultList.Count > 0)
+                {
+                    SearchResult = $"Found {SearchResultList.Count} film{(SearchResultList.Count > 1 ? "s" : "")}";
+                    MaxPage = (int)Math.Ceiling((double)SearchResultList.Count / _maxItemsPerPage);
+                    CurrentPage = 1;
+                    FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
+                }
+                else
+                {
+                    SearchResult = "There are no films matched the search";
+                    FilmList = new ObservableCollection<Film>();
+                    MaxPage = 0;
+                    CurrentPage = 0;
+                }
+            });
+
+            SortCommand = new RelayCommand(o =>
+            {
+                if (SelectedSort != null)
+                {
+                    if (SelectedSort == "Name, A-Z")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderBy(film => film.FilmName).ToList());
+                    }
+                    else if (SelectedSort == "Name, Z-A")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderByDescending(film => film.FilmName).ToList());
+                    }
+                    else if (SelectedSort == "Duration, Ascending")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderBy(film => film.FilmDuration).ToList());
+                    }
+                    else if (SelectedSort == "Duration, Descending")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderByDescending(film => film.FilmDuration).ToList());
+                    }
+                    else if (SelectedSort == "Rating, Ascending")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderBy(film => film.FilmRating).ToList());
+                    }
+                    else if (SelectedSort == "Rating, Descending")
+                    {
+                        SearchResultList = new ObservableCollection<Film>(SearchResultList.OrderByDescending(film => film.FilmRating).ToList());
+                    }
+
+                    CurrentPage = 1;
+                    FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
+                }
+            });
+        }
+
+        public void SearchByName()
+        {
+            if (NameSearch != string.Empty)
+            {
+                SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase)).OrderBy(film => film.FilmName).ToList());
+                SelectedSort = "Name, A-Z";
+                if (SearchResultList.Count > 0)
+                {
+                    SearchResult = $"Found {SearchResultList.Count} film{(SearchResultList.Count > 1 ? "s" : "")}";
+                    MaxPage = (int)Math.Ceiling((double)SearchResultList.Count / _maxItemsPerPage);
+                    CurrentPage = 1;
+                    FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
+                }
+                else
+                {
+                    SearchResult = "There are no films matched the search";
+                    FilmList = new ObservableCollection<Film>();
+                    MaxPage = 0;
+                    CurrentPage = 0;
+                }
+            }
         }
     }
 }

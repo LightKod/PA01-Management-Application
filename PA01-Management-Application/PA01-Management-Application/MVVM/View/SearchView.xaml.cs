@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA01_Management_Application.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace PA01_Management_Application.MVVM.View
             InitializeComponent();
         }
 
-        private void advancedSearchBtn_Click(object sender, RoutedEventArgs e)
+        private void advancedSearchToogle_Click(object sender, RoutedEventArgs e)
         {
             if (advancedSearchBox.Visibility == Visibility.Visible)
             {
@@ -38,6 +39,31 @@ namespace PA01_Management_Application.MVVM.View
                 advancedSearchToogle.Content = "Close Advanced Search";
                 advancedSearchBox.Visibility = Visibility.Visible;
                 searchBtn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void advancedSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(Validation.GetHasError(TimeBox) || Validation.GetHasError(PriceBox) || Validation.GetHasError(YearBox)))
+            {
+                if (DataContext is SearchViewModel viewModel)
+                {
+                    if (viewModel.AdvancedSearchCommand.CanExecute(this))
+                    {
+                        viewModel.AdvancedSearchCommand.Execute(this);
+                    }
+                }
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext is SearchViewModel viewModel)
+            {
+                if (viewModel.SortCommand.CanExecute(this))
+                {
+                    viewModel.SortCommand.Execute(this);
+                }
             }
         }
     }

@@ -12,20 +12,163 @@
         <local1:PagePerMaxPageConverter x:Key="PagePerMaxPageConverter"/>
         <local1:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter"/>
         <local1:LessThanMaxPageConverter x:Key="LessThanMaxPageConverter"/>
+
+        <!-- COMBOBOX THEME -->
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" 
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        Background="Transparent"
+                        BorderBrush="White"
+                        BorderThickness="0,0,0,1" />
+                <Border Grid.Column="0"
+                        CornerRadius="0" 
+                        Margin="1" 
+                        Background="Transparent" 
+                        BorderBrush="{x:Null}"
+                        BorderThickness="0" />
+                <Path x:Name="Arrow"
+                    Grid.Column="1"     
+                    Fill="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z" />
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" 
+                                          Template="{StaticResource ComboBoxToggleButton}" 
+                                          Grid.Column="2" 
+                                          Focusable="false"
+                                          IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press"/>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              Margin="3,3,23,3"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                                     Style="{x:Null}" 
+                                     Template="{StaticResource ComboBoxTextBox}" 
+                                     HorizontalAlignment="Left" 
+                                     VerticalAlignment="Center" 
+                                     Margin="3,3,23,3"
+                                     Focusable="True" 
+                                     Background="#FF3F3F3F"
+                                     Foreground="Green"
+                                     Visibility="Hidden"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True" 
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                                      SnapsToDevicePixels="True"                
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="#191919"
+                                            BorderThickness="0"
+                                            BorderBrush="{x:Null}"/>
+                                    <ScrollViewer Margin="0,6,0,10" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0,0,10,10"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- SimpleStyles: ComboBoxItem -->
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                                Padding="4"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#888888"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
+    
     <Grid>
         <StackPanel Margin="0,16,0,0">
+            
+            <!-- SEARCH INPUT -->
             <Grid Margin="16,0,16,0">
                 <TextBox Height="40"
-                 VerticalContentAlignment="Center"
-                 Style="{StaticResource SearchTextBoxTheme}"/>
+                         VerticalContentAlignment="Center"
+                         Style="{StaticResource SearchTextBoxTheme}"/>
                 <Button x:Name="searchBtn"
-                Width="40" Height="40"
-                HorizontalAlignment="Right"
-                BorderBrush="{x:Null}" BorderThickness="0"
-                Background="Transparent"
-                Cursor="Hand"
-                Command="{Binding SearchByNameCommand}">
+                        Width="40" Height="40"
+                        HorizontalAlignment="Right"
+                        BorderBrush="{x:Null}" BorderThickness="0"
+                        Background="Transparent"
+                        Cursor="Hand"
+                        Command="{Binding SearchByNameCommand}">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -37,24 +180,26 @@
                     </Button.Template>
                 </Button>
             </Grid>
+            
+            <!-- ADVANCED SEARCH TOOGLE -->
             <Button x:Name="advancedSearchToogle"
-            Content="Advanced Search"
-            Margin="16,0,16,0"
-            Cursor="Hand"
-            BorderBrush="{x:Null}" BorderThickness="0"
-            Background="Transparent"
-            Foreground="White"
-            Padding="0,10" Click="advancedSearchBtn_Click">
+                    Content="Advanced Search"
+                    Margin="16,0,16,0"
+                    Cursor="Hand"
+                    BorderBrush="{x:Null}" BorderThickness="0"
+                    Background="Transparent"
+                    Foreground="White"
+                    Padding="0,10" Click="advancedSearchToogle_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Padding="{TemplateBinding Padding}">
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
                             <TextBlock x:Name="textBlock"
-                               HorizontalAlignment="Center" 
-                               Text="{TemplateBinding Content}"
-                               FontWeight="Bold"/>
+                                       HorizontalAlignment="Center" 
+                                       Text="{TemplateBinding Content}"
+                                       FontWeight="Bold"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -77,6 +222,8 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            
+            <!-- ADVANCED SEARCH FORM -->
             <StackPanel x:Name="advancedSearchBox" Margin="16,0,16,0" Visibility="Collapsed">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -90,32 +237,32 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="By Actor"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>
                         <Border Grid.Column="1"
-                        Height="40"
-                        Background="Transparent"
-                        BorderBrush="White"
-                        BorderThickness="0,0,0,1">
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1">
                             <Grid>
                                 <TextBox Text="{Binding ActorSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 Padding="8,0,8,0"
-                                 Foreground="White"
-                                 CaretBrush="White"
-                                 x:Name="ActorBox"/>
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         Foreground="White"
+                                         CaretBrush="White"
+                                         x:Name="ActorBox"/>
                                 <TextBlock IsHitTestVisible="False"
-                                   Text="Enter actor's name"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="SemiBold"
-                                   Margin="10,0,0,0"
-                                   Foreground="#d1d1d1"
-                                   Grid.Column="1">
+                                           Text="Enter actor's name"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
@@ -136,32 +283,32 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="By Director"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>
                         <Border Grid.Column="1"
-                        Height="40"
-                        Background="Transparent"
-                        BorderBrush="White"
-                        BorderThickness="0,0,0,1">
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1">
                             <Grid>
                                 <TextBox Text="{Binding DirectorSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 Padding="8,0,8,0"
-                                 Foreground="White"
-                                 CaretBrush="White"
-                                 x:Name="DirectorBox"/>
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         Foreground="White"
+                                         CaretBrush="White"
+                                         x:Name="DirectorBox"/>
                                 <TextBlock IsHitTestVisible="False"
-                                   Text="Enter director's name"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="SemiBold"
-                                   Margin="10,0,0,0"
-                                   Foreground="#d1d1d1"
-                                   Grid.Column="1">
+                                           Text="Enter director's name"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
@@ -193,22 +340,22 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Time"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>
                         <Border Grid.Column="1"
-                        Height="40"
-                        Background="Transparent"
-                        BorderBrush="White"
-                        BorderThickness="0,0,0,1">
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1">
                             <Grid>
                                 <TextBox BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 Padding="8,0,8,0"
-                                 CaretBrush="White"
-                                 x:Name="TimeBox">
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         CaretBrush="White"
+                                         x:Name="TimeBox">
                                     <TextBox.Text>
                                         <Binding Path="TimeSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -228,13 +375,13 @@
                                     </TextBox.Style>
                                 </TextBox>
                                 <TextBlock IsHitTestVisible="False"
-                                   Text="hh:mm"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="SemiBold"
-                                   Margin="10,0,0,0"
-                                   Foreground="#d1d1d1"
-                                   Grid.Column="1">
+                                           Text="hh:mm"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
@@ -256,22 +403,22 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Price From"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>
                         <Border Grid.Column="1"
-                        Height="40"
-                        Background="Transparent"
-                        BorderBrush="White"
-                        BorderThickness="0,0,0,1">
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1">
                             <Grid>
                                 <TextBox BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 Padding="8,0,8,0"
-                                 CaretBrush="White"
-                                 x:Name="PriceBox">
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         CaretBrush="White"
+                                         x:Name="PriceBox">
                                     <TextBox.Text>
                                         <Binding Path="PriceSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -291,13 +438,13 @@
                                     </TextBox.Style>
                                 </TextBox>
                                 <TextBlock IsHitTestVisible="False"
-                                   Text="Ticket price"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="SemiBold"
-                                   Margin="10,0,0,0"
-                                   Foreground="#d1d1d1"
-                                   Grid.Column="1">
+                                           Text="Ticket price"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
@@ -319,22 +466,22 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Year"
-                           Foreground="White"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Margin="0,0,10,0"/>
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"/>
                         <Border Grid.Column="1"
-                        Height="40"
-                        Background="Transparent"
-                        BorderBrush="White"
-                        BorderThickness="0,0,0,1">
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1">
                             <Grid>
                                 <TextBox BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 Padding="8,0,8,0"
-                                 CaretBrush="White"
-                                 x:Name="YearBox">
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         CaretBrush="White"
+                                         x:Name="YearBox">
                                     <TextBox.Text>
                                         <Binding Path="YearSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
@@ -354,13 +501,13 @@
                                     </TextBox.Style>
                                 </TextBox>
                                 <TextBlock IsHitTestVisible="False"
-                                   Text="Premiere year"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="SemiBold"
-                                   Margin="10,0,0,0"
-                                   Foreground="#d1d1d1"
-                                   Grid.Column="1">
+                                           Text="Premiere year"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
@@ -378,43 +525,75 @@
                 </Grid>
 
                 <Button x:Name="advancedSearchBtn"
-                Content="Search"
-                Height="40"
-                Width="160"
-                Margin="0,32,0,0"
-                Background="#e50914"
-                Foreground="White"
-                Cursor="Hand">
+                        Content="Search"
+                        Height="40"
+                        Width="160"
+                        Margin="0,32,0,0"
+                        Background="#e50914"
+                        Foreground="White"
+                        Cursor="Hand"
+                        Click="advancedSearchBtn_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border CornerRadius="20"
-                            Height="{TemplateBinding Height}"
-                            Width="{TemplateBinding Width}"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0">
+                            <Border x:Name="Border"
+                                    CornerRadius="20"
+                                    Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="0">
                                 <TextBlock Text="{TemplateBinding Content}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   FontWeight="Bold"/>
+                                           Foreground="{TemplateBinding Foreground}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           FontWeight="Bold"/>
                             </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="#910a11" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation To="#e50914" Duration="0:0:0.2" Storyboard.TargetName="Border" Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
             </StackPanel>
 
-            <TextBlock Text="{Binding SearchResult}" FontSize="20" FontWeight="Bold" Foreground="White" Margin="16,16,16,0">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
+            <!-- SEARCH NOTI AND SORT -->
+            <Grid>
+                <TextBlock Text="{Binding SearchResult}" FontSize="20" FontWeight="Bold" Foreground="White" Margin="16,16,16,0" VerticalAlignment="Center"/>
+
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Orientation="Horizontal" Margin="0,0,16,0">
+                    <Label Content="Sort by:" Foreground="White" FontWeight="Bold" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                    <ComboBox Height="40" Width="150"
+                              ItemsSource="{Binding ComboBoxOptions}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" 
+                              SelectionChanged="ComboBox_SelectionChanged"/>
+                </StackPanel>
+
+                <Grid.Style>
+                    <Style TargetType="{x:Type Grid}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}}" Value="">
+                            <DataTrigger Binding="{Binding SearchResult}" Value="">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
                         <Setter Property="Visibility" Value="Visible"/>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                </Grid.Style>
+            </Grid>
 
+            <!-- SEARCH RESULT -->
             <ItemsControl x:Name="itemsControl" ItemsSource="{Binding FilmList}" ItemTemplate="{StaticResource FilmSearchItemTheme}" Margin="16, 32, 16, 0" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
