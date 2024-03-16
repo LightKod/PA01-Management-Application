@@ -4,11 +4,11 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="AppWindow.xaml">
+             StartupUri="/MVVM/View/BookingScreeningTime.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                
+
 
                 <ResourceDictionary Source="./Themes/FilmItemTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/FilmSetTheme.xaml"/>
@@ -27,7 +27,7 @@
             <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
                 <views:AccountPageView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewmodels:SearchViewModel}">
                 <views:SearchView/>
             </DataTemplate>
