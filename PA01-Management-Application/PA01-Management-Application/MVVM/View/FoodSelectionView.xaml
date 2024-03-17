@@ -54,7 +54,7 @@
             <Button Grid.Column="1" Style="{StaticResource ButtonBase}" 
             VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
             Height="80" Background="#FFFFFF"
-            Command="{Binding DataContext.ConfirmClickCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+            Command="{Binding DataContext.ComfirmCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             >
                 <StackPanel Orientation="Horizontal">
                     <fa:FontAwesome

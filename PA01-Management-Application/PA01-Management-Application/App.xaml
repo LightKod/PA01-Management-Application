@@ -39,6 +39,10 @@
             <DataTemplate DataType="{x:Type viewmodels:FoodSelectionViewModel}">
                 <views:FoodSelectionView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PaymentPreviewViewModel}">
+                <views:PaymentPreviewView/>
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
