@@ -13,6 +13,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
 
         public RelayCommand SearchViewCommand { get; set; }
+        public RelayCommand AccountViewCommand { get; set; }
 
         public RelayCommand SearchCommand { get; set; }
 
@@ -20,6 +21,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public HomeViewModel HomeVM { get; set; }
 
         public SearchViewModel SearchVM { get; set; }
+        public AccountViewModel AccountVM { get; set; }
 
         private object _currentView;
 
@@ -50,6 +52,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
             // Initialize views and their view models
             HomeVM = new HomeViewModel();
             SearchVM = new SearchViewModel();
+            AccountVM = new AccountViewModel(); 
+
             CurrentView = HomeVM;
 
             // Handle the command calls
@@ -61,6 +65,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
             SearchViewCommand = new RelayCommand(o =>
             {
                 CurrentView = SearchVM;
+            });
+
+            AccountViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = AccountVM;
             });
 
             SearchCommand = new RelayCommand(o =>

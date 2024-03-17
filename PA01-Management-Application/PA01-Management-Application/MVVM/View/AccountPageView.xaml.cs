@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using PA01_Management_Application.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +22,46 @@ namespace PA01_Management_Application.MVVM.View
     /// </summary>
     public partial class AccountPageView : UserControl
     {
+
+        private UserViewModel _viewModel;
         public AccountPageView()
         {
             InitializeComponent();
+            _viewModel = new UserViewModel();
+            DataContext = _viewModel;
+
+            SetProfile();
         }
+
+        private void SetProfile()
+        {
+            if (_viewModel.Users != null && _viewModel.Users.Count > 0)
+            {
+                txtUserName.Text = $"Xin chào {_viewModel.Users[0].Username},";
+                txtName.Text = $"Tên: {_viewModel.Users[0].Fullname},";
+                txtEmail.Text = $"Email: {_viewModel.Users[0].Email},";
+                txtSDT.Text = $"Số điện thoại: {_viewModel.Users[0].Phone},";
+            }
+        }
+
+        private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog.Title = "Chọn ảnh đại diện";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedImagePath = openFileDialog.FileName;
+
+                Uri imageUri = new Uri(selectedImagePath);
+                BitmapImage bitmapImage = new BitmapImage(imageUri);
+                avatarImage.ImageSource = bitmapImage;
+
+            }
+        }
+
 
         private void MenuItem_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -38,5 +76,40 @@ namespace PA01_Management_Application.MVVM.View
             Button button = sender as Button;
             button.Background = Brushes.Transparent;
         }
+
+        private void updateProfile_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.UpdateProfileView updateProfileView = new MVVM.View.UpdateProfileView(_viewModel);
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = updateProfileView;
+        }
+        private void ViewButton1_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.GiftView giftView = new MVVM.View.GiftView();
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = giftView;
+        }
+
+        private void ViewButton2_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.VoucherView voucherView = new MVVM.View.VoucherView();
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = voucherView;
+        }
+
+        private void ViewButton3_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.CouponView couponView = new MVVM.View.CouponView();
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = couponView;
+        }
+
+        private void ViewButton4_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.PurchasedTicketView purchasedTicketView = new MVVM.View.PurchasedTicketView();
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = purchasedTicketView;
+        }
+
     }
 }

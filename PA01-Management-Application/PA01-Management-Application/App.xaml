@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="/MVVM/View/BookingScreeningTime.xaml">
+             StartupUri="AppWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
