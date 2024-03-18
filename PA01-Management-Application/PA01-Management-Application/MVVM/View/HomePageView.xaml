@@ -12,7 +12,7 @@
             <!-- HOT FILM SLIDER HERE -->
             <Grid>
                 <!-- Image control for displaying slideshow in the center -->
-                <Image x:Name="SlideshowImage" Stretch="Uniform"/>
+                <Image x:Name="SlideshowImage" Height="400" Stretch="UniformToFill"/>
 
                 <!-- Previous button in the top-left corner -->
                 <Image Source="/MVVM/Images/left.png" Margin="5,0,5,0" Width="32" Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" MouseDown="PreviousImage_MouseDown" Opacity="0.7"/>
