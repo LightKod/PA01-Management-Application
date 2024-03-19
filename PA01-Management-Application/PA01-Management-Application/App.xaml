@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:PA01_Management_Application"
              xmlns:views="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:viewmodels="clr-namespace:PA01_Management_Application.MVVM.ViewModel"
-             StartupUri="/MVVM/View/BookingScreeningTime.xaml">
+             StartupUri="AppWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="./Themes/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/ScrollBarTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/SearchTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/AdminMenuButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
@@ -37,6 +38,14 @@
 
             <DataTemplate DataType="{x:Type viewmodels:FoodSelectionViewModel}">
                 <views:FoodSelectionView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PaymentPreviewViewModel}">
+                <views:PaymentPreviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:AdminViewModel}">
+                <views:AdminView/>
             </DataTemplate>
         </ResourceDictionary>
 

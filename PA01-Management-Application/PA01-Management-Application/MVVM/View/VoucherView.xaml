@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.VoucherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="MenuItemStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#555555"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#2196F3"/>
+            <Setter Property="BorderBrush" Value="#1976D2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1976D2"/>
+                    <Setter Property="BorderBrush" Value="#2196F3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#000d21">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#000d21" CornerRadius="10" Margin="20">
+
+            <StackPanel Margin="10">
+                <!-- Title Border -->
+                <Border BorderBrush="Black" BorderThickness="2" Background="Black" CornerRadius="5">
+                    <TextBlock Text="Voucher" FontWeight="Bold" Foreground="White" FontSize="25" TextAlignment="Center" Margin="10"/>
+                </Border>
+
+                <TextBlock Text="Đăng Ký Voucher" Foreground="#e50914" Margin="20" FontSize="20" FontWeight="Bold"/>
+                <Rectangle Fill="White" Height="1" Margin="20,0,20,20"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left fragment -->
+                    <StackPanel Grid.Column="0" Margin="20">
+                        <!-- Số thẻ -->
+                        <TextBlock Text="Số thẻ:" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
+                        <TextBox x:Name="txtCardNumber" Margin="0,0,0,10" Height="30"/>
+
+                        <!-- Mã PIN -->
+                        <TextBlock Text="Mã PIN:" FontSize="16" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
+                        <TextBox x:Name="txtPin" Margin="0,0,0,20" Height="30"/>
+
+                        <!-- Nút Đăng ký và Back -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Back" Style="{StaticResource ButtonStyle}" Margin="0,0,20,0" Click="BackButton_Click" Width="87" BorderThickness="0"/>
+                            <Button Content="Đăng ký" Style="{StaticResource ButtonStyle}" Margin="0,0,0,0" Click="RegisterButton_Click" Width="87" BorderThickness="0" Height="27"/>
+
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Right fragment -->
+                    <Border Grid.Column="1" Width="250" Height="150" Background="White" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
+                        <Image Source="/Resources/Images/voucher.png" Width="250" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <Grid Margin="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Voucher của bạn" Foreground="#e50914" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="1" Text="Hiện có | " Foreground="#d1d1d1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,0,40,0"/>
+                    <TextBlock Grid.Column="2" Text="0,00" Foreground="#0078d7" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"/>
+
+                </Grid>
+
+                <Rectangle Fill="White" Height="1" Margin="20,0,20,20"/>
+
+                <Border BorderBrush="White" BorderThickness="1" VerticalAlignment="Stretch" Margin="20" CornerRadius="10">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" MinWidth="209" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Table headers -->
+                        <TextBlock Text="Tìm nhanh" Foreground="White" FontSize="14" FontWeight="Bold" Margin="15,15,15,15" Grid.Column="0" HorizontalAlignment="Left" Width="70"/>
+
+                        <!-- ScrollViewer for buttons -->
+                        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Margin="10,0,10,0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="1 tuần" Style="{StaticResource ButtonStyle}" Width="70"/>
+                                <Button Content="1 tháng" Style="{StaticResource ButtonStyle}" Width="70" Margin="10,0"/>
+                                <Button Content="3 tháng" Style="{StaticResource ButtonStyle}" Width="70" Margin="10,0"/>
+                            </StackPanel>
+                        </ScrollViewer>
+
+                        <!-- Date pickers -->
+                        <Grid Grid.Column="2" Margin="10,0,10,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <DatePicker Grid.Column="0" Margin="0" Height="40" Background="#323232" Foreground="Black" Padding="5,9,0,0" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Language="vi-VN"/>
+                            <TextBlock Grid.Column="1" Text="~" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <DatePicker Grid.Column="2" Margin="0" Height="40" Background="#323232" Foreground="Black" Padding="5,9,0,0" FontSize="14" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Language="vi-VN"/>
+                        </Grid>
+
+                        <!-- Search button -->
+                        <Button Grid.Column="3" Content="Tìm kiếm" Style="{StaticResource ButtonStyle}" Width="120" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Border>
+
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

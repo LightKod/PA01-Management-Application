@@ -25,9 +25,15 @@
     <None Remove="Resources\Icons\fa6-regular.otf" />
     <None Remove="Resources\Icons\fa6-solid.otf" />
     <None Remove="Resources\Icons\icon.png" />
+    <None Remove="Resources\Icons\logo-momo-1.png" />
+    <None Remove="Resources\Icons\logo-momo.png" />
+    <None Remove="Resources\Icons\logo-zalopay.png" />
     <None Remove="Resources\Icons\qrcode.png" />
     <None Remove="Resources\Images\app_logo.png" />
     <None Remove="Resources\Images\avatar_placeholder.jpg" />
+    <None Remove="Resources\Images\coupon.png" />
+    <None Remove="Resources\Images\giftcard.png" />
+    <None Remove="Resources\Images\voucher.png" />
     <None Remove="Videos\video.mp4" />
   </ItemGroup>
 
@@ -70,9 +76,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Icons\icon.png" />
+    <Resource Include="Resources\Icons\logo-momo-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\logo-momo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\logo-zalopay.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Icons\qrcode.png" />
     <Resource Include="Resources\Images\app_logo.png" />
     <Resource Include="Resources\Images\avatar_placeholder.jpg" />
+    <Resource Include="Resources\Images\coupon.png" />
+    <Resource Include="Resources\Images\giftcard.png" />
+    <Resource Include="Resources\Images\voucher.png" />
   </ItemGroup>
 
 </Project>

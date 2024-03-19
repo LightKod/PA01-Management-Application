@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PA01_Management_Application.MVVM.ViewModel
@@ -31,14 +32,20 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public RelayCommand SubFoodCommand { get; }
         public RelayCommand AddFoodCommand { get; }
+        public RelayCommand ComfirmCommand { get; }
 
         public FoodSelectionViewModel()
         {
             CreateSampleFood();
             AddFoodCommand = new(AddFoodCommandExecute);
             SubFoodCommand = new(SubFoodCommandExecute);
+            ComfirmCommand = new(ComfirmCommandExecute);
         }
 
+        private void ComfirmCommandExecute(object obj)
+        {
+            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new PaymentPreviewViewModel();
+        }
 
         public FoodSelectionViewModel(Room _room, Room displayRoom) : base()
         {
