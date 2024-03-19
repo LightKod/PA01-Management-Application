@@ -1,4 +1,6 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.MVVM.Models;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,13 +9,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static PA01_Management_Application.MVVM.View.BookingScreeningTime;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
     internal class BookingScreeningTimeViewModel : ObservableObject
     {
+        public class DateInfo
+        {
+            public string Day { get; set; }
+            public string DayOfWeek { get; set; }
+            public string Month { get; set; }
+        }
+        public class CinemaDetailsViewModel
+        {
+            public string CinemaName { get; set; }
+            public string TheaterName { get; set; }
+            public ObservableCollection<Schedule> TimeButtons { get; set; }
+        }
         private ObservableCollection<string> _cityList;
+        public ObservableCollection<Schedule> Schedules { get; set; }
+        private readonly MovieService _movieService = new MovieService();
+
         public ObservableCollection<string> CityList
         {
             get { return _cityList; }
@@ -56,8 +73,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
-        private CinemaDetailsViewModel _selectedCinemaDetailsViewModel;
-        public CinemaDetailsViewModel SelectedCinemaDetailsViewModel
+        private Schedule _selectedCinemaDetailsViewModel;
+        public Schedule SelectedCinemaDetailsViewModel
         {
             get { return _selectedCinemaDetailsViewModel; }
             set
@@ -85,28 +102,20 @@ namespace PA01_Management_Application.MVVM.ViewModel
             DateList = new ObservableCollection<DateInfo>
             {
                 new DateInfo { Day = "15", DayOfWeek = "Mon", Month = "03" },
-                new DateInfo { Day = "25", DayOfWeek = "Tues", Month = "02" },
+                new DateInfo { Day = "16", DayOfWeek = "Tue", Month = "03" },
+                new DateInfo { Day = "17", DayOfWeek = "Wed", Month = "03" },
+                new DateInfo { Day = "18", DayOfWeek = "Thu", Month = "03" },
+                new DateInfo { Day = "19", DayOfWeek = "Fri", Month = "03" },
+
                 // Thêm các đối tượng dữ liệu khác nếu cần
             };
+            //Lấy ListSchedular từ movieId và DateOnly
 
             // Khởi tạo CinemaDetailsCollection
             CinemaDetailsCollection = new ObservableCollection<CinemaDetailsViewModel>();
 
             // Thêm dữ liệu vào CinemaDetailsCollection
-            var cinemaDetails = new CinemaDetailsViewModel
-            {
-                CinemaName = "CGV Aeon Tân Phú",
-                TheaterName = "Rạp 27D",
-                TimeButtons = new ObservableCollection<string>
-                {
-                    "17:20 PM",
-                    "17:20 PM",
-                    // Thêm các giá trị thời gian khác nếu cần
-                }
-            };
 
-            CinemaDetailsCollection.Add(cinemaDetails);
-            CinemaDetailsCollection.Add(cinemaDetails);
 
             DateButtonClickCommand = new RelayCommand(ExecuteDateButtonClick);
             CinemaDetailsClickCommand = new RelayCommand(ExecuteCinemaDetailsClick);
@@ -117,7 +126,35 @@ namespace PA01_Management_Application.MVVM.ViewModel
         {
             // Xử lý logic khi DateButton được click
             SelectedDate = parameter as DateInfo;
+            int movieId = 1072790;
             Debug.WriteLine(SelectedDate.Day.ToString());
+            DateOnly selectedDate = new DateOnly(2024, int.Parse(SelectedDate.Month), int.Parse(SelectedDate.Day));
+            // Call the method to get schedules for the selected movie ID and date
+            Schedules = new ObservableCollection<Schedule>(_movieService.GetSchedulesByMovieIdAndDate(movieId, selectedDate));
+            Debug.WriteLine("Number of schedules: " + Schedules.Count);
+            CinemaDetailsCollection.Clear();
+            foreach (var schedule in Schedules)
+            {
+
+                string cinemaName = _movieService.GetCinemaNameByRoomId(schedule.RoomId); // Lấy tên rạp từ ID của phòng chiếu
+
+                var existingCinemaDetails = CinemaDetailsCollection.FirstOrDefault(c => c.CinemaName == cinemaName);
+                if (existingCinemaDetails == null)
+                {
+                    var newCinemaDetails = new CinemaDetailsViewModel
+                    {
+                        CinemaName = cinemaName,
+                        TheaterName = "Rạp", // Có thể thay đổi theo yêu cầu
+                    };
+                    newCinemaDetails.TimeButtons = new ObservableCollection<Schedule>();
+                    newCinemaDetails.TimeButtons.Add(schedule); // Thêm lịch chiếu vào TimeButtons
+                    CinemaDetailsCollection.Add(newCinemaDetails);
+                }
+                else
+                {
+                    existingCinemaDetails.TimeButtons.Add(schedule); // Thêm lịch chiếu vào TimeButtons của CinemaDetailsViewModel tương ứng
+                }
+            }
         }
         private void ExecuteCinemaDetailsClick(object parameter)
         {
@@ -125,8 +162,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
             // Sử dụng biến cinemaDetails ở đây để thực hiện các thao tác cần thiết
             Debug.WriteLine("aaaaa");
 
-            SelectedCinemaDetailsViewModel = parameter as CinemaDetailsViewModel;
-            Debug.WriteLine(SelectedCinemaDetailsViewModel.TheaterName.ToString());
+            SelectedCinemaDetailsViewModel = parameter as Schedule;
+            Debug.WriteLine(SelectedCinemaDetailsViewModel.ScheduleStart.ToString());
 
         }
 

@@ -273,9 +273,9 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button Content="{Binding}"  
+                                                <Button Content="{Binding ScheduleStart}"  
                                                         Command="{Binding ElementName=CinemaDetailsCollection, Path=DataContext.CinemaDetailsClickCommand}"
-                                                        CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                        CommandParameter="{Binding}"
                                                         Template="{StaticResource ShowTimeButtonTemplate}" Margin="10,0,10,0"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>

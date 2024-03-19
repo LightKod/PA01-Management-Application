@@ -9,7 +9,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-
                 <ResourceDictionary Source="./Themes/FilmItemTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/FilmSetTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/FilmSearchItemTheme.xaml"/>
