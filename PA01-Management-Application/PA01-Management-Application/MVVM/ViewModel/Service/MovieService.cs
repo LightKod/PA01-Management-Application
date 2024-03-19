@@ -66,6 +66,16 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
 
             return actors;
         }
+
+        public async Task<Person[]> GetPersonActorsByMovieIdAsync(int movieId)
+        {
+            var actors = await _context.Movies
+                .Where(m => m.MovieId == movieId)
+                .SelectMany(m => m.Actors)
+                .ToArrayAsync();
+
+            return actors;
+        }
         // lấy danh sách đạo diễn theo film (by Movie id)
         public async Task<string?> GetDirectorNameByMovieIdAsync(int movieId)
         {

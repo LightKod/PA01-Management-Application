@@ -19,7 +19,7 @@ namespace PA01_Management_Application.MVVM.Model
             ID = string.Empty;
             Name = string.Empty;
             Description = string.Empty;
-            Price = 0f;
+            Price = 0;
             ImagePath = string.Empty;
         }
 

@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:PA01_Management_Application.Converters"
+                    >
+        <converters:AddDollarConverter x:Key="AddDollarConverter"/>
     <DataTemplate x:Key="OrderItem">
         <Border BorderThickness="0" BorderBrush="#aaaaaa">
             <Grid>
@@ -15,7 +18,7 @@
                 <Label Grid.Column="1"
                    HorizontalAlignment="Right"
                    FontSize="24" FontWeight="SemiBold" Foreground="#FFFFFF"
-                   Content="{Binding Price}"
+                   Content="{Binding Price, Converter={StaticResource AddDollarConverter}}"
             />
             </Grid>
         </Border>

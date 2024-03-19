@@ -25,6 +25,19 @@ namespace PA01_Management_Application.MVVM.Model
             Type = type;
         }
 
+        public float GetPrice()
+        {
+            switch (Type)
+            {
+                case SeatType.Normal:
+                    return 10;
+                case SeatType.VIP: 
+                    return 20;
+                default:
+                    return 0;
+            }
+        }
+
         public string SeatTypeString
         {
             get {

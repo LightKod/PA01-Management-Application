@@ -1,4 +1,5 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Models;
 using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -83,6 +85,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 OnPropertyChanged(nameof(SelectedCinemaDetailsViewModel));
             }
         }
+
+        private Movie movie;
+        public Movie Movie
+        {
+            get { return movie; }
+            set
+            {
+                movie = value;
+                OnPropertyChanged(nameof(Movie));
+            }
+        }
+
         public RelayCommand DateButtonClickCommand { get; private set; }
         public RelayCommand CinemaDetailsClickCommand { get; set; }
 
@@ -120,13 +134,14 @@ namespace PA01_Management_Application.MVVM.ViewModel
             DateButtonClickCommand = new RelayCommand(ExecuteDateButtonClick);
             CinemaDetailsClickCommand = new RelayCommand(ExecuteCinemaDetailsClick);
 
-
+            Movie = null;
+            Movie = BookingDataHolder.movie;
         }
         private void ExecuteDateButtonClick(object parameter)
         {
             // Xử lý logic khi DateButton được click
             SelectedDate = parameter as DateInfo;
-            int movieId = 1072790;
+            int movieId = BookingDataHolder.movieID;
             Debug.WriteLine(SelectedDate.Day.ToString());
             DateOnly selectedDate = new DateOnly(2024, int.Parse(SelectedDate.Month), int.Parse(SelectedDate.Day));
             // Call the method to get schedules for the selected movie ID and date
@@ -163,8 +178,12 @@ namespace PA01_Management_Application.MVVM.ViewModel
             Debug.WriteLine("aaaaa");
 
             SelectedCinemaDetailsViewModel = parameter as Schedule;
+
+            BookingDataHolder.schedule = SelectedCinemaDetailsViewModel;
+
             Debug.WriteLine(SelectedCinemaDetailsViewModel.ScheduleStart.ToString());
 
+            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new SeatSelectionViewModel();
         }
 
 
