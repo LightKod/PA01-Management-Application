@@ -19,10 +19,20 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        public FilmManagementViewModel FilmManagementVM { get; set; }
+
         public ICommand ShowReportPageCommand { get; private set; }
+        public RelayCommand FilmManagementCommand { get; set; }
 
         public AdminViewModel()
         {
+            FilmManagementVM = new FilmManagementViewModel();
+
+            FilmManagementCommand = new RelayCommand(o =>
+            {
+                CurrentAdminView = FilmManagementVM;
+            });
+
             ShowReportPageCommand = new RelayCommand(ShowReportPage);
         }
 

@@ -16,8 +16,9 @@
                          IsChecked="True"/>
                 
                 <RadioButton Content="Films"
-                         Style="{StaticResource AdminMenuButtonTheme}"
-                         Cursor="Hand"/>
+                             Style="{StaticResource AdminMenuButtonTheme}"
+                             Cursor="Hand"
+                             Command="{Binding FilmManagementCommand}"/>
                 
                 <RadioButton Content="Shows, Tickets And Vouchers"
                          Style="{StaticResource AdminMenuButtonTheme}"

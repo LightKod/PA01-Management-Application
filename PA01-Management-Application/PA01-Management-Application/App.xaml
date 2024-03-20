@@ -54,6 +54,10 @@
             <DataTemplate DataType="{x:Type viewmodels:BookingScreeningTimeViewModel}">
                 <views:BookingScreeningTime/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:FilmManagementViewModel}">
+                <views:FilmManagementView/>
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>
