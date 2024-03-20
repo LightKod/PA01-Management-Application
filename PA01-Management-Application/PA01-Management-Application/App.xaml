@@ -27,6 +27,9 @@
             <DataTemplate DataType="{x:Type viewmodels:AccountViewModel}">
                 <views:AccountPageView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ReportViewModel}">
+                <views:ReportPageView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SearchViewModel}">
                 <views:SearchView/>

@@ -6,14 +6,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Viewbox>
-        <Grid Background="#000d21">
+        <Grid Background="#263238">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Border BorderBrush="Black" BorderThickness="2" Background="Black" CornerRadius="5">
+            <Border BorderBrush="White" BorderThickness="2" Background="#37474F" CornerRadius="5" Margin="10">
                 <TextBlock Grid.Row="0" Text="Update Profile" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" Foreground="White"/>
             </Border>
 
@@ -26,120 +26,107 @@
 
                 <!-- Left Column -->
                 <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                    <TextBlock Text="Personal Information" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="red"/>
-
-                    <!-- Full Name -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Full Name:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtFullname" Grid.Column="1" Margin="5"/>
-                    </Grid>
+                    <TextBlock Text="Personal Information" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#FF5252"/>
 
                     <!-- Email -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Email:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtEmail" Grid.Column="1" Margin="5"/>
+                        <TextBox x:Name="txtEmail" Grid.Column="1" Margin="5" Width="200"/>
+                    </Grid>
+
+                    <!-- Full Name -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Full Name:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
+                        <TextBox x:Name="txtFullname" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
                     <!-- Phone -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Phone:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtPhone" Grid.Column="1" Margin="5"/>
+                        <TextBox x:Name="txtPhone" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
-                    <!-- New Password -->
-                    <Grid>
+                    <!-- Password -->
+                    <!-- Password -->
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <!-- Thêm một cột cho nút Change -->
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="New Password:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <PasswordBox x:Name="txtPassword" Grid.Column="1" Margin="5"/>
+                        <TextBlock Text="Password:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White" Height="16"/>
+                        <PasswordBox x:Name="txtPassword" Grid.Column="1" Margin="5,5,5,5"/>
+                        <Button Content="Change" Grid.Column="2" Margin="5,5,5,5" Background="#007ACC" Foreground="White" FontWeight="Bold" Click="ChangePasswordButton_Click"/>
+                        <!-- Thêm nút Change -->
                     </Grid>
 
-                    <!-- Confirm Password -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Confirm Password:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <PasswordBox x:Name="txtConfirmPassword" Grid.Column="1" Margin="5"/>
-                    </Grid>
+
                 </StackPanel>
 
                 <!-- Right Column -->
-                <StackPanel Grid.Column="1">
-                    <TextBlock Text="Additional Information" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="Red"/>
+                <StackPanel Grid.Column="1" Margin="0,0,20,0">
+                    <TextBlock Text="Additional Information" FontWeight="Bold" FontSize="18" Margin="0,0,0,10" Foreground="#FF5252"/>
 
                     <!-- Username -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Username:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtUsername" Grid.Column="1" Margin="5"/>
+                        <TextBox x:Name="txtUsername" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
                     <!-- Birthday -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Birthday:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <DatePicker x:Name="dpBirthday" Grid.Column="1" Margin="5" Language="vi-VN"/>
+                        <DatePicker x:Name="dpBirthday" Grid.Column="1" Margin="5" Language="vi-VN" Width="200"/>
                     </Grid>
 
                     <!-- Gender -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Gender:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5">
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <RadioButton x:Name="rbMale" Content="Nam" Margin="5" Foreground="White"/>
                             <RadioButton x:Name="rbFemale" Content="Nữ" Margin="5" Foreground="White"/>
                         </StackPanel>
                     </Grid>
 
                     <!-- City -->
-                    <Grid>
+                    <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="120"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="City:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtCity" Grid.Column="1" Margin="5"/>
-                    </Grid>
-
-                    <!-- Old Password -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Old Password:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <PasswordBox x:Name="txtOldPassword" Grid.Column="1" Margin="5"/>
+                        <TextBox x:Name="txtCity" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
                 </StackPanel>
             </Grid>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                <Button Content="Back" Margin="5" Width="100" Background="Gray" Foreground="White" FontWeight="Bold"/>
+                <Button Content="Back" Click="BackButton_Click" Margin="5" Width="100" Background="#455A64" Foreground="White" FontWeight="Bold"/>
                 <Button Content="Save Changes" Click="SaveChangesButton_Click" Margin="5" Width="150" Background="#007ACC" Foreground="White" FontWeight="Bold"/>
             </StackPanel>
         </Grid>

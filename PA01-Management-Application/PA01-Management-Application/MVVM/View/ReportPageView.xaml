@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="PA01_Management_Application.MVVM.View.ReportPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Report Statistics" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 10 20" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <ComboBox x:Name="DateFilterComboBox" Width="150" Margin="5" VerticalAlignment="Center" Background="#EEE" SelectionChanged="DateFilterComboBox_SelectionChanged">
+                <ComboBoxItem Content="Day to Day" />
+                <ComboBoxItem Content="By Week" />
+                <ComboBoxItem Content="By Month" />
+                <ComboBoxItem Content="By Year" />
+            </ComboBox>
+
+            <DatePicker x:Name="StartDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+            <DatePicker x:Name="EndDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+            <ComboBox x:Name="MovieFilterComboBox" Width="150" Margin="5" VerticalAlignment="Center" Background="#EEE" SelectedIndex="0">
+
+            </ComboBox>
+        </StackPanel>
+
+        <lvc:CartesianChart x:Name="ReportChart" Grid.Row="2" Margin="0,10,0,0">
+            <lvc:CartesianChart.Series>
+                <lvc:LineSeries Title="Booking Trends" Values="{Binding Path=Bookings}" />
+            </lvc:CartesianChart.Series>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Time" />
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Bookings" />
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+    </Grid>
+</UserControl>

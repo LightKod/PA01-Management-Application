@@ -14,6 +14,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public RelayCommand SearchViewCommand { get; set; }
         public RelayCommand AccountViewCommand { get; set; }
+        public RelayCommand ReportViewCommand { get; set; }
 
         public RelayCommand SearchCommand { get; set; }
 
@@ -22,6 +23,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public SearchViewModel SearchVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
+        public ReportViewModel ReportVM { get; set; }
 
         private object _currentView;
 
@@ -53,6 +55,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             HomeVM = new HomeViewModel();
             SearchVM = new SearchViewModel();
             AccountVM = new AccountViewModel(); 
+            ReportVM = new ReportViewModel();
 
             CurrentView = HomeVM;
 
@@ -76,6 +79,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 CurrentView = SearchVM;
                 SearchVM.SearchByName();
+            });
+
+            ReportViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = ReportVM;
             });
 
             IsAdmin = true;
