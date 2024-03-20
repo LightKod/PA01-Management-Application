@@ -143,7 +143,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             foreach (Seat seat in selectedSeats)
             {
-                Booking booking = new Booking();
+                PA01_Management_Application.MVVM.Models.Booking booking = new();
                 booking.SeatId = seat.Name;
                 //booking.UserId = 1;
                 booking.ScheduleId = scheduleID;
@@ -168,7 +168,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             if(Discount > 0)
             {
-                Booking booking = new Booking();
+                PA01_Management_Application.MVVM.Models.Booking booking = new();
                 booking.SeatId = "DISCOUNT";
                 //booking.UserId = 1;
                 booking.ScheduleId = scheduleID;
