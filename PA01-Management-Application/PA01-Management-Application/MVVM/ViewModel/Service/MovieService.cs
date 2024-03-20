@@ -390,8 +390,18 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
         }
 
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="scheduleId"></param>
+        /// <param name="seatId"></param>
+        /// <returns>True: booked | False: unbooked</returns>
+        public bool CheckIfBooked(int scheduleId, string seatId)
+        {
+            bool check = _context.Bookings.FirstOrDefault(x => x.ScheduleId == scheduleId && x.SeatId == seatId) != null;
+            Debug.WriteLine(check);
+            return check;
+        }
 
     }
 }

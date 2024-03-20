@@ -1,9 +1,7 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.MVVM.View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
@@ -21,8 +19,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        public ICommand ShowReportPageCommand { get; private set; }
+
         public AdminViewModel()
         {
+            ShowReportPageCommand = new RelayCommand(ShowReportPage);
+        }
+
+        private void ShowReportPage(object parameter)
+        {
+            CurrentAdminView = new ReportPageView(); 
         }
     }
 }

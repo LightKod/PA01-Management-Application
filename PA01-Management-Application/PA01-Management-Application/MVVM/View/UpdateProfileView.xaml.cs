@@ -20,6 +20,9 @@ namespace PA01_Management_Application.MVVM.View
             DataContext = _viewModel;
 
             SetProfile();
+
+            txtEmail.IsEnabled = false;
+            txtUsername.IsEnabled = false;
         }
 
         private void SetProfile()
@@ -31,6 +34,7 @@ namespace PA01_Management_Application.MVVM.View
                 txtPhone.Text = _viewModel.Users[0].Phone;
                 txtUsername.Text = _viewModel.Users[0].Username;
                 txtCity.Text = _viewModel.Users[0].City;
+                txtPassword.Password = _viewModel.Users[0].Password;
                 if (_viewModel.Users[0].Birthday != null)
                 {
                     dpBirthday.SelectedDate = _viewModel.Users[0].Birthday;
@@ -48,33 +52,8 @@ namespace PA01_Management_Application.MVVM.View
             }
         }
 
-        private bool IsPasswordConfirmed()
-        {
-            return txtPassword.Password == txtConfirmPassword.Password;
-        }
-
-        private bool IsPasswordOld()
-        {
-            return txtOldPassword.Password == _viewModel.Users[0].Password;
-        }
-
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            // Kiểm tra mật khẩu đã được xác nhận chưa
-            if (!IsPasswordConfirmed())
-            {
-                MessageBox.Show("Confirm Password không khớp với Password.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // Kiểm tra mật khẩu cũ
-            if (!IsPasswordOld())
-            {
-                MessageBox.Show("Password cũ không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            // Tạo đối tượng User mới từ các thông tin đã nhập
             User updatedUser = new User
             {
                 UserId = _viewModel.Users[0].UserId,
@@ -86,15 +65,25 @@ namespace PA01_Management_Application.MVVM.View
                 Email = txtEmail.Text,
                 City = txtCity.Text,
                 Phone = txtPhone.Text,
-                Point = _viewModel.Users[0].Point // Giữ nguyên số điểm, không thay đổi từ giao diện
+                Point = _viewModel.Users[0].Point
             };
-
-            // Lưu các thay đổi
             _viewModel.SaveUserChanges(updatedUser);
 
-            // Chuyển sang trang AccountPageView để xem các thay đổi
             var mainWindowViewModel = App.Current.MainWindow.DataContext as AppWindowViewModel;
             mainWindowViewModel.CurrentView = new AccountPageView();
+        }
+
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow(_viewModel);
+            changePasswordWindow.ShowDialog();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            MVVM.View.AccountPageView accountPageView = new MVVM.View.AccountPageView();
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = accountPageView;
         }
 
     }

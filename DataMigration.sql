@@ -57,6 +57,7 @@ CREATE TABLE movies (
   vote_count INT,
   runTime INT,
   adult BIT,
+  certification NVARCHAR(255),
   backdrop_path NVARCHAR(255),
   poster_path NVARCHAR(255),
   video BIT,

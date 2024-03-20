@@ -245,7 +245,7 @@
                                     Margin="0,8,8,0" VerticalAlignment="Center"/>
                                 <Label Grid.Row="1" Grid.Column="1"
                                     FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
-                                    Content="01/01/2024" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    Content="{Binding Schedule.ScheduleDate}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                                 <!--Time-->
                                 <Label Grid.Row="2"
                                     FontWeight="Bold" FontSize="24" Foreground="#FFFFFF"
@@ -253,7 +253,7 @@
                                     Margin="0,8,8,0" VerticalAlignment="Center"/>
                                 <Label Grid.Row="2" Grid.Column="1"
                                     FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
-                                    Content="17h30" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    Content="{Binding Schedule.ScheduleStart}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
                                 <Label Grid.Row="3"
                                     FontWeight="Bold" FontSize="24" Foreground="#FFFFFF"
@@ -261,7 +261,7 @@
                                     Margin="0,8,8,0" VerticalAlignment="Center"/>
                                 <Label Grid.Row="3" Grid.Column="1"
                                     FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
-                                    Content="A1-A2-A3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                    Content="{Binding SeatString}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                             </Grid>
                         </Border>
                         
@@ -308,7 +308,9 @@
                     <Button Grid.Row="2" Style="{StaticResource ButtonBase}" 
                             HorizontalAlignment="Center" VerticalAlignment="Center"
                             Height="90"
-                            Background="#e50914">
+                            Background="#e50914"
+                            Command="{Binding PayClickCommand}"
+                            >
                         <StackPanel Orientation="Horizontal" Margin="20">
                             <fa:FontAwesome
                                 VerticalAlignment="Center"
