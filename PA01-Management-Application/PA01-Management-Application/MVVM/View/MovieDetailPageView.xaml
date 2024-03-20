@@ -61,7 +61,7 @@
                                 HorizontalAlignment="Center"
                             />
                         <StackPanel Margin="10,0,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="9" FontSize="32" Foreground="#FFFFFF" VerticalAlignment="Top"/>
+                        <TextBlock Text="{Binding Film.FilmRating}" FontSize="32" Foreground="#FFFFFF" VerticalAlignment="Top"/>
                             <TextBlock Text ="/10" FontSize="28" Foreground="#aaaaaa" VerticalAlignment="Bottom"/>
                         </StackPanel>
                     </StackPanel>

@@ -55,6 +55,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         }
 
+
+
         private void ButtonClickCommandExecute(object parameter)
         {
             if (parameter is Button button)
@@ -68,7 +70,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     Seat baseSeat = room.Seats.Find(x => x.Name == SelectedSeat.Name);
                     SeatType baseType = baseSeat.Type;
 
-                    if (baseType == SeatType.None) return;
+                    if (baseType == SeatType.None || baseType == SeatType.Booked) return;
 
                     SelectedSeat.Type = SelectedSeat.Type == SeatType.Picked ? baseType : SeatType.Picked;
 
@@ -112,7 +114,6 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 return;
             }
             Debug.WriteLine($"Booked: {selectedSeats.Count} seats");
-            BookingDataHolder.room = room;
             BookingDataHolder.seats = selectedSeats;
 
 
