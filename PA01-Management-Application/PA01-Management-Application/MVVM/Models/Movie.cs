@@ -21,7 +21,11 @@ public partial class Movie
 
     public int? VoteCount { get; set; }
 
+    public int? RunTime { get; set; }
+
     public bool? Adult { get; set; }
+
+    public string? Certification { get; set; }
 
     public string? BackdropPath { get; set; }
 

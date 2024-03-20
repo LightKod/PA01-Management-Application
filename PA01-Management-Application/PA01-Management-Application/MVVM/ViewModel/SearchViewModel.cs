@@ -1,5 +1,6 @@
 ﻿using PA01_Management_Application.Core;
 using PA01_Management_Application.MVVM.Model;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     class SearchViewModel : ObservableObject
     {
+        MovieService service = new();
+
         private string _nameSearch;
 
         public string NameSearch
@@ -49,26 +52,14 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
-        private string _timeSearch;
+        private string _durationSearch;
 
-        public string TimeSearch
+        public string DurationSearch
         {
-            get { return _timeSearch; }
+            get { return _durationSearch; }
             set
             {
-                _timeSearch = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string _priceSearch;
-
-        public string PriceSearch
-        {
-            get { return _priceSearch; }
-            set
-            {
-                _priceSearch = value;
+                _durationSearch = value;
                 OnPropertyChanged();
             }
         }
@@ -165,8 +156,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             NameSearch = string.Empty;
             ActorSearch = string.Empty;
             DirectorSearch = string.Empty;
-            TimeSearch = string.Empty;
-            PriceSearch = string.Empty;
+            DurationSearch = string.Empty;
             YearSearch = string.Empty;
             SearchResult = string.Empty;
             CurrentPage = 0;
@@ -176,32 +166,6 @@ namespace PA01_Management_Application.MVVM.ViewModel
                                                                    "Duration, Ascending", "Duration, Descending",
                                                                    "Rating, Ascending", "Rating, Descending" };
 
-            DummyFilmList = new ObservableCollection<Film>();
-            DummyFilmList.Add(new Film
-                    (
-                        $"This is a film with a very long title to test the capability of the ItemsControl",
-                       [$"Genre"],
-                        69,
-                        4.96,
-                        "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png",
-                         "Videos/video.mp4",
-                        [], ["Meo meo bruh", "Huhu"], [], []
-                    ));
-            for (int j = 0; j < 9; j++)
-            {
-                DummyFilmList.Add(new Film
-                    (
-                        $"Shrek {j}",
-                       [$"Genre {j}"],
-                        69 - j,
-                        4.96 + j*0.1,
-                        j % 3 == 0 ? "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png" : "https://www.elle.vn/wp-content/uploads/2023/12/06/560540/poster-Mai-scaled.jpg",
-                         "Videos/video.mp4",
-                        [],
-                        j % 2 == 0 ? ["Pickle", $"{(j % 3 == 0 ? "Bruh" : "Lmao")}"] : ["Doggy", $"{(j % 3 == 0 ? "Lmao" : "Bruh")}"],
-                        [], []
-                    ));
-            }
             SearchResultList = new ObservableCollection<Film>();
 
             SearchByNameCommand = new RelayCommand(o =>
@@ -223,25 +187,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             AdvancedSearchCommand = new RelayCommand(o =>
             {
-                SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase) &&
-                                                                                              (film.Directors != null && film.Directors.Any(director => director.Contains(DirectorSearch, StringComparison.OrdinalIgnoreCase))))
-                                                                               .OrderBy(film => film.FilmName)
-                                                                               .ToList());
-                SelectedSort = "Name, A-Z";
-                if (SearchResultList.Count > 0)
-                {
-                    SearchResult = $"Found {SearchResultList.Count} film{(SearchResultList.Count > 1 ? "s" : "")}";
-                    MaxPage = (int)Math.Ceiling((double)SearchResultList.Count / _maxItemsPerPage);
-                    CurrentPage = 1;
-                    FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
-                }
-                else
-                {
-                    SearchResult = "There are no films matched the search";
-                    FilmList = new ObservableCollection<Film>();
-                    MaxPage = 0;
-                    CurrentPage = 0;
-                }
+                SearchWithExtraInfo();
             });
 
             SortCommand = new RelayCommand(o =>
@@ -279,11 +225,12 @@ namespace PA01_Management_Application.MVVM.ViewModel
             });
         }
 
-        public void SearchByName()
+        public async void SearchByName()
         {
             if (NameSearch != string.Empty)
             {
-                SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase)).OrderBy(film => film.FilmName).ToList());
+                /*SearchResultList = new ObservableCollection<Film>(DummyFilmList.Where(film => film.FilmName.Contains(NameSearch, StringComparison.OrdinalIgnoreCase)).OrderBy(film => film.FilmName).ToList());*/
+                await GetAllMoviesByName();
                 SelectedSort = "Name, A-Z";
                 if (SearchResultList.Count > 0)
                 {
@@ -300,6 +247,74 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     CurrentPage = 0;
                 }
             }
+        }
+
+        public async Task GetAllMoviesByName()
+        {
+            var searchResult = service.SearchMoviesByTitle(NameSearch);
+            SearchResultList.Clear();
+            foreach (var movie in searchResult)
+            {
+                Film f = new();
+
+                f.FilmID = movie.MovieId;
+                f.FilmName = movie.Title;
+                f.FilmGenres = await service.GetGenresByMovieIdAsync(movie.MovieId);
+                f.FilmDuration = movie.RunTime.Value;
+                f.FilmRating = movie.VoteAverage.Value;
+                f.FilmTrailer = "Videos/video.mp4";
+                f.FilmBanner = new string[] { movie.BackdropPath };
+                f.FilmPoster = movie.PosterPath;
+                f.Directors = new string[] { await service.GetDirectorNameByMovieIdAsync(movie.MovieId) };
+                f.Stars = await service.GetActorsByMovieIdAsync(movie.MovieId);
+                f.FilmDescription = movie.Overview;
+
+                SearchResultList.Add(f);
+            };
+        }
+
+        public async void SearchWithExtraInfo()
+        {
+            await GetAllMoviesWithExtraInfo();
+            SelectedSort = "Name, A-Z";
+            if (SearchResultList.Count > 0)
+            {
+                SearchResult = $"Found {SearchResultList.Count} film{(SearchResultList.Count > 1 ? "s" : "")}";
+                MaxPage = (int)Math.Ceiling((double)SearchResultList.Count / _maxItemsPerPage);
+                CurrentPage = 1;
+                FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
+            }
+            else
+            {
+                SearchResult = "There are no films matched the search";
+                FilmList = new ObservableCollection<Film>();
+                MaxPage = 0;
+                CurrentPage = 0;
+            }
+        }
+
+        public async Task GetAllMoviesWithExtraInfo()
+        {
+            var searchResult = service.SearchMovies(NameSearch, DirectorSearch, ActorSearch, YearSearch == string.Empty ? 0 : Int32.Parse(YearSearch));
+            SearchResultList.Clear();
+            foreach (var movie in searchResult)
+            {
+                Film f = new();
+
+                f.FilmID = movie.MovieId;
+                f.FilmName = movie.Title;
+                f.FilmGenres = await service.GetGenresByMovieIdAsync(movie.MovieId);
+                f.FilmDuration = movie.RunTime.Value;
+                f.FilmRating = movie.VoteAverage.Value;
+                f.FilmTrailer = "Videos/video.mp4";
+                f.FilmBanner = new string[] { movie.BackdropPath };
+                f.FilmPoster = movie.PosterPath;
+                f.Directors = new string[] { await service.GetDirectorNameByMovieIdAsync(movie.MovieId) };
+                f.Stars = await service.GetActorsByMovieIdAsync(movie.MovieId);
+                f.FilmDescription = movie.Overview;
+
+                SearchResultList.Add(f);
+            };
         }
     }
 }

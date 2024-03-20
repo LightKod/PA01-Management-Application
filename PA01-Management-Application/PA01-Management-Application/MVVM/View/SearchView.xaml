@@ -330,8 +330,6 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="16"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="16"/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <Grid>
@@ -339,7 +337,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Time"
+                        <TextBlock Text="Duration from"
                                    Foreground="White"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"
@@ -355,72 +353,9 @@
                                          VerticalContentAlignment="Center"
                                          Padding="8,0,8,0"
                                          CaretBrush="White"
-                                         x:Name="TimeBox">
+                                         x:Name="DurationBox">
                                     <TextBox.Text>
-                                        <Binding Path="TimeSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local2:TimeValidation/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                    <TextBox.Style>
-                                        <Style TargetType="{x:Type TextBox}">
-                                            <Style.Triggers>
-                                                <Trigger Property="Validation.HasError" Value="True">
-                                                    <Setter Property="Foreground" Value="#e50914"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                            <Setter Property="Foreground" Value="White"/>
-                                        </Style>
-                                    </TextBox.Style>
-                                </TextBox>
-                                <TextBlock IsHitTestVisible="False"
-                                           Text="hh:mm"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           FontWeight="SemiBold"
-                                           Margin="10,0,0,0"
-                                           Foreground="#d1d1d1"
-                                           Grid.Column="1">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=TimeBox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                    </Grid>
-
-                    <Grid Grid.Column="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Price From"
-                                   Foreground="White"
-                                   FontWeight="SemiBold"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,10,0"/>
-                        <Border Grid.Column="1"
-                                Height="40"
-                                Background="Transparent"
-                                BorderBrush="White"
-                                BorderThickness="0,0,0,1">
-                            <Grid>
-                                <TextBox BorderThickness="0"
-                                         Background="Transparent"
-                                         VerticalContentAlignment="Center"
-                                         Padding="8,0,8,0"
-                                         CaretBrush="White"
-                                         x:Name="PriceBox">
-                                    <TextBox.Text>
-                                        <Binding Path="PriceSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding Path="DurationSearch" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                                             <Binding.ValidationRules>
                                                 <local2:PositiveNumberValidation/>
                                             </Binding.ValidationRules>
@@ -438,7 +373,7 @@
                                     </TextBox.Style>
                                 </TextBox>
                                 <TextBlock IsHitTestVisible="False"
-                                           Text="Ticket price"
+                                           Text="Enter starting duration"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            FontWeight="SemiBold"
@@ -448,7 +383,7 @@
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=PriceBox}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=DurationBox}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -460,12 +395,12 @@
                         </Border>
                     </Grid>
 
-                    <Grid Grid.Column="4">
+                    <Grid Grid.Column="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Year"
+                        <TextBlock Text="Year from"
                                    Foreground="White"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"
@@ -501,7 +436,7 @@
                                     </TextBox.Style>
                                 </TextBox>
                                 <TextBlock IsHitTestVisible="False"
-                                           Text="Premiere year"
+                                           Text="Enter starting premiere year"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            FontWeight="SemiBold"

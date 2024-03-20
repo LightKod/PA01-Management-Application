@@ -9,6 +9,7 @@ namespace PA01_Management_Application.MVVM.Model
 {
     class Film : ObservableObject
     {
+        public int FilmID { get; set; }
         public string FilmName { get; set; }
         public string[] FilmGenres { get; set; }
         public int FilmDuration { get; set; }

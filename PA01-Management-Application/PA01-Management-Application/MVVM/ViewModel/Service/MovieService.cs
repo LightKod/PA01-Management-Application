@@ -18,6 +18,14 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
 
         //HomePage
         //Lấy danh sách film đang được chiếu lấy tất cả (10 phim) schedular
+        public List<Movie> GetAllScreeningMovies()
+        {
+            using (var context = new MovieManagementContext())
+            {
+                return context.Movies.Take(10).ToList();
+            }
+        }
+
         //Lấy danh sách film có popularity top 10
 
         public List<Movie> GetTop10PopularMovies()

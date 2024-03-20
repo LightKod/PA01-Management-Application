@@ -1,6 +1,7 @@
 ﻿using PA01_Management_Application.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace PA01_Management_Application.MVVM.View
 
         private void advancedSearchBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!(Validation.GetHasError(TimeBox) || Validation.GetHasError(PriceBox) || Validation.GetHasError(YearBox)))
+            if (!(Validation.GetHasError(DurationBox) || Validation.GetHasError(YearBox)))
             {
                 if (DataContext is SearchViewModel viewModel)
                 {
