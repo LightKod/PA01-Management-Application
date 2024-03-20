@@ -1,4 +1,5 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
@@ -151,6 +153,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public RelayCommand SortCommand { get; set; }
 
+        public MovieDetailViewModel MovieDetailVM { get; set; }
+        public RelayCommand MovieDetailCommand {  get; set; }
+
         public SearchViewModel()
         {
             NameSearch = string.Empty;
@@ -221,6 +226,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                     CurrentPage = 1;
                     FilmList = new ObservableCollection<Film>(SearchResultList.Take(_maxItemsPerPage).ToList());
+                }
+            });
+
+            MovieDetailVM = new MovieDetailViewModel();
+            MovieDetailCommand = new RelayCommand(o =>
+            {
+                if (o is Film selectedFilm)
+                {
+                    BookingDataHolder.movieID = selectedFilm.FilmID;
+                    (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = MovieDetailVM;
                 }
             });
         }

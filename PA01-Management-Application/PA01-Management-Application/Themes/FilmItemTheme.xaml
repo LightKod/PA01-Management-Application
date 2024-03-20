@@ -13,7 +13,7 @@
             <Grid>
                 <MediaElement Source="{Binding FilmTrailer}" LoadedBehavior="Manual"/>
                 <Image x:Name="image" Source="{Binding FilmPoster}" Stretch="UniformToFill"/>
-                <StackPanel Opacity="0" VerticalAlignment="Bottom" Margin="5, 0, 0, 5">
+                <StackPanel Opacity="0" VerticalAlignment="Bottom" Margin="5, 0, 5, 5">
                     <TextBlock Text="{Binding FilmName}" FontSize="16" FontWeight="Bold" Foreground="White" TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding FilmGenres, Converter={StaticResource DirectorsToStringConverter}}" Foreground="White" Margin="0,5,0,0" TextWrapping="Wrap"/>
                     <TextBlock Text="{Binding Directors, Converter={StaticResource DirectorsToStringConverter}}" Foreground="White" Margin="0,5,0,0" TextWrapping="Wrap"/>
