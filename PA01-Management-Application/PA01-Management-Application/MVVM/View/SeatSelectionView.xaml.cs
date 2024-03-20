@@ -1,5 +1,7 @@
-﻿using PA01_Management_Application.MVVM.Model;
+﻿using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.ViewModel;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,32 +46,49 @@ namespace PA01_Management_Application.MVVM.View
 
         void CreateTempRoom()
         {
-            int col = 7;
-            int row = 7;
+            int col = 14;
+            int row = 10;
             List<Seat> seats = new();
 
-            for (int y = 0; y < col; y++)
+            MovieService service = new();
+
+            for ( int x = 0; x < row; x++)
             {
-                for(int x = 0; x < row; x++)
+                for(int y = 0; y < col; y++)
                 {
-                    if(x == 3)
+                    string seatID = $"{MapToAlphabet(x)}{y}";
+                    if (service.CheckIfBooked(BookingDataHolder.schedule.ScheduleId, seatID))
                     {
-                        seats.Add(new Seat($"{x}-{y}", SeatType.None));
+                        seats.Add(new Seat(seatID, SeatType.Booked));
+                    }
+                    else if (y == 3 || y == 10)
+                    {
+                        seats.Add(new Seat(seatID, SeatType.None));
 
                     }
-                    else if (y > 3)
+                    else if (x > 6)
                     {
-                        seats.Add(new Seat($"{x}-{y}", SeatType.VIP));
+                        seats.Add(new Seat(seatID, SeatType.VIP));
                     }
                     else
                     {
-                        seats.Add(new Seat($"{x}-{y}", SeatType.Normal));
+                        seats.Add(new Seat(seatID, SeatType.Normal));
                     }
-                    Debug.WriteLine($"{x}-{y}");
+                    Debug.WriteLine(seatID);
                 }
             }
 
             room = new("R01", "Room 01", seats, row, col);
+        }
+
+        char MapToAlphabet(int value)
+        {
+            if (value < 0 || value > 9)
+            {
+                throw new ArgumentOutOfRangeException("Value must be between 0 and 9.");
+            }
+
+            return (char)('A' + value);
         }
     }
 }
