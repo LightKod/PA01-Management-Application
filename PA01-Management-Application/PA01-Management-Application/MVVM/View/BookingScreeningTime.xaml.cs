@@ -28,18 +28,7 @@ namespace PA01_Management_Application.MVVM.View
         private bool isButtonPressed = false;
         Button DateClickedButton = null;
         Button CityClickedButton = null;
-        public class DateInfo
-        {
-            public string Day { get; set; }
-            public string DayOfWeek { get; set; }
-            public string Month { get; set; }
-        }
-        public class CinemaDetailsViewModel
-        {
-            public string CinemaName { get; set; }
-            public string TheaterName { get; set; }
-            public ObservableCollection<string> TimeButtons { get; set; }
-        }
+
         BookingScreeningTimeViewModel ViewModel;
         public BookingScreeningTime()
         {

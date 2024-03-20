@@ -11,19 +11,15 @@ namespace PA01_Management_Application.MVVM.ViewModel
     {
         // Commands to change CurrentView (see AppWindow.xaml, the part with RadioButtons and their Command property)
         public RelayCommand HomeViewCommand { get; set; }
-
         public RelayCommand SearchViewCommand { get; set; }
         public RelayCommand AccountViewCommand { get; set; }
-        public RelayCommand ReportViewCommand { get; set; }
 
         public RelayCommand SearchCommand { get; set; }
 
         // Possible view models that can be called from this screen
         public HomeViewModel HomeVM { get; set; }
-
         public SearchViewModel SearchVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
-        public ReportViewModel ReportVM { get; set; }
 
         private object _currentView;
 
@@ -55,7 +51,6 @@ namespace PA01_Management_Application.MVVM.ViewModel
             HomeVM = new HomeViewModel();
             SearchVM = new SearchViewModel();
             AccountVM = new AccountViewModel(); 
-            ReportVM = new ReportViewModel();
 
             CurrentView = HomeVM;
 
@@ -73,6 +68,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
             AccountViewCommand = new RelayCommand(o =>
             {
                 CurrentView = AccountVM;
+            });
+
+            AdminViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = AdminVM;
             });
 
             SearchCommand = new RelayCommand(o =>

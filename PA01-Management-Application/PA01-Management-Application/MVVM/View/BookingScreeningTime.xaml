@@ -137,7 +137,7 @@
                 <RowDefinition Height="4*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Image Source="https://image.tmdb.org/t/p/original//6x2CNod5RB3NkXSBJ81Y8KNy4g3.jpg" Stretch="UniformToFill" />
+                <Image Source="{Binding Movie.PosterPath}" Stretch="UniformToFill" />
             </Grid>
             <Grid Grid.Row="1" Background="#2e3037">
                 <StackPanel Margin="10,20,10,10">
@@ -157,7 +157,7 @@
         </Grid>
         <Grid Grid.Column="1" >
             <Grid.Background>
-                <ImageBrush ImageSource="https://image.tmdb.org/t/p/original//5mzr6JZbrqnqD8rCEvPhuCE5Fw2.jpg" Opacity="0.5"/>
+                <ImageBrush ImageSource="{Binding Movie.BackdropPath}" Opacity="0.5"/>
             </Grid.Background>
             <Grid Background="#75000000">
                 <Grid.RowDefinitions>
@@ -273,9 +273,9 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button Content="{Binding}"  
+                                                <Button Content="{Binding ScheduleStart}"  
                                                         Command="{Binding ElementName=CinemaDetailsCollection, Path=DataContext.CinemaDetailsClickCommand}"
-                                                        CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                        CommandParameter="{Binding}"
                                                         Template="{StaticResource ShowTimeButtonTemplate}" Margin="10,0,10,0"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>

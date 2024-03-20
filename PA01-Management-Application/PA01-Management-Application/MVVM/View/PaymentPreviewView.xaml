@@ -5,11 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/" 
+             xmlns:converters="clr-namespace:PA01_Management_Application.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920"
              Background="#141414">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converters:AddDollarConverter x:Key="AddDollarConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/MovieDetails/Buttons/ButtonBase.xaml"/>
                 <ResourceDictionary Source="/Themes/MovieDetails/DataTemplates/TextPersonDataTemplate.xaml"/>
@@ -104,16 +106,20 @@
                                         Content="Coupon:"
                                         />
                                     <TextBox Grid.Column="1"
+                                        VerticalContentAlignment="Center"
+                                        x:Name="CouponTextBox"
                                         Margin="60,4,100,0"
                                         HorizontalAlignment="Stretch"
                                         FontSize="24" FontWeight="SemiBold" Foreground="#000000"
                                         />
                                     <Button Grid.Column="2"
                                         Style="{StaticResource ButtonBase}"
-                                            Margin="80,0,0,0"
-                                            FontSize="28" FontWeight="Bold"
-                                            Foreground="#000000"
-                                            Content="Apply"
+                                        Margin="80,0,0,0"
+                                        FontSize="28" FontWeight="Bold"
+                                        Foreground="#000000"
+                                        Content="Apply"
+                                        Command="{Binding ApplyCouponCommand}"
+                                        CommandParameter="{Binding ElementName=CouponTextBox}" 
                                         />
                                 </Grid>
                             </Border>
@@ -160,6 +166,7 @@
                                              HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <RadioButton GroupName="paymentType"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            IsChecked="True"        
                                             />     
                                     </Viewbox>
                                     
@@ -251,7 +258,7 @@
                                 <Label Grid.Row="3"
                                     FontWeight="Bold" FontSize="24" Foreground="#FFFFFF"
                                     Content="Seat:"
-                                    Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    Margin="0,8,8,0" VerticalAlignment="Center"/>
                                 <Label Grid.Row="3" Grid.Column="1"
                                     FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
                                     Content="A1-A2-A3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -278,7 +285,7 @@
                                 Margin="0,0,8,0" VerticalAlignment="Center"/>
                             <Label Grid.Row="0" Grid.Column="1"
                                 FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
-                                Content="$20.00" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                Content="{Binding TotalPrice, Converter={StaticResource AddDollarConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
                             <!--Discount-->
                             <Label Grid.Row="1"
@@ -287,7 +294,7 @@
                                 Margin="0,8,8,0" VerticalAlignment="Center"/>
                             <Label Grid.Row="1" Grid.Column="1"
                                 FontWeight="Regular" FontSize="22" Foreground="#FFFFFF"
-                                Content="$5.00" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                Content="{Binding Discount, Converter={StaticResource AddDollarConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                             <!--Total-->
                             <Label Grid.Row="2"
                                 FontWeight="Bold" FontSize="32" Foreground="#FFFFFF"
@@ -295,7 +302,7 @@
                                 Margin="0,8,8,0" VerticalAlignment="Center"/>
                             <Label Grid.Row="2" Grid.Column="1"
                                 FontWeight="Regular" FontSize="28" Foreground="#FFFFFF"
-                                Content="$15.00" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                                Content="{Binding FinalPrice, Converter={StaticResource AddDollarConverter}}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>
                     <Button Grid.Row="2" Style="{StaticResource ButtonBase}" 

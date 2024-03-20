@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using PA01_Management_Application.Core;
-using PA01_Management_Application.MVVM.Model;
+using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +20,6 @@ namespace PA01_Management_Application.MVVM.ViewModel
         ObservableCollection<KeyValuePair<Food, int>> foodAmountCollection;
         List<Food> foodList;
 
-        static Room room;
         public ObservableCollection<KeyValuePair<Food, int>> FoodAmountCollection
         {
             get { return foodAmountCollection; }
@@ -42,55 +42,56 @@ namespace PA01_Management_Application.MVVM.ViewModel
             ComfirmCommand = new(ComfirmCommandExecute);
         }
 
+
         private void ComfirmCommandExecute(object obj)
         {
+            BookingDataHolder.foods = foodAmountCollection;
             (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new PaymentPreviewViewModel();
         }
 
-        public FoodSelectionViewModel(Room _room, Room displayRoom) : base()
-        {
-            room = _room;
-           
-        }
 
         private void SubFoodCommandExecute(object parameter)
         {
-            Food food = foodList.Find(x => x.ID == parameter);
-            if (food == null) return;
-            int index = foodAmountCollection.IndexOf(foodAmountCollection.First(x => x.Key.ID == parameter));
-
-
-            if (foodAmountCollection[index].Value <= 0)
+            if(parameter is int id)
             {
-                return;
+                Food food = foodList.Find(x => x.FoodId == id);
+                if (food == null) return;
+                int index = foodAmountCollection.IndexOf(foodAmountCollection.First(x => x.Key.FoodId == id));
+
+
+                if (foodAmountCollection[index].Value <= 0)
+                {
+                    return;
+                }
+                foodAmountCollection[index] = new(foodAmountCollection[index].Key, foodAmountCollection[index].Value - 1);
+                OnPropertyChanged(nameof(FoodAmountCollection));
             }
-            foodAmountCollection[index] = new(foodAmountCollection[index].Key, foodAmountCollection[index].Value - 1);
-            OnPropertyChanged(nameof(FoodAmountCollection));
+            
         }
 
         private void AddFoodCommandExecute(object parameter)
         {
-            Food food = foodList.Find(x => x.ID == parameter);
-            if (food == null) return;
-            int index = foodAmountCollection.IndexOf(foodAmountCollection.First(x => x.Key.ID == parameter));
+            if (parameter is int id)
+            {
+                Food food = foodList.Find(x => x.FoodId == id);
+                if (food == null) return;
+                int index = foodAmountCollection.IndexOf(foodAmountCollection.First(x => x.Key.FoodId == id));
 
 
-            foodAmountCollection[index] = new(foodAmountCollection[index].Key, foodAmountCollection[index].Value + 1);
-            OnPropertyChanged(nameof(FoodAmountCollection));
+                foodAmountCollection[index] = new(foodAmountCollection[index].Key, foodAmountCollection[index].Value + 1);
+                OnPropertyChanged(nameof(FoodAmountCollection));
+            }
         }
 
 
-        void CreateSampleFood()
+        async void CreateSampleFood()
         {
             foodList = new();
             foodAmountCollection = new();
 
-            foodList.Add(new("FCB1", "Combo 1", "1 Drink + 2 Popcorn", 20, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
-            foodList.Add(new("FCB2", "Combo 1", "2 Drink + 2 Popcorn", 40, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
-            foodList.Add(new("FCB3", "Combo 1", "2 Drink + 2 Popcorn", 40, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
-            foodList.Add(new("FCB4", "Combo 1", "2 Drink + 2 Popcorn", 40, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
-            foodList.Add(new("FCB5", "Combo 1", "2 Drink + 2 Popcorn", 40, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
-            foodList.Add(new("FCB6", "Combo 1", "2 Drink + 2 Popcorn", 40, "https://iguov8nhvyobj.vcdn.cloud/media/wysiwyg/2022/082022/Birthday_Popcorn_Box_350x495.png"));
+            MovieManagementContext context = new MovieManagementContext();
+            foodList = context.Foods.ToList();
+       
 
             foreach (var food in foodList)
             {

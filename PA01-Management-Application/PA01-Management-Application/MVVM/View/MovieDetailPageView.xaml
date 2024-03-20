@@ -18,7 +18,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"  Background="#141414">
         <Grid Margin="48,48,48,48">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -72,7 +71,7 @@
             <!---Trailer Grid-->
             <Grid Grid.Row="1">
                 <Image x:Name="imageBanner" Stretch="Uniform"/>
-                <MediaElement Name="mediaBanner" Grid.Column="1" Source="Videos/video.mp4"/>
+            <MediaElement Name="mediaBanner" Grid.Column="1" LoadedBehavior="Manual" UnloadedBehavior="Stop" Source="Videos/video.mp4"/>
                 <fa:FontAwesome
             Icon="AngleLeft"
             FontSize="72"
@@ -199,5 +198,4 @@
                 </StackPanel>
             </Grid>
         </Grid>
-    </ScrollViewer>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Model;
 using System;
 using System.Collections.Generic;
@@ -64,19 +65,21 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 {
                     Room cpyRoom = new(DisplayRoom);
 
-                    SeatType baseType = room.Seats.Find(x => x.Name == SelectedSeat.Name).Type;
+                    Seat baseSeat = room.Seats.Find(x => x.Name == SelectedSeat.Name);
+                    SeatType baseType = baseSeat.Type;
 
                     if (baseType == SeatType.None) return;
 
                     SelectedSeat.Type = SelectedSeat.Type == SeatType.Picked ? baseType : SeatType.Picked;
 
+
                     if(SelectedSeat.Type == SeatType.Picked)
                     {
-                        selectedSeats.Add(SelectedSeat);
+                        selectedSeats.Add(baseSeat);
                     }
                     else
                     {
-                        if(selectedSeats.Contains(SelectedSeat)) selectedSeats.Remove(SelectedSeat);
+                        if(selectedSeats.Contains(baseSeat)) selectedSeats.Remove(baseSeat);
                     }
 
                     int index = DisplayRoom.Seats.FindIndex(x => x.Name == SelectedSeat.Name);
@@ -97,8 +100,23 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         private void ConfirmClickCommandExecute(object parameter)
         {
+            if(selectedSeats.Count < 1)
+            {
+                string messageBoxText = "Please select more than 1 seat";
+                string caption = "Error";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                return;
+            }
             Debug.WriteLine($"Booked: {selectedSeats.Count} seats");
-            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new FoodSelectionViewModel(room, DisplayRoom);
+            BookingDataHolder.room = room;
+            BookingDataHolder.seats = selectedSeats;
+
+
+            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new FoodSelectionViewModel();
         }
 
         void CreateSampleSeat()

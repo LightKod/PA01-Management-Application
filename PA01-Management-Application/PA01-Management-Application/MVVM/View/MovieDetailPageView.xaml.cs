@@ -12,22 +12,7 @@ namespace PA01_Management_Application.MVVM.View
     public partial class MovieDetailPageView : UserControl
     {
         List<string> bannerUrls;
-        Film film = new Film(
-                "Dune 2: Part Two",
-                ["Adventure", "Action"],
-                1200,
-                9.0,
-                "https://upload.wikimedia.org/wikipedia/vi/9/94/Dune_2_VN_poster.jpg",
-                "Videos/video.mp4",
-                [   
-                    "/MVVM/Images/1.jpg",
-                    "/MVVM/Images/2.jpg",
-                    "/MVVM/Images/3.jpg"
-                ],
-                ["Denis Villeneuve"],
-                ["Denis Villeneuve", "Jon Spaihts", "Frank Herbert"],
-                ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson"]
-                );
+        Film film;
         List<string> mediaUrls;
         int index = 0;
         MovieDetailViewModel viewModel;
@@ -36,10 +21,18 @@ namespace PA01_Management_Application.MVVM.View
         {
             InitializeComponent();
             DataContext = viewModel = new MovieDetailViewModel();
-            viewModel.Film = film;
+            LoadImage();
+        }
+
+        async void LoadImage()
+        {
+            await viewModel.GetMovieDetail();
+            film = viewModel.Film;
+
             mediaUrls = new List<string>();
             mediaUrls.Add(film.FilmTrailer);
             mediaUrls.AddRange(film.FilmBanner);
+
         }
 
         private void PreviousImage_MouseDown(object sender, MouseButtonEventArgs e)
@@ -68,11 +61,13 @@ namespace PA01_Management_Application.MVVM.View
                 mediaBanner.Source = imageUri;
                 mediaBanner.Visibility = System.Windows.Visibility.Visible;
                 imageBanner.Visibility = System.Windows.Visibility.Hidden;
+                mediaBanner.Play();
             }
             else
             {
-                Uri imageUri = new Uri(mediaUrls[index], UriKind.Relative);
+                Uri imageUri = new Uri(mediaUrls[index]);
                 BitmapImage image = new BitmapImage(imageUri);
+                mediaBanner.Stop();
                 imageBanner.Source = image;
                 mediaBanner.Visibility = System.Windows.Visibility.Hidden;
                 imageBanner.Visibility = System.Windows.Visibility.Visible;
