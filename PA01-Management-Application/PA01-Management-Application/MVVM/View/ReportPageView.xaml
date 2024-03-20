@@ -25,9 +25,9 @@
                 <ComboBoxItem Content="By Year" />
             </ComboBox>
 
-            <DatePicker x:Name="StartDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <DatePicker x:Name="StartDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed" Language="vi-VN"/>
 
-            <DatePicker x:Name="EndDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <DatePicker x:Name="EndDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed" Language="vi-VN"/>
 
             <ComboBox x:Name="MovieFilterComboBox" Width="150" Margin="5" VerticalAlignment="Center" Background="#EEE" SelectedIndex="0">
 

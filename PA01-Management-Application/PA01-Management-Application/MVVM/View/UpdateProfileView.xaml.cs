@@ -23,6 +23,7 @@ namespace PA01_Management_Application.MVVM.View
 
             txtEmail.IsEnabled = false;
             txtUsername.IsEnabled = false;
+            txtPassword.IsEnabled = false;
         }
 
         private void SetProfile()
