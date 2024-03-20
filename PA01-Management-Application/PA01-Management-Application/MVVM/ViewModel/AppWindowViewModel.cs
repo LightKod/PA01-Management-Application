@@ -13,13 +13,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand SearchViewCommand { get; set; }
         public RelayCommand AccountViewCommand { get; set; }
-
+        public RelayCommand ReportViewCommand { get; set; }
+        public RelayCommand AdminViewCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
 
         // Possible view models that can be called from this screen
         public HomeViewModel HomeVM { get; set; }
         public SearchViewModel SearchVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
+        public ReportViewModel ReportVM { get; set; }
+        public AdminViewModel AdminVM { get; set; }
 
         private object _currentView;
 
@@ -50,7 +53,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
             // Initialize views and their view models
             HomeVM = new HomeViewModel();
             SearchVM = new SearchViewModel();
-            AccountVM = new AccountViewModel(); 
+            AccountVM = new AccountViewModel();
+            AdminVM = new AdminViewModel();
+            ReportVM = new ReportViewModel();   
 
             CurrentView = HomeVM;
 
@@ -70,6 +75,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 CurrentView = AccountVM;
             });
 
+            ReportViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = ReportVM;
+            });
+
             AdminViewCommand = new RelayCommand(o =>
             {
                 CurrentView = AdminVM;
@@ -79,11 +89,6 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 CurrentView = SearchVM;
                 SearchVM.SearchByName();
-            });
-
-            ReportViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = ReportVM;
             });
 
             IsAdmin = true;

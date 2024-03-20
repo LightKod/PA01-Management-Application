@@ -47,12 +47,18 @@
     <Resource Include="MVVM\Images\2.jpg" />
   </ItemGroup>
 
-  <ItemGroup>
+<ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
-    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-  </ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
 
+  </ItemGroup>
+  
   <ItemGroup>
     <Resource Include="MVVM\Images\1.jpg" />
     <Resource Include="MVVM\Images\3.jpg" />

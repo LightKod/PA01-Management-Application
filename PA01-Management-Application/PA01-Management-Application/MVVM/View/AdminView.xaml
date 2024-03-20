@@ -25,7 +25,8 @@
                 
                 <RadioButton Content="Reports"
                          Style="{StaticResource AdminMenuButtonTheme}"
-                         Cursor="Hand"/>
+                         Cursor="Hand"
+                         Command="{Binding ShowReportPageCommand}"/>
             </StackPanel>
             <!-- CONTENT -->
             <ContentControl Content="{Binding CurrentAdminView}" Margin="16,16,16,0"/>
