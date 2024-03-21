@@ -212,11 +212,11 @@
                     </Grid.RowDefinitions>
                     <StackPanel>
                         <Image Name="imagePoster" Grid.Column="0" Height="260"
-                       Source="https://upload.wikimedia.org/wikipedia/vi/9/94/Dune_2_VN_poster.jpg"
+                       Source="{Binding Movie.PosterPath}"
                        />
                         <Label
                             FontWeight="SemiBold" FontSize="36" Foreground="#FFFFFF" HorizontalAlignment="Center"
-                            >Dune: Part 2</Label>
+                            Content="{Binding Movie.Title}"></Label>
                         <Border BorderBrush="#aaaaaa" BorderThickness="0,1,0,0" Margin="16">
                             <Grid Margin="0,20,0,0">
                                 <Grid.ColumnDefinitions>

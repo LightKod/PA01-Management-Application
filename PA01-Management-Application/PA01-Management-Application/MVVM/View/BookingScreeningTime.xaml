@@ -23,14 +23,14 @@
                             <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBlock Text="{Binding Month}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                            <TextBlock Foreground="#FFFFFF" Text="{Binding Month}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
                         </Grid>
                         <Grid Grid.Row="1">
-                            <TextBlock Text="{Binding DayOfWeek}" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <TextBlock Foreground="#FFFFFF" Text="{Binding DayOfWeek}" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         </Grid>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <TextBlock Text="{Binding Day}" FontSize="32" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Foreground="#FFFFFF" Text="{Binding Day}" FontSize="32" FontWeight="Bold"  HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                 </Grid>
             </Border>
@@ -39,6 +39,11 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter TargetName="PART_Border"  Property="Background" Value="{StaticResource HoverBackgroundBrush}"/>
                     <Setter Property="Foreground" Value="{StaticResource HoverForegroundBrush}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter TargetName="PART_Border"  Property="Background" Value="#000000"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
 
@@ -56,9 +61,9 @@
                     <Setter Property="Foreground" Value="{StaticResource HoverForegroundBrush}"/>
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter TargetName="CityBorder"  Property="Background" Value="{StaticResource HoverBackgroundBrush}"/>
-                    <Setter Property="Foreground" Value="{StaticResource HoverForegroundBrush}"/>
+                <Trigger Property="IsPressed" Value="False">
+                    <Setter TargetName="CityBorder"  Property="Background" Value="#141414"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
                     <Setter Property="Cursor" Value="Hand"/>
                 </Trigger>
 
@@ -122,7 +127,7 @@
 
 
                 </Grid>
-                <Grid Grid.Row="1" >
+                <!--<Grid Grid.Row="1" >
                     <ItemsControl Grid.Row="2"  ItemsSource="{Binding CityList}"  Margin="20,20,0,30">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -137,8 +142,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-
-                </Grid>
+                </Grid>-->
                 <Grid Grid.Row="2">
                     <ItemsControl x:Name="CinemaDetailsCollection" ItemsSource="{Binding CinemaDetailsCollection}" >
                         <ItemsControl.ItemTemplate>

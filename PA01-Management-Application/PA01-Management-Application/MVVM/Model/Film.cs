@@ -17,9 +17,15 @@ namespace PA01_Management_Application.MVVM.Model
         public string FilmPoster { get; set; }
         public string FilmDescription { get; set; }
         public string FilmTrailer { get; set; }
+        public string Certification { get; set; }
+        public string Duration { get; set; }
+        public string ReleaseYear { get; set; }
+        public string SmallBannerText { get; set; }
         public string[] FilmBanner { get; set; }
         public string[] Directors { get; set; }
+        public PA01_Management_Application.MVVM.Models.Person[] DirectorsObj { get; set; }
         public string[] Writers { get; set; }
+        public PA01_Management_Application.MVVM.Models.Person[] StarsObj { get; set; }
         public string[] Stars { get; set; }
 
         public Film(string filmName, string[] filmGenres, int filmDuration, double filmRating, string filmPoster, string filmTrailer, string[] filmBanner, string[] directors, string[] writers, string[] stars)

@@ -33,12 +33,13 @@ namespace PA01_Management_Application.MVVM.View
             mediaUrls.Add(film.FilmTrailer);
             mediaUrls.AddRange(film.FilmBanner);
 
+            UpdateBanner();
         }
 
         private void PreviousImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             index--;
-            if (index < 1)
+            if (index < 0)
                 index = mediaUrls.Count - 1;
 
             UpdateBanner();

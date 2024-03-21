@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA01_Management_Application.MVVM.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace PA01_Management_Application.MVVM.View
     /// </summary>
     public partial class PersonDetailWindow : Window
     {
-        public PersonDetailWindow()
+        Person Person { get; set; }
+        public PersonDetailWindow(Person person)
         {
             InitializeComponent();
+            Person = person;
+            DataContext = Person;
         }
     }
 }

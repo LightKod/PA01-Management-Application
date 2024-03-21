@@ -3,8 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:command="http://www.galasoft.ch/mvvmlight"
       xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
       xmlns:fa="http://schemas.fontawesome.io/icons/" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             
       mc:Ignorable="d" 
       d:DesignHeight="3000" d:DesignWidth="1900"
       Background="#141414">
@@ -41,8 +44,9 @@
                     </Label>
                     <Label Margin="0,5,0,0" 
                                    VerticalAlignment="Center"
-                                   FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa">
-                        2024 · PG-13 · 2h 46m
+                                   FontWeight="SemiBold" FontSize="28" Foreground="#aaaaaa"
+                           Content="{Binding Film.SmallBannerText}">
+                          
                     </Label>
                 </StackPanel>
                 <StackPanel Grid.Row="0" Grid.Column="1" 
@@ -121,8 +125,10 @@
                             </Label>
                             <TextBlock TextWrapping="Wrap"
                                VerticalAlignment="Center"
-                               FontWeight="Regular" FontSize="20" Foreground="#AAAAAA">
-                                Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.
+                               FontWeight="Regular" FontSize="20" Foreground="#AAAAAA"
+                               Text="{Binding Film.FilmDescription}"
+                                       >
+                               
                             </TextBlock>
                         </StackPanel>
                     </Border>
@@ -135,8 +141,8 @@
                     FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Directors:
                             </Label>
-                            <ItemsControl ItemsSource="{Binding Film.Directors}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
-                                <ItemsControl.ItemsPanel>
+                            <ItemsControl ItemsSource="{Binding Film.DirectorsObj}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
+                            <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
@@ -145,7 +151,7 @@
                         </StackPanel>
                     </Border>
                     <!---Writers-->
-                    <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
+                    <!--<Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
                             <Label
                     HorizontalAlignment="Center"
@@ -161,7 +167,7 @@
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>
                         </StackPanel>
-                    </Border>
+                    </Border>-->
                     <!---Stars-->
                     <Border BorderThickness="0,0,0,1" BorderBrush="#aaaaaa">
                         <StackPanel Orientation="Horizontal" Margin="0, 20,0,20">
@@ -171,8 +177,8 @@
                     FontWeight="SemiBold" FontSize="28" Foreground="#FFFFFF">
                                 Stars:
                             </Label>
-                            <ItemsControl ItemsSource="{Binding Film.Stars}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
-                                <ItemsControl.ItemsPanel>
+                        <ItemsControl ItemsSource="{Binding Film.StarsObj}" ItemTemplate="{StaticResource TextPersonDataTemplate}">
+                            <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
