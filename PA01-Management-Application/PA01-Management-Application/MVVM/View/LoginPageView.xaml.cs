@@ -19,7 +19,7 @@ namespace PA01_Management_Application.MVVM.View
     /// <summary>
     /// Interaction logic for LoginPageView.xaml
     /// </summary>
-    public partial class LoginPageView : Window
+    public partial class LoginPageView : UserControl
     {
         LoginPageViewModel viewModel = new LoginPageViewModel();
         public LoginPageView()

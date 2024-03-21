@@ -58,6 +58,12 @@
             <DataTemplate DataType="{x:Type viewmodels:FilmManagementViewModel}">
                 <views:FilmManagementView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:LoginPageViewModel}">
+                <views:LoginPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
+                <views:RegisterPageView/>
+            </DataTemplate>
         </ResourceDictionary>
 
     </Application.Resources>

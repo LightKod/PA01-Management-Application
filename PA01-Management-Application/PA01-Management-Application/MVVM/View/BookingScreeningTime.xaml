@@ -80,14 +80,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-        <Style TargetType="Button">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsButtonPressed}" Value="True">
-                    <Setter Property="Background" Value="Blue"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+
     </UserControl.Resources>
 
     <Grid>

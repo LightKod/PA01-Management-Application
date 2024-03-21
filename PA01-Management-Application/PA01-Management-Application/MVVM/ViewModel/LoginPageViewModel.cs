@@ -1,5 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Models;
 using PA01_Management_Application.MVVM.View;
 using PA01_Management_Application.MVVM.ViewModel.Service;
@@ -65,8 +66,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
         }
         private void ExecuteRegisterCommand(object parameter)
         {
-            RegisterPageView registerPageView = new RegisterPageView();
-            registerPageView.ShowDialog();
+
+            (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = (Application.Current.MainWindow.DataContext as AppWindowViewModel).RegisterVM;
 
         }
         private void ExecuteLogin(object parameter)
@@ -78,15 +79,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             if (AuthenticateUser(EmailOrPhoneNumber, Password))
             {
+
                 // Đăng nhập thành công
                 // Reset các trường
                 // lấy user sau khi thành công
+                (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = (Application.Current.MainWindow.DataContext as AppWindowViewModel).AccountVM;
 
-                AppWindow newWindow = new AppWindow();
-                newWindow.Show();
 
-                // Đóng cửa sổ hiện tại
-                Application.Current.MainWindow.Close();
 
             }
             else
@@ -110,7 +109,15 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     if (passwordHasher.VerifyPassword(password, user.Password))
                     {
                         Debug.WriteLine("checkeeeeeeeeeee");
-
+                        UserData.userData = user;
+                        if (user.Rules == 1)
+                        {
+                            (Application.Current.MainWindow.DataContext as AppWindowViewModel).IsAdmin = true;
+                        }
+                        else
+                        {
+                            (Application.Current.MainWindow.DataContext as AppWindowViewModel).IsAdmin = false;
+                        }
                         // Mật khẩu hợp lệ
                         return true;
                     }

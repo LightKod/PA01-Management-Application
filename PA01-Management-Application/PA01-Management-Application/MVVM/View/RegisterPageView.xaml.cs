@@ -21,7 +21,7 @@ namespace PA01_Management_Application.MVVM.View
     /// <summary>
     /// Interaction logic for RegisterPageView.xaml
     /// </summary>
-    public partial class RegisterPageView : Window
+    public partial class RegisterPageView : UserControl
     {
         RegisterViewModel viewModel = new RegisterViewModel();
         public RegisterPageView()
