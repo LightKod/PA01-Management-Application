@@ -101,6 +101,16 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             return null;
         }
 
+        public async Task<PA01_Management_Application.MVVM.Models.Person?> GetDirectorByMovieIdAsync(int movieId)
+        {
+            var movie = await _context.Movies
+                .Include(m => m.Director)
+                .FirstOrDefaultAsync(m => m.MovieId == movieId);
+
+
+            return movie.Director;
+        }
+
 
         //Search 
         //Search các phim có chứa chuỗi params

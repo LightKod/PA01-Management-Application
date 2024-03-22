@@ -23,6 +23,8 @@ public partial class User
 
     public string? City { get; set; }
 
+    public int? Rules { get; set; }
+
     public string? Phone { get; set; }
 
     public int? Point { get; set; }

@@ -5,16 +5,18 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="TextPersonDataTemplate">
-        <StackPanel Orientation="Horizontal">
-            <TextBlock x:Name="Separator" Style="{StaticResource TextPerson}" Text="·" FontSize="30" Margin="5,0,5,0">
-            </TextBlock>
-            <TextBlock Style="{StaticResource TextPerson}" Text="{Binding}">
-            </TextBlock>
-        </StackPanel>
-        <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                <Setter Property="Visibility" TargetName="Separator" Value="Collapsed"/>
-            </DataTrigger>
-        </DataTemplate.Triggers>
+        <Button Command="{Binding DataContext.OpenPersonWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                CommandParameter="{Binding}"
+                Background="Transparent" BorderThickness="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Separator" Style="{StaticResource TextPerson}" Text="·" FontSize="30" Margin="5,0,5,0"/>
+                <TextBlock Style="{StaticResource TextPerson}" Text="{Binding Name}"/>
+            </StackPanel>
+        </Button>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                    <Setter Property="Visibility" TargetName="Separator" Value="Collapsed"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
     </DataTemplate>
 </ResourceDictionary>

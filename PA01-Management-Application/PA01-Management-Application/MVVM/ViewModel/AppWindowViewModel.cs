@@ -1,9 +1,12 @@
 ﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
@@ -23,7 +26,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public AccountViewModel AccountVM { get; set; }
         public ReportViewModel ReportVM { get; set; }
         public AdminViewModel AdminVM { get; set; }
-
+        public LoginPageViewModel LoginPageVM { get; set; }
+        public RegisterViewModel RegisterVM { get; set; }
         private object _currentView;
 
         public object CurrentView
@@ -55,8 +59,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
             SearchVM = new SearchViewModel();
             AccountVM = new AccountViewModel();
             AdminVM = new AdminViewModel();
-            ReportVM = new ReportViewModel();   
-
+            ReportVM = new ReportViewModel();
+            LoginPageVM = new LoginPageViewModel();
+            RegisterVM = new RegisterViewModel();
             CurrentView = HomeVM;
 
             // Handle the command calls
@@ -72,7 +77,15 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             AccountViewCommand = new RelayCommand(o =>
             {
-                CurrentView = AccountVM;
+                if (UserData.userData != null)
+                {
+                    CurrentView = AccountVM;
+
+                }
+                else
+                {
+                    CurrentView = LoginPageVM;
+                }
             });
 
             ReportViewCommand = new RelayCommand(o =>
@@ -91,7 +104,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 SearchVM.SearchByName();
             });
 
-            IsAdmin = true;
+            IsAdmin = false;
         }
     }
 }

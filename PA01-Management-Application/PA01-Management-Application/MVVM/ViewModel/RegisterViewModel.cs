@@ -149,7 +149,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                     // Hiển thị thông báo hoặc thực hiện các hành động khác sau khi thêm thành công
                     Debug.WriteLine("Thêm người dùng mới thành công.");
-                    Application.Current.MainWindow.Close();
+                    (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = (Application.Current.MainWindow.DataContext as AppWindowViewModel).LoginPageVM;
 
                 }
                 catch (Exception ex)

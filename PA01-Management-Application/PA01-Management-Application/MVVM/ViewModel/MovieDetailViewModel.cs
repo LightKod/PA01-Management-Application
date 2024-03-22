@@ -2,6 +2,7 @@
 using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.Models;
+using PA01_Management_Application.MVVM.View;
 using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
@@ -26,14 +27,24 @@ namespace PA01_Management_Application.MVVM.ViewModel
         }
 
         public RelayCommand BookClickCommand { get; set; }
+        public RelayCommand OpenPersonWindowCommand { get; set; }
 
         MovieService service = new();
 
         public MovieDetailViewModel() 
         {
             BookClickCommand = new(BookClickCommandExecute);
+            OpenPersonWindowCommand = new(OpenPersonWindowCommandExecute);
         }
 
+        private void OpenPersonWindowCommandExecute(object obj)
+        {
+            if(obj is PA01_Management_Application.MVVM.Models.Person person)
+            {
+                PersonDetailWindow personView = new(person);
+                personView.Show();
+            }
+        }
 
         public async Task GetMovieDetail()
         {
@@ -50,7 +61,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
             f.Directors = new string[] { await service.GetDirectorNameByMovieIdAsync(movieID) };
             f.Stars = await service.GetActorsByMovieIdAsync(movieID);
             f.FilmDescription = movie.Overview;
-
+            f.Duration = ConvertMinutesToHoursAndMinutes(movie.RunTime.Value);
+            f.Certification = movie.Certification;
+            f.ReleaseYear = movie.ReleaseDate.Value.Year.ToString();
+            f.DirectorsObj = new PA01_Management_Application.MVVM.Models.Person[] { await service.GetDirectorByMovieIdAsync(movieID) };
+            f.StarsObj = await service.GetPersonActorsByMovieIdAsync(movieID);
+            if (string.IsNullOrEmpty(f.Certification)) f.Certification = "PG-13";
+            f.SmallBannerText = $"{f.ReleaseYear} · {f.Certification} · {f.Duration}";
             Film = null;
             Film = f;
 
@@ -59,6 +76,15 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         }
 
+        string ConvertMinutesToHoursAndMinutes(int totalMinutes)
+        {
+            int hours = totalMinutes / 60;
+            int minutes = totalMinutes % 60;
+
+            string formattedTime = $"{hours}h {minutes:00}m";
+
+            return formattedTime;
+        }
         private void BookClickCommandExecute(object obj)
         {
 

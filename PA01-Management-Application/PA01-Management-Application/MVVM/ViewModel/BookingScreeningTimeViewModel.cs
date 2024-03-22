@@ -142,11 +142,11 @@ namespace PA01_Management_Application.MVVM.ViewModel
             // Xử lý logic khi DateButton được click
             SelectedDate = parameter as DateInfo;
             int movieId = BookingDataHolder.movieID;
-            Debug.WriteLine(SelectedDate.Day.ToString());
+            //Debug.WriteLine(SelectedDate.Day.ToString());
             DateOnly selectedDate = new DateOnly(2024, int.Parse(SelectedDate.Month), int.Parse(SelectedDate.Day));
             // Call the method to get schedules for the selected movie ID and date
             Schedules = new ObservableCollection<Schedule>(_movieService.GetSchedulesByMovieIdAndDate(movieId, selectedDate));
-            Debug.WriteLine("Number of schedules: " + Schedules.Count);
+            //Debug.WriteLine("Number of schedules: " + Schedules.Count);
             CinemaDetailsCollection.Clear();
             foreach (var schedule in Schedules)
             {
@@ -175,13 +175,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
         {
             // Xử lý logic khi CinemaDetailsViewModel được click
             // Sử dụng biến cinemaDetails ở đây để thực hiện các thao tác cần thiết
-            Debug.WriteLine("aaaaa");
+            //Debug.WriteLine("aaaaa");
 
             SelectedCinemaDetailsViewModel = parameter as Schedule;
 
             BookingDataHolder.schedule = SelectedCinemaDetailsViewModel;
 
-            Debug.WriteLine(SelectedCinemaDetailsViewModel.ScheduleStart.ToString());
+            //Debug.WriteLine(SelectedCinemaDetailsViewModel.ScheduleStart.ToString());
 
             (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new SeatSelectionViewModel();
         }

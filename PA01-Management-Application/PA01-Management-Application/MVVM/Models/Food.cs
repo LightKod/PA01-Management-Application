@@ -9,6 +9,8 @@ public partial class Food
 
     public string? FoodName { get; set; }
 
+    public DateTime? BookingDate { get; set; }
+
     public string? FoodIdDescription { get; set; }
 
     public double? Price { get; set; }
