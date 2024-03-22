@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.Models;
 using System;
 using System.Collections.Generic;
@@ -76,7 +77,7 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             return actors;
         }
 
-        public async Task<Person[]> GetPersonActorsByMovieIdAsync(int movieId)
+        public async Task<PA01_Management_Application.MVVM.Models.Person[]> GetPersonActorsByMovieIdAsync(int movieId)
         {
             var actors = await _context.Movies
                 .Where(m => m.MovieId == movieId)
@@ -183,7 +184,7 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
         public bool RemoveAllActorsFromMovie(int movieId)
         {
             // Tìm bộ phim theo ID
-            var movie = _context.Movies.FirstOrDefault(m => m.MovieId == movieId);
+            var movie = _context.Movies.Include(m => m.Actors).FirstOrDefault(m => m.MovieId == movieId);
 
             if (movie != null)
             {
@@ -284,7 +285,7 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
                     // Nếu diễn viên chưa tồn tại, tạo mới và thêm vào phim
                     else
                     {
-                        var newActor = new Person { Name = actorName };
+                        var newActor = new PA01_Management_Application.MVVM.Models.Person { Name = actorName };
                         movie.Actors.Add(newActor);
                     }
                 }
@@ -315,7 +316,7 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             }
         }
         //Update 1 Movie
-        public void UpdateMovie(int movieId, string newTitle, DateOnly newReleaseDate)
+        public void UpdateMovie(int movieId, Film film)
         {
             // Tìm bộ phim cần cập nhật trong cơ sở dữ liệu
             var movieToUpdate = _context.Movies.FirstOrDefault(m => m.MovieId == movieId);
@@ -323,8 +324,13 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             if (movieToUpdate != null)
             {
                 // Cập nhật các thuộc tính của bộ phim
-                movieToUpdate.Title = newTitle;
-                movieToUpdate.ReleaseDate = newReleaseDate;
+                movieToUpdate.Title = film.FilmName;
+                movieToUpdate.OriginalTitle = film.FilmName;
+                movieToUpdate.Overview = film.FilmDescription;
+                movieToUpdate.VoteAverage = film.FilmRating;
+                movieToUpdate.RunTime = film.FilmDuration;
+                movieToUpdate.BackdropPath = film.FilmBanner[0];
+                movieToUpdate.PosterPath = film.FilmPoster;
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 _context.SaveChanges();
@@ -332,15 +338,20 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
         }
 
         //thêm 1 Movie vào dataBase
-        public void AddMovieToDatabase(string title, DateOnly releaseDate, int directorId)
+        public int AddMovieToDatabase(Film film)
         {
             // Tạo một đối tượng Movie mới
             var newMovie = new Movie
             {
-                Title = title,
-                ReleaseDate = releaseDate,
-                DirectorId = directorId,
-                // Các thuộc tính khác của bộ phim có thể được đặt ở đây
+                Title = film.FilmName,
+                OriginalTitle = film.FilmName,
+                Overview = film.FilmDescription,
+                ReleaseDate = DateOnly.FromDateTime(DateTime.Today),
+                VoteAverage = film.FilmRating,
+                VoteCount = 1,
+                RunTime = film.FilmDuration,
+                BackdropPath = film.FilmBanner[0],
+                PosterPath = film.FilmPoster
             };
 
             // Thêm đối tượng Movie mới vào DbSet của DbContext
@@ -348,10 +359,20 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
 
             // Lưu thay đổi vào cơ sở dữ liệu
             _context.SaveChanges();
+
+            return newMovie.MovieId;
         }
         //lấy movie by id (Có ở trên rồi)
 
         //Lấy tất cả tên của thể loại Movie (có ở trên rồi)
+        public List<string> GetAllGenreNames()
+        {
+            // Truy vấn tất cả các tên của Genre từ cơ sở dữ liệu
+            var genreNames = _context.Genres.Select(p => p.GenreName).ToList();
+
+            return genreNames;
+        }
+
         //Lấy tất cả tên của Person
         public List<string> GetAllPersonNames()
         {

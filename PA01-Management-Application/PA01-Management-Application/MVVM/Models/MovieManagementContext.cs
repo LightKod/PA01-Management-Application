@@ -134,7 +134,7 @@ public partial class MovieManagementContext : DbContext
             entity.ToTable("movies");
 
             entity.Property(e => e.MovieId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("movie_id");
             entity.Property(e => e.Adult).HasColumnName("adult");
             entity.Property(e => e.BackdropPath)

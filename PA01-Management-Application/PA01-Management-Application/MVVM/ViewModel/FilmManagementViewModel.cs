@@ -1,6 +1,7 @@
 ﻿using PA01_Management_Application.Core;
 using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.View;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     class FilmManagementViewModel : ObservableObject
     {
+        MovieService service = new();
+
         // Everytime this view model is called, this list should be refreshed by fetching from database
         private ObservableCollection<Film> _filmList;
 
@@ -33,23 +36,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public FilmManagementViewModel()
         {
             FilmList = new ObservableCollection<Film>();
-            for (int i = 0; i < 10; i++)
-            {
-                FilmList.Add(new Film
-                    (
-                        $"Shrek {i}",
-                        [$"{(i % 2 == 0 ? "Action" : "Romance")}", $"{(i % 3 == 0 ? "Horror" : "Comedy")}", $"{(i % 5 == 0 ? "Sci-fi" : "Slice of life")}"],
-                        i % 2 == 0 ? (120 - i) : (120 + i),
-                        i % 2 == 0 ? (5.0 + i * 0.1) : (5.0 - i * 0.1),
-                        i % 2 == 0 ? "https://upload.wikimedia.org/wikipedia/vi/b/bb/Spy_×_Family_Code_White_Movie_Teaser_Visual.png" : "https://www.elle.vn/wp-content/uploads/2023/12/06/560540/poster-Mai-scaled.jpg",
-                        "Videos/video.mp4",
-                        [],
-                        i % 2 == 0 ? ["Pickle", $"{(i % 3 == 0 ? "Adam" : "Eve")}"] : ["Doggy", $"{(i % 3 == 0 ? "Martin" : "Lucas")}"],
-                        i % 2 == 0 ? ["Meo", $"{(i % 3 == 0 ? "Dwight" : "Jess")}", $"{(i % 2 == 0 ? "Matt" : "Jason")}"] : ["Argenti", $"{(i % 3 == 0 ? "Loucha" : "Pela")}"],
-                        i % 2 == 0 ? ["Star", $"{(i % 3 == 0 ? "WeebBro" : "ILoveMyHand")}"] : ["Brighter Star", $"{(i % 3 == 0 ? "WhoAreYou" : "Idk")}"]
-                    )
-                );
-            }
+            GetAllFilms();
 
             EditFilmCommand = new RelayCommand(o =>
             {
@@ -62,9 +49,19 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                     if (addEditFilmViewModel.IsValidForm)
                     {
+                        Film newFilm = addEditFilmViewModel.BuildFilm();
+
+                        service.DeleteGenresByMovieId(filmToEdit.FilmID);
+                        service.DeleteDirectorsByMovieId(filmToEdit.FilmID);
+                        service.RemoveAllActorsFromMovie(filmToEdit.FilmID);
+                        service.UpdateMovie(filmToEdit.FilmID, newFilm);
+                        service.AddGenresToMovie(filmToEdit.FilmID, newFilm.FilmGenres);
+                        service.AddDirectorToMovie(filmToEdit.FilmID, newFilm.Directors[0]);
+                        service.AddActorsToMovie(filmToEdit.FilmID, newFilm.Stars);
+
                         var index = FilmList.IndexOf(filmToEdit);
                         FilmList.RemoveAt(index);
-                        FilmList.Insert(index, addEditFilmViewModel.BuildFilm());
+                        FilmList.Insert(index, newFilm);
                     }
                 }
             });
@@ -90,9 +87,40 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
                 if (addEditFilmViewModel.IsValidForm)
                 {
-                    FilmList.Add(addEditFilmViewModel.BuildFilm());
+                    Film newFilm = addEditFilmViewModel.BuildFilm();
+
+                    int id = service.AddMovieToDatabase(newFilm);
+                    service.AddGenresToMovie(id, newFilm.FilmGenres);
+                    service.AddDirectorToMovie(id, newFilm.Directors[0]);
+                    service.AddActorsToMovie(id, newFilm.Stars);
+
+                    newFilm.FilmID = id;
+                    FilmList.Add(newFilm);
                 }
             });
+        }
+
+        private async Task GetAllFilms()
+        {
+            var movies = service.GetAllMovies();
+            foreach (var movie in movies)
+            {
+                Film f = new();
+
+                f.FilmID = movie.MovieId;
+                f.FilmName = movie.Title;
+                f.FilmGenres = await service.GetGenresByMovieIdAsync(movie.MovieId);
+                f.FilmDuration = movie.RunTime.Value;
+                f.FilmRating = movie.VoteAverage.Value;
+                f.FilmTrailer = "Videos/video.mp4";
+                f.FilmBanner = new string[] { movie.BackdropPath };
+                f.FilmPoster = movie.PosterPath;
+                f.Directors = new string[] { await service.GetDirectorNameByMovieIdAsync(movie.MovieId) };
+                f.Stars = await service.GetActorsByMovieIdAsync(movie.MovieId);
+                f.FilmDescription = movie.Overview;
+
+                FilmList.Add(f);
+            }
         }
     }
 }

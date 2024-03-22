@@ -58,7 +58,13 @@
             <DataTemplate DataType="{x:Type viewmodels:FilmManagementViewModel}">
                 <views:FilmManagementView/>
             </DataTemplate>
-        </ResourceDictionary>
 
+            <!-- FIX FOR System.Windows.Data Error: 4 -->
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

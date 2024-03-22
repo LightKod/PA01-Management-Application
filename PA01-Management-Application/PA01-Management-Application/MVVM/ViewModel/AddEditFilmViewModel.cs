@@ -1,5 +1,6 @@
 ﻿using PA01_Management_Application.Core;
 using PA01_Management_Application.MVVM.Model;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     class AddEditFilmViewModel : ObservableObject
     {
+        MovieService service = new();
+
         private bool _isEditing;
 
         public bool IsEditing
@@ -33,6 +36,14 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 _isValidForm = value;
                 OnPropertyChanged();
             }
+        }
+
+        private int _filmId;
+
+        public int FilmId
+        {
+            get { return _filmId; }
+            set { _filmId = value; }
         }
 
 
@@ -80,6 +91,30 @@ namespace PA01_Management_Application.MVVM.ViewModel
             set
             {
                 _filmPoster = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _filmBanner;
+
+        public string FilmBanner
+        {
+            get { return _filmBanner; }
+            set
+            {
+                _filmBanner = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _filmDescription;
+
+        public string FilmDescription
+        {
+            get { return _filmDescription; }
+            set
+            {
+                _filmDescription = value;
                 OnPropertyChanged();
             }
         }
@@ -149,10 +184,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
             if (isEdit && filmToEdit != null)
             {
                 IsEditing = true;
+                FilmId = filmToEdit.FilmID;
                 FilmName = filmToEdit.FilmName;
                 FilmDuration = filmToEdit.FilmDuration;
                 FilmRating = filmToEdit.FilmRating;
                 FilmPoster = filmToEdit.FilmPoster;
+                FilmBanner = filmToEdit.FilmBanner[0];
+                FilmDescription = filmToEdit.FilmDescription;
                 FilmGenres = new ObservableCollection<string>(filmToEdit.FilmGenres);
                 FilmPeople = new ObservableCollection<Tuple<string, string>>();
                 foreach (var item in filmToEdit.Directors)
@@ -167,10 +205,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
             else
             {
                 IsEditing = false;
+                FilmId = 0;
                 FilmName = String.Empty;
                 FilmDuration = 0;
                 FilmRating = 0f;
                 FilmPoster = String.Empty;
+                FilmBanner = String.Empty;
+                FilmDescription = String.Empty;
                 FilmGenres = new ObservableCollection<string>();
                 FilmPeople = new ObservableCollection<Tuple<string, string>>();
             }
@@ -184,12 +225,12 @@ namespace PA01_Management_Application.MVVM.ViewModel
             // Refresh the ComboBoxes' options whenever an add request is called
             GetGenreCommand = new RelayCommand(o =>
             {
-                GenreComboBoxOptions = GetGenreNames();
+               GetGenreNames();
             });
 
             GetPeopleCommand = new RelayCommand(o =>
             {
-                PeopleComboBoxOptions = GetPeopleNames();
+                GetPeopleNames();
             });
 
             SaveGenreCommand = new RelayCommand(o =>
@@ -238,7 +279,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
             CheckFormValidityCommand = new RelayCommand(o =>
             {
-                if (FilmName == string.Empty || FilmDuration <= 0 || FilmRating <= 0 || FilmPoster == string.Empty || FilmGenres.Count == 0 || FilmPeople.Count == 0)
+                if (FilmName == string.Empty || FilmDuration <= 0 || FilmRating <= 0 || FilmPoster == string.Empty || FilmBanner == string.Empty || FilmDescription == string.Empty || FilmGenres.Count == 0 || FilmPeople.Count == 0)
                 {
                     IsValidForm = false;
                 }
@@ -249,44 +290,32 @@ namespace PA01_Management_Application.MVVM.ViewModel
             });
         }
 
-        private ObservableCollection<string> GetGenreNames()
+        private async void GetGenreNames()
         {
-            return new ObservableCollection<string>
-            {
-                "Horror",
-                "Action",
-                "Romance",
-                "Sci-fi"
-            };
+            GenreComboBoxOptions = new ObservableCollection<string>(service.GetAllGenreNames());
         }
 
-        private ObservableCollection<string> GetPeopleNames()
+        private async void GetPeopleNames()
         {
-            return new ObservableCollection<string>
-            {
-                "Pickle",
-                "Adam",
-                "Eve",
-                "ILoveMyHand",
-                "WhoAreYou"
-            };
+            PeopleComboBoxOptions = new ObservableCollection<string>(service.GetAllPersonNames());
         }
 
         public Film BuildFilm()
         {
-            Film film = new Film
-                (
-                    FilmName,
-                    FilmGenres.ToArray(),
-                    FilmDuration,
-                    FilmRating,
-                    FilmPoster,
-                    "Videos/video.mp4",
-                    [],
-                    FilmPeople.Where(p => p.Item2 == "Director").Select(p => p.Item1).ToArray(),
-                    [],
-                    FilmPeople.Where(p => p.Item2 == "Actor").Select(p => p.Item1).ToArray()
-                );
+            Film film = new();
+
+            film.FilmID = FilmId;
+            film.FilmName = FilmName;
+            film.FilmGenres = FilmGenres.ToArray();
+            film.FilmDuration = FilmDuration;
+            film.FilmRating = FilmRating;
+            film.FilmTrailer = "Videos/video.mp4";
+            film.FilmBanner = new string[] { FilmBanner };
+            film.FilmPoster = FilmPoster;
+            film.Directors = FilmPeople.Where(p => p.Item2 == "Director").Select(p => p.Item1).ToArray();
+            film.Stars = FilmPeople.Where(p => p.Item2 == "Actor").Select(p => p.Item1).ToArray();
+            film.FilmDescription = FilmDescription;
+
             return film;
         }
     }

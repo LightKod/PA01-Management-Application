@@ -26,7 +26,6 @@
                     <DataGridTextColumn Header="Duration" Binding="{Binding FilmDuration}"/>
                     <DataGridTextColumn Header="Rating" Binding="{Binding FilmRating}"/>
                     <DataGridTextColumn Header="Directors" Binding="{Binding Directors, Converter={StaticResource ArrayToStringConverter}}" CanUserSort="False"/>
-                    <DataGridTextColumn Header="Writers" Binding="{Binding Writers, Converter={StaticResource ArrayToStringConverter}}" CanUserSort="False"/>
                     <DataGridTextColumn Header="Actors" Binding="{Binding Stars, Converter={StaticResource ArrayToStringConverter}}" CanUserSort="False"/>
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
@@ -54,10 +53,6 @@
                                             <TextBlock Margin="4,0,0,0" Text="{Binding Directors, Converter={StaticResource DirectorsToStringConverter}}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Writers:" FontWeight="Bold"/>
-                                            <TextBlock Margin="4,0,0,0" Text="{Binding Writers, Converter={StaticResource DirectorsToStringConverter}}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Actors:" FontWeight="Bold"/>
                                             <TextBlock Margin="4,0,0,0" Text="{Binding Stars, Converter={StaticResource DirectorsToStringConverter}}"/>
                                         </StackPanel>
@@ -66,8 +61,16 @@
                                             <TextBlock Margin="4,0,0,0" Text="{Binding FilmPoster}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Banner's Path:" FontWeight="Bold"/>
+                                            <TextBlock Margin="4,0,0,0" Text="{Binding FilmBanner[0]}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Trailer's Path:" FontWeight="Bold"/>
                                             <TextBlock Margin="4,0,0,0" Text="{Binding FilmTrailer}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Description:" FontWeight="Bold"/>
+                                            <TextBlock Margin="4,0,0,0" Text="{Binding FilmDescription}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>

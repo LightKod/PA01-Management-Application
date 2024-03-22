@@ -74,8 +74,8 @@
                                      VerticalAlignment="Center" 
                                      Margin="3,3,23,3"
                                      Focusable="True" 
-                                     Background="#FF3F3F3F"
-                                     Foreground="Green"
+                                     Background="Transparent"
+                                     Foreground="White"
                                      Visibility="Hidden"
                                      IsReadOnly="{TemplateBinding IsReadOnly}"/>
                             <Popup Name="Popup"
@@ -216,6 +216,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -392,6 +394,92 @@
                                 </TextBlock>
                             </Grid>
                         </Border>
+
+                        <!-- FILM BANNER -->
+                        <TextBlock Grid.Row="4"
+                                   Text="Film Banner"
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"/>
+                        <Border Grid.Column="1" Grid.Row="4"
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1"
+                                Margin="0,10">
+                            <Grid>
+                                <TextBox Text="{Binding FilmBanner, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         Foreground="White"
+                                         CaretBrush="White"
+                                         x:Name="FilmBannerBox"/>
+                                <TextBlock IsHitTestVisible="False"
+                                           Text="Enter film's banner URL"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=FilmBannerBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <!-- FILM DESCRIPTION -->
+                        <TextBlock Grid.Row="5"
+                                   Text="Film Description"
+                                   Foreground="White"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"/>
+                        <Border Grid.Column="1" Grid.Row="5"
+                                Height="40"
+                                Background="Transparent"
+                                BorderBrush="White"
+                                BorderThickness="0,0,0,1"
+                                Margin="0,10">
+                            <Grid>
+                                <TextBox Text="{Binding FilmDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="8,0,8,0"
+                                         Foreground="White"
+                                         CaretBrush="White"
+                                         x:Name="FilmDescriptionBox"/>
+                                <TextBlock IsHitTestVisible="False"
+                                           Text="Enter film's brief description"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontWeight="SemiBold"
+                                           Margin="10,0,0,0"
+                                           Foreground="#d1d1d1"
+                                           Grid.Column="1">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=FilmDescriptionBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
                     </Grid>
 
                     <!-- FILM GENRES -->
@@ -514,7 +602,7 @@
                                        Margin="0,0,4,0"/>
                             <ComboBox x:Name="genreComboBox" Height="24" Width="100" Margin="0,0,10,0"
                                       ItemsSource="{Binding GenreComboBoxOptions}"
-                                      SelectedIndex="0"/>
+                                      SelectedIndex="0" IsEditable="True"/>
                             <Button x:Name="genreComboBoxGroupAdd"
                                     Content="Add"
                                     Height="24"
@@ -728,7 +816,7 @@
                                        Margin="0,0,4,0"/>
                             <ComboBox x:Name="personComboBox" Height="24" Width="100" Margin="0,0,10,0"
                                       ItemsSource="{Binding PeopleComboBoxOptions}"
-                                      SelectedIndex="0"/>
+                                      SelectedIndex="0" IsEditable="True"/>
 
                             <!-- ROLE COMBOBOX -->
                             <TextBlock Text="Role" 
