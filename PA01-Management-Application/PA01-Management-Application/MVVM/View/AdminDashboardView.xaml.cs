@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA01_Management_Application.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace PA01_Management_Application.MVVM.View
     /// </summary>
     public partial class AdminDashboardView : UserControl
     {
+        AdminDashboardViewModel viewModel;
         public AdminDashboardView()
         {
             InitializeComponent();
+            DataContext = viewModel = new AdminDashboardViewModel();
         }
     }
 }

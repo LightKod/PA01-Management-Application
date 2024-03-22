@@ -10,11 +10,11 @@
              Background="#141414">
     <Grid Margin="50">
         <Grid.RowDefinitions>
-            <RowDefinition Height="360"/>
+            <RowDefinition Height="260"/>
             <RowDefinition Height="170"/>
             <RowDefinition Height="820"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="0, 0, 400, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -24,31 +24,30 @@
             <!--Movies-->
             <Border Grid.Column="0" 
                 BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
-                <Border BorderThickness="10, 0, 0, 0" Margin="20, 50, 20, 50" BorderBrush="#aaaaaa">
+                <Border BorderThickness="10, 0, 0, 0" Margin="20, 30, 20, 30" BorderBrush="#aaaaaa">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
-                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Margin="20,0,0,0"
-                               FontSize="36" FontWeight="Bold" Foreground="#FFFFFF" 
+                               FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Center"
                                Content="Movies Airing"
                                 />
-                        <Label Grid.Row="1" Grid.Column="0" Margin="20,0,0,0"
-                               FontSize="100" FontWeight="Bold" Foreground="#FFFFFF" 
-                               VerticalAlignment="Center"
-                               Content="10"
+                        <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
+                               FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Top"
+                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
                                 Icon="Film"
-                                FontSize="36"
+                                FontSize="24"
                                 Foreground="#aaaaaa"
-                                Margin="30,0,30,0" 
                                 VerticalAlignment="Center" HorizontalAlignment="Center" 
                             />
                     </Grid>
@@ -57,111 +56,111 @@
             <!--Daily-->
             <Border Grid.Column="1" 
                 BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
-                <Border BorderThickness="10, 0, 0, 0" Margin="20, 50, 20, 50" BorderBrush="#aaaaaa">
+                <Border BorderThickness="10, 0, 0, 0" Margin="20, 30, 20, 30" BorderBrush="#aaaaaa">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
-                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Margin="20,0,0,0"
-                   FontSize="28" FontWeight="Bold" Foreground="#FFFFFF" 
-                   VerticalAlignment="Center"
-                   Content="Daily Schedule"
-                    />
-                        <Label Grid.Row="1" Grid.Column="0" Margin="20,0,0,0"
-                   FontSize="100" FontWeight="Bold" Foreground="#FFFFFF" 
-                   VerticalAlignment="Center"
-                   Content="10"
-                    />
+                        <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0"
+                               FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Center"
+                               Content="Daily Schedule"
+                                />
+                        <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
+                               FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Top"
+                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
-                    Icon="Calendar"
-                    FontSize="36"
-                    Foreground="#aaaaaa"
-                    Margin="30,0,30,0" 
-                    VerticalAlignment="Center" HorizontalAlignment="Center" 
-                />
+                                Icon="Film"
+                                FontSize="24"
+                                Foreground="#aaaaaa"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            />
                     </Grid>
                 </Border>
             </Border>
+
             <!--Weekly-->
             <Border Grid.Column="2" 
-    BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
-                <Border BorderThickness="10, 0, 0, 0" Margin="20, 50, 20, 50" BorderBrush="#aaaaaa">
+                BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
+                <Border BorderThickness="10, 0, 0, 0" Margin="20, 30, 20, 30" BorderBrush="#aaaaaa">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
-                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Margin="20,0,0,0"
-       FontSize="28" FontWeight="Bold" Foreground="#FFFFFF" 
-       VerticalAlignment="Center"
-       Content="Weekly Schedule"
-        />
-                        <Label Grid.Row="1" Grid.Column="0" Margin="20,0,0,0"
-       FontSize="100" FontWeight="Bold" Foreground="#FFFFFF" 
-       VerticalAlignment="Center"
-       Content="10"
-        />
+                        <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0"
+                               FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Center"
+                               Content="Weekly Schedule"
+                                />
+                        <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
+                               FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Top"
+                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
-        Icon="Calendar"
-        FontSize="36"
-        Foreground="#aaaaaa"
-        Margin="30,0,30,0" 
-        VerticalAlignment="Center" HorizontalAlignment="Center" 
-    />
+                                Icon="Film"
+                                FontSize="24"
+                                Foreground="#aaaaaa"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            />
                     </Grid>
                 </Border>
             </Border>
+
             <!--Monthly-->
-            <Border Grid.Column="3" 
-BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
-                <Border BorderThickness="10, 0, 0, 0" Margin="20, 50, 20, 50" BorderBrush="#aaaaaa">
-                    <Grid> 
+            <Border Grid.Column="4" 
+                BorderThickness="1" CornerRadius="50" BorderBrush="#aaaaaa" Margin="10, 20, 10, 20">
+                <Border BorderThickness="10, 0, 0, 0" Margin="20, 30, 20, 30" BorderBrush="#aaaaaa">
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
-                            <RowDefinition Height="7*"/>
+                            <RowDefinition Height="5*"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Margin="20,0,0,0"
-                               FontSize="27" FontWeight="Bold" Foreground="#FFFFFF" 
+                        <Label Grid.Row="0" Grid.Column="0" Margin="5,0,0,0"
+                               FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Center"
                                Content="Monthly Schedule"
                                 />
-                        <Label Grid.Row="1" Grid.Column="0" Margin="20,0,0,0"
-                               FontSize="100" FontWeight="Bold" Foreground="#FFFFFF" 
-                               VerticalAlignment="Center"
-                               Content="10"
+                        <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
+                               FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
+                               VerticalAlignment="Top"
+                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
-                                        Icon="Calendar"
-                                        FontSize="36"
-                                        Foreground="#aaaaaa"
-                                        Margin="30,0,30,0" 
-                                        VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                    />
+                                Icon="Film"
+                                FontSize="24"
+                                Foreground="#aaaaaa"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            />
                     </Grid>
                 </Border>
             </Border>
+
         </Grid>
         <Label Grid.Row="1" Margin="0, 50, 0 ,0"
                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF"
                Content="Movie renenues"
             >
-            
+
         </Label>
         <DataGrid Grid.Row="2" Margin="0, 0, 0, 0"
-                  CanUserAddRows="False" CanUserDeleteRows="False">
+                  CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding MovieData}">
 
         </DataGrid>
     </Grid>
