@@ -47,7 +47,7 @@ CREATE TABLE cinemas (
 -- Tạo bảng movies
 
 CREATE TABLE movies (
-  movie_id INT PRIMARY KEY,
+  movie_id INT PRIMARY KEY IDENTITY(1,1),
   title NVARCHAR(255),
   original_title NVARCHAR(255),
   overview NVARCHAR(MAX),
@@ -719,7 +719,8 @@ INSERT INTO Person (ID, Name, Avatar, Biography) VALUES (78994, N'Sergio Peris-M
 INSERT INTO Person (ID, Name, Avatar, Biography) VALUES (137467, N'Ben Wheatley', N'https://image.tmdb.org/t/p/original/d9MEfHUzizFSB5IdrsGxG8vYBLK.jpg', N'Ben Wheatley (born 1972 in Billericay, Essex, England) is a writer-director, best known for his low-budget folk horror films "Kill List" (2011) and "A Field in England" (2013), dystopian satire "High-Rise" (2015), and black comedy action film "Free Fire" (2016). He is married to screenwriter Amy Jump, with whom he collaborates on many of his scripts.');
 
 
--- Them du lieu vao bang movies
+-- Them du lieu vao bang movies 
+SET IDENTITY_INSERT movies ON
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (1096197, N'Vòng Vây Cá Mập', N'No Way Up', N'', '2024-01-18', 1847.627, 5.801, 138, 0, 'https://image.tmdb.org/t/p/original/mDeUmPe4MF35WWlAqj4QFX5UauJ.jpg', 'https://image.tmdb.org/t/p/original/yD3wMrQvG59IIWm3fYGjn1Lk0hT.jpg', 0, 'pt', 56533, 90);
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (932420, N'Code 8: Phần II', N'Code 8 Part II', N'Ở thành phố nơi người sở hữu sức mạnh bị kiểm soát và áp bức, cựu tội phạm nọ phải phải tìm đến tay trùm ma túy mà anh coi khinh để bảo vệ một cậu bé khỏi gã cảnh sát đồi bại.', '2024-02-27', 1749.699, 6.588, 200, 0, 'https://image.tmdb.org/t/p/original/ekRp1sEA8pnuzVHQkUESTgNSKdW.jpg', 'https://image.tmdb.org/t/p/original/hhvMTxlTZtnCOe7YFhod9uz3m37.jpg', 0, 'en', 227346, 101);
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (693134, N'Hành Tinh Cát: Phần Hai', N'Dune: Part Two', N'Hành Tinh Cát – Phần 2 sẽ tiếp tục khám phá hành trình đậm chất thần thoại của Paul Atreides khi anh đồng hành cùng Chani và những người Fremen trên chặng đường trả thù những kẻ đã hủy hoại gia đình mình. Đối mặt với những lựa chọn giữa tình yêu của cuộc đời mình và số phận của vũ trụ, Paul phải ngăn chặn viễn cảnh tương lai tồi tệ chỉ mình anh nhìn thấy.', '2024-02-27', 1259.931, 8.448, 1217, 0, 'https://image.tmdb.org/t/p/original/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg', 'https://image.tmdb.org/t/p/original/8QdnKQyZDlN6rBSrfU1V5PctfUu.jpg', 0, 'en', 137427, 167);
@@ -821,6 +822,7 @@ INSERT INTO movies (movie_id, title, original_title, overview, release_date, pop
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (507089, N'Năm Đêm Kinh Hoàng', N'Five Nights at Freddys', N'Nhân viên bảo vệ Mike bắt đầu làm việc tại Freddy Fazbear Pizza. Trong đêm làm việc đầu tiên, anh nhận ra mình sẽ không dễ gì vượt qua được ca đêm ở đây. Chẳng mấy chốc, anh sẽ vén màn sự thật đã xảy ra tại Freddy.', '2023-10-25', 207.398, 7.675, 3436, 0, 'https://image.tmdb.org/t/p/original/7NRGAtu8E4343NSKwhkgmVRDINw.jpg', 'https://image.tmdb.org/t/p/original/6wz4JGel2IRvfna6M8xKrudfXUx.jpg', 0, 'en', 2103746, 110);
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (575264, N'Nhiệm Vụ: Bất Khả Thi - Nghiệp Báo Phần 1', N'Mission: Impossible - Dead Reckoning Part One', N'Phần phim thứ 7 của loạt phim Nhiệm Vụ Bất Khả Thi', '2023-07-08', 184.537, 7.557, 3198, 0, 'https://image.tmdb.org/t/p/original/628Dep6AxEtDxjZoGP78TsOxYbK.jpg', 'https://image.tmdb.org/t/p/original/eoLBADTttXo4HJLLUK9amxE4RRM.jpg', 0, 'en', 9033, 164);
 INSERT INTO movies (movie_id, title, original_title, overview, release_date, popularity, vote_average, vote_count, adult, backdrop_path, poster_path, video, original_language, director_id, runTime) VALUES (615656, N'Cá Mập Siêu Bạo Chúa 2: Vực Sâu', N'Meg 2: The Trench', N'Nhóm của Jonas Taylor tiếp cận gần khu vực Rãnh Mariana, nơi họ đụng độ một quái vật bí ẩn, khiến một thành viên trong nhóm thiệt mạng ngay sau đó. Cái chết của người đồng đội báo hiệu cho cả nhóm về một mối đe dọa to lớn đang giấu mình...', '2023-08-02', 200.947, 6.622, 2977, 0, 'https://image.tmdb.org/t/p/original/5mzr6JZbrqnqD8rCEvPhuCE5Fw2.jpg', 'https://image.tmdb.org/t/p/original/6x2CNod5RB3NkXSBJ81Y8KNy4g3.jpg', 0, 'en', 137467, 116);
+SET IDENTITY_INSERT movies OFF
 
 --Them movie actor
 INSERT INTO movie_actor (movie_id, actor_id) VALUES (1096197, 2613589);
