@@ -104,7 +104,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 SearchVM.SearchByName();
             });
 
-            IsAdmin = false;
+            IsAdmin = true;
         }
     }
 }

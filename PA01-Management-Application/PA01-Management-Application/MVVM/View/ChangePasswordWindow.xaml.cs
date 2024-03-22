@@ -9,9 +9,9 @@ namespace PA01_Management_Application.MVVM.View
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        private UserViewModel _viewModel;
+        private AccountViewModel _viewModel;
 
-        public ChangePasswordWindow(UserViewModel viewModel)
+        public ChangePasswordWindow(AccountViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;
@@ -34,20 +34,20 @@ namespace PA01_Management_Application.MVVM.View
                 return;
             }
 
-            Close(); 
+            Close();
 
-            
-            //bool passwordChanged = _viewModel.ChangePassword(oldPassword, newPassword);
 
-            //if (passwordChanged)
-            //{
-            //    MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    Close(); // Đóng cửa sổ sau khi thay đổi mật khẩu thành công
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Failed to change password. Please check your old password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+            bool passwordChanged = _viewModel.ChangePassword(oldPassword, newPassword);
+
+            if (passwordChanged)
+            {
+                MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                Close(); // Đóng cửa sổ sau khi thay đổi mật khẩu thành công
+            }
+            else
+            {
+                MessageBox.Show("Failed to change password. Please check your old password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -50,7 +50,28 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             //return bookings.Select(b => (b.date, b.price)).ToList();
         }
 
+        public async Task<List<(DateTime? date, double? price)>> GetBookingsByMovieId(int movieId)
+        {
+            var bookings = _context.Bookings
+                .Where(b => b.Schedule != null && b.Schedule.MovieId == movieId)
+                .GroupBy(b => b.BookingDate)
+                .Select(group => new { date = group.Key, price = group.Sum(b => b.Price) })
+                .ToList();
 
+            var foodBookings = _context.BookingFoods
+              .Where(bf => bf.Schedule != null && bf.Schedule.MovieId == movieId)
+              .GroupBy(bf => bf.BookingDate)
+              .Select(group => new { date = group.Key, price = group.Sum(bf => bf.Price) })
+              .ToList();
+
+            var combinedBookings = bookings
+                .Concat(foodBookings)
+                .GroupBy(b => b.date)
+                .Select(group => new { date = group.Key, price = group.Sum(b => b.price) })
+                .ToList();
+
+            return combinedBookings.Select(b => (b.date, b.price)).ToList();
+        }
 
     }
 }

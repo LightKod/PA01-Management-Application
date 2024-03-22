@@ -29,7 +29,7 @@
 
             <DatePicker x:Name="EndDatePicker" Width="150" Margin="5" VerticalAlignment="Center" Visibility="Collapsed" Language="vi-VN"/>
 
-            <ComboBox x:Name="MovieFilterComboBox" Width="150" Margin="5" VerticalAlignment="Center" Background="#EEE" SelectedIndex="0">
+            <ComboBox x:Name="MovieFilterComboBox" DisplayMemberPath="Title" Width="150" Margin="5" VerticalAlignment="Center" Background="#EEE" SelectedIndex="0">
 
             </ComboBox>
         </StackPanel>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using PA01_Management_Application.MVVM.Model;
+using PA01_Management_Application.MVVM.Models;
 using System.Globalization;
 
 namespace PA01_Management_Application.MVVM.ViewModel
@@ -57,20 +57,20 @@ namespace PA01_Management_Application.MVVM.ViewModel
                                                    .AddHours(random.Next(0, 24))
                                                    .AddMinutes(random.Next(0, 60));
 
-                Booking booking = new Booking
-                {
-                    BookingId = i + 1,
-                    UserId = userId,
-                    ScheduleId = scheduleId,
-                    SeatId = seatId,
-                    Price = price,
-                    SeatStatus = seatStatus,
-                    ComboFood = comboFood,
-                    Movie = movie,
-                    BookingDate = bookingDate
-                };
+                //Booking booking = new Booking
+                //{
+                //    BookingId = i + 1,
+                //    UserId = userId,
+                //    ScheduleId = scheduleId,
+                //    SeatId = seatId,
+                //    Price = price,
+                //    SeatStatus = seatStatus,
+                //    ComboFood = comboFood,
+                //    Movie = movie,
+                //    BookingDate = bookingDate
+                //};
 
-                Bookings.Add(booking);
+                //Bookings.Add(booking);
             }
         }
 
@@ -96,9 +96,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 // Update booking information
                 existingBooking.UserId = updatedBooking.UserId;
                 existingBooking.ScheduleId = updatedBooking.ScheduleId;
-                existingBooking.SeatId = updatedBooking.SeatId;
+                //existingBooking.SeatId = updatedBooking.SeatId;
                 existingBooking.Price = updatedBooking.Price;
-                existingBooking.SeatStatus = updatedBooking.SeatStatus;
+                //existingBooking.SeatStatus = updatedBooking.SeatStatus;
                 existingBooking.BookingDate = updatedBooking.BookingDate;
 
                 OnPropertyChanged(nameof(Bookings));

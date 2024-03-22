@@ -1,8 +1,13 @@
-﻿using PA01_Management_Application.MVVM.Model;
+﻿using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.ViewModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using System;
+using PA01_Management_Application.MVVM.Models;
+
 
 namespace PA01_Management_Application.MVVM.View
 {
@@ -11,67 +16,65 @@ namespace PA01_Management_Application.MVVM.View
     /// </summary>
     public partial class UpdateProfileView : UserControl
     {
-        private UserViewModel _viewModel;
+        private AccountViewModel _viewModel;
 
-        public UpdateProfileView(UserViewModel viewModel)
+        public UpdateProfileView(AccountViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;
             DataContext = _viewModel;
 
-            SetProfile();
-
             txtEmail.IsEnabled = false;
             txtUsername.IsEnabled = false;
             txtPassword.IsEnabled = false;
+
+            _viewModel.UpdateDataFromUserData();
+            SetGender();
+
         }
 
-        private void SetProfile()
+        private void SetGender()
         {
-            if (_viewModel.Users != null && _viewModel.Users.Count > 0)
+
+            if (_viewModel.Gender == 0)
             {
-                txtFullname.Text = _viewModel.Users[0].Fullname;
-                txtEmail.Text = _viewModel.Users[0].Email;
-                txtPhone.Text = _viewModel.Users[0].Phone;
-                txtUsername.Text = _viewModel.Users[0].Username;
-                txtCity.Text = _viewModel.Users[0].City;
-                txtPassword.Password = _viewModel.Users[0].Password;
-                if (_viewModel.Users[0].Birthday != null)
-                {
-                    dpBirthday.SelectedDate = _viewModel.Users[0].Birthday;
-                }
+                rbMale.IsChecked = true;
+            }
+            else
+            {
+                rbFemale.IsChecked = true;
+            }
+        }
 
-                if (_viewModel.Users[0].Gender == 1)
-                {
-                    rbMale.IsChecked = true;
-                }
-                else
-                {
-                    rbFemale.IsChecked = true;
-                }
 
+
+        private void PasswordChangedHandler(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is AccountViewModel viewModel)
+            {
+                var passwordBox = sender as PasswordBox;
+                if (passwordBox != null)
+                {
+                    var securePassword = passwordBox.SecurePassword;
+
+                    // Chuyển đổi mật khẩu sang văn bản để hiển thị
+                    var passwordString = new System.Net.NetworkCredential(string.Empty, securePassword).Password;
+
+                    viewModel.Password = passwordString;
+                }
             }
         }
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            User updatedUser = new User
+            if (_viewModel.SaveChanges())
             {
-                UserId = _viewModel.Users[0].UserId,
-                Username = txtUsername.Text,
-                Password = txtPassword.Password,
-                Fullname = txtFullname.Text,
-                Birthday = dpBirthday.SelectedDate.Value,
-                Gender = rbMale.IsChecked == true ? 1 : 2,
-                Email = txtEmail.Text,
-                City = txtCity.Text,
-                Phone = txtPhone.Text,
-                Point = _viewModel.Users[0].Point
-            };
-            _viewModel.SaveUserChanges(updatedUser);
+                MessageBox.Show("Your profile has been updated successfully.", "Profile Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
 
-            var mainWindowViewModel = App.Current.MainWindow.DataContext as AppWindowViewModel;
-            mainWindowViewModel.CurrentView = new AccountPageView();
+            MVVM.View.AccountPageView accountProfileView = new MVVM.View.AccountPageView(_viewModel);
+
+            (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = accountProfileView;
         }
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)

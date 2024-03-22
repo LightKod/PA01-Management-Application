@@ -1,7 +1,11 @@
 ﻿using Microsoft.Win32;
+using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.Models;
 using PA01_Management_Application.MVVM.ViewModel;
+using PA01_Management_Application.MVVM.ViewModel.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,26 +27,27 @@ namespace PA01_Management_Application.MVVM.View
     public partial class AccountPageView : UserControl
     {
 
-        private UserViewModel _viewModel;
+        private AccountViewModel _viewModel;
+
         public AccountPageView()
         {
             InitializeComponent();
-            _viewModel = new UserViewModel();
+
+            _viewModel = new AccountViewModel();
             DataContext = _viewModel;
 
-            SetProfile();
+            _viewModel.UpdateDataFromUserData();
         }
 
-        private void SetProfile()
+        public AccountPageView(AccountViewModel viewModel)
         {
-            if (_viewModel.Users != null && _viewModel.Users.Count > 0)
-            {
-                txtUserName.Text = $"Xin chào {_viewModel.Users[0].Username},";
-                txtName.Text = $"Tên: {_viewModel.Users[0].Fullname},";
-                txtEmail.Text = $"Email: {_viewModel.Users[0].Email},";
-                txtSDT.Text = $"Số điện thoại: {_viewModel.Users[0].Phone},";
-            }
+            InitializeComponent();
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+
+            _viewModel.UpdateDataFromUserData();
         }
+
 
         private void ChangeAvatarButton_Click(object sender, RoutedEventArgs e)
         {

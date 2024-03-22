@@ -35,7 +35,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Email:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtEmail" Grid.Column="1" Margin="5" Width="200"/>
+                        <TextBox x:Name="txtEmail" Text="{Binding Email}" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
                     <!-- Full Name -->
@@ -45,7 +45,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Full Name:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtFullname" Grid.Column="1" Margin="5" Width="200"/>
+                        <TextBox x:Name="txtFullname" Text="{Binding Fullname}" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
                     <!-- Phone -->
@@ -55,10 +55,9 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Phone:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtPhone" Grid.Column="1" Margin="5" Width="200"/>
+                        <TextBox x:Name="txtPhone" Text="{Binding Phone}" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
-                    <!-- Password -->
                     <!-- Password -->
                     <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
@@ -68,9 +67,8 @@
                             <!-- Thêm một cột cho nút Change -->
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Password:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White" Height="16"/>
-                        <PasswordBox x:Name="txtPassword" Grid.Column="1" Margin="5,5,5,5"/>
+                        <PasswordBox x:Name="txtPassword"  PasswordChanged="PasswordChangedHandler" Grid.Column="1" Margin="5,5,5,5"/>
                         <Button Content="Change" Grid.Column="2" Margin="5,5,5,5" Background="#007ACC" Foreground="White" FontWeight="Bold" Click="ChangePasswordButton_Click"/>
-                        <!-- Thêm nút Change -->
                     </Grid>
 
 
@@ -87,7 +85,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Username:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtUsername" Grid.Column="1" Margin="5" Width="200"/>
+                        <TextBox x:Name="txtUsername" Text="{Binding Username}" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
 
                     <!-- Birthday -->
@@ -97,7 +95,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Birthday:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <DatePicker x:Name="dpBirthday" Grid.Column="1" Margin="5" Language="vi-VN" Width="200"/>
+                        <DatePicker x:Name="dpBirthday" SelectedDate="{Binding Birthday}" Grid.Column="1" Margin="5" Language="vi-VN" Width="200"/>
                     </Grid>
 
                     <!-- Gender -->
@@ -120,7 +118,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="City:" FontWeight="Bold" VerticalAlignment="Center" Foreground="White"/>
-                        <TextBox x:Name="txtCity" Grid.Column="1" Margin="5" Width="200"/>
+                        <TextBox x:Name="txtCity" Text="{Binding City}" Grid.Column="1" Margin="5" Width="200"/>
                     </Grid>
                 </StackPanel>
             </Grid>
