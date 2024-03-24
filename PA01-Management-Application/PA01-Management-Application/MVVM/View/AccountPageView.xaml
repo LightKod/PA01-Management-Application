@@ -24,16 +24,16 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="#000d21">
+    <Grid Background="#000000">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="#000d21" CornerRadius="10" Margin="20">
+        <Border Grid.Column="0" Background="#000000" CornerRadius="10" Margin="20">
             <StackPanel Margin="10">
                 <!-- Title Border -->
                 <Border BorderBrush="Black" BorderThickness="2" Background="Black" CornerRadius="5">
-                    <TextBlock Text="Thông tin chung" FontWeight="Bold" Foreground="White" FontSize="25" TextAlignment="Center" Margin="10"/>
+                    <TextBlock Text="Profile" FontWeight="Bold" Foreground="White" FontSize="25" TextAlignment="Center" Margin="10"/>
                 </Border>
 
                 <Grid>
@@ -45,12 +45,12 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <Button x:Name="changeAvatarButton" Content="Thay đổi" Style="{StaticResource MenuItemStyle}" FontSize="24" Width="150" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top"  Margin="47,200,0,20" Background="DarkGray" Click="ChangeAvatarButton_Click"/>
-                        <TextBlock x:Name="txtUserName" Text="Xin chào username," Foreground="OrangeRed" FontSize="16" Margin="5,270,0,0" FontWeight="Bold" />
-                        <TextBlock Text="Với trang này, bạn sẽ quản lý được tất cả thông tin tài khoản của mình." Foreground="White" FontSize="16" Margin="5,295,0,0"/>
+                        <TextBlock x:Name="txtUserName" Text="Welcome back!" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="5,270,0,0" />
+                        <TextBlock Text="You can edit your profile in this page." Foreground="White" FontSize="16" Margin="5,295,0,0"/>
                     </Grid>
 
                     <Grid>
-                        <TextBlock Text="Thẻ thành viên" Foreground="White" FontSize="24" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,86,20"/>
+                        <TextBlock Text="Membership Card" FontWeight="SemiBold" Foreground="White" FontSize="24" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,86,20"/>
                         <Border Width="210" Height="70" Background="White" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,100,60,252">
                             <Image Source="/Resources/Icons/qrcode.png" Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -72,14 +72,14 @@
                             </Grid.RowDefinitions>
 
                             <!-- Table headers -->
-                            <TextBlock Text="Cấp độ thẻ" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
-                            <TextBlock Text="Thẻ quà tặng" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Giftcard" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
                             <TextBlock Text="Voucher" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center"/>
                             <TextBlock Text="Coupon" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center"/>
-                            <TextBlock Text="Vé đã mua" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Booked Tickets" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center"/>
 
                             <!-- Data rows -->
-                            <TextBlock Text="Tổng chi tiêu          0đ" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
+                            <TextBlock Text="Total Spending" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left"/>
                             <TextBlock Text="0 đ" Foreground="White" FontSize="16" Margin="5" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"/>
                             <TextBlock Text="0" Foreground="White" FontSize="16" Margin="5" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"/>
                             <TextBlock Text="0" Foreground="White" FontSize="16" Margin="5" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"/>
@@ -91,11 +91,11 @@
                             <Rectangle Fill="White" Width="1" Height="Auto" Grid.Column="2" Grid.RowSpan="3" Margin="-1,5" HorizontalAlignment="Right"/>
                             <Rectangle Fill="White" Width="1" Height="Auto" Grid.Column="3" Grid.RowSpan="3" Margin="-1,5" HorizontalAlignment="Right"/>
 
-                            <TextBlock Text="Điểm số                  25 P" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5,10,5,0" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left"/>
-                            <Button Content="Xem" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton1_Click"/>
-                            <Button Content="Xem" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton2_Click"/>
-                            <Button Content="Xem" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton3_Click"/>
-                            <Button Content="Xem" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton4_Click"/>
+                            <TextBlock Text="Points" Foreground="White" FontSize="16" FontWeight="Bold" Margin="5,10,5,0" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left"/>
+                            <Button Content="Details" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton1_Click"/>
+                            <Button Content="Details" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton2_Click"/>
+                            <Button Content="Details" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton3_Click"/>
+                            <Button Content="Details" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="5,0,5,5" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" Click="ViewButton4_Click"/>
 
                         </Grid>
                     </Border>
@@ -107,10 +107,7 @@
 
         </Border>
 
-        <TextBlock Text="THÔNG TIN TÀI KHOẢN" Margin="25,570,20,0" Foreground="Red" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
-
-        <TextBlock Text="LIÊN HỆ" Margin="25,635,20,0" Foreground="White" FontSize="14" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1" />
-        <Button Content="Thay đổi" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="120,620,20,0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Background="DarkGray" Click="updateProfile_Click"/>
+        <TextBlock Text="Account Infomation" Margin="25,570,20,0" Foreground="White" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Row="1"/>
 
         <TextBlock Text="Full Name:" Margin="25,670,20,0" Foreground="White" FontSize="16" Grid.ColumnSpan="2" Grid.Row="1"/>
         <TextBlock x:Name="name" Text="{Binding Fullname}" Margin="125,670,20,0" Foreground="White" FontSize="16" Grid.ColumnSpan="2" Grid.Row="1"/>
@@ -120,7 +117,7 @@
 
         <TextBlock Text="Phone:" Margin="25,730,20,0" Foreground="White" FontSize="16" Grid.ColumnSpan="2" Grid.Row="1"/>
         <TextBlock x:Name="phone" Text="{Binding Phone}" Margin="125,730,20,20" Foreground="White" FontSize="16" Grid.ColumnSpan="2" Grid.Row="1"/>
-
+        <Button Content="Update" Style="{StaticResource MenuItemStyle}" FontSize="16" Margin="120,620,20,0" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Background="DarkGray" Click="updateProfile_Click"/>
 
     </Grid>
 </UserControl>

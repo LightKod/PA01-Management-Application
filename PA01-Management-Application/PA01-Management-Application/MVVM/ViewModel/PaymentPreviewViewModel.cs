@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
@@ -96,6 +97,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        string cinemaName { get; set; }
+
+        public string CinemaName
+        {
+            get { return cinemaName; }
+            set
+            {
+                cinemaName = value;
+                OnPropertyChanged(nameof(CinemaName));
+            }
+        }
+
 
         Schedule schedule;
         public Schedule Schedule
@@ -132,6 +145,16 @@ namespace PA01_Management_Application.MVVM.ViewModel
             AddFoodData();
 
             FinalPrice = TotalPrice;
+            GetCinemaName();
+
+
+        }
+
+        async void GetCinemaName()
+        {
+            MovieManagementContext context = new();
+            Models.Room room = context.Rooms.FirstOrDefault((Models.Room r) => r.RoomId == schedule.RoomId);
+            CinemaName = context.Cinemas.FirstOrDefault((Cinema x) => x.CinemaId == room.CinemaId).CinemaName;
         }
 
         private void PayClickCommandExecute(object obj)

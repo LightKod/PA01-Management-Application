@@ -26,6 +26,62 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        int movieAiring;
+        public int MovieAiring
+        {
+            get
+            {
+                return movieAiring;
+            }
+            set
+            {
+                movieAiring = value;
+                OnPropertyChanged(nameof(MovieAiring));
+            }
+        }
+
+        int dailySchedule;
+        public int DailySchedule
+        {
+            get
+            {
+                return dailySchedule;
+            }
+            set
+            {
+                dailySchedule = value;
+                OnPropertyChanged(nameof(DailySchedule));
+            }
+        }
+
+        int monthlySchedule;
+        public int MonthlySchedule
+        {
+            get
+            {
+                return monthlySchedule;
+            }
+            set
+            {
+                monthlySchedule = value;
+                OnPropertyChanged(nameof(MonthlySchedule));
+            }
+        }
+
+        int weeklySchedule;
+        public int WeeklySchedule
+        {
+            get
+            {
+                return weeklySchedule;
+            }
+            set
+            {
+                weeklySchedule = value;
+                OnPropertyChanged(nameof(WeeklySchedule));
+            }
+        }
+
         MovieManagementContext context = new();
 
 
@@ -65,6 +121,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     movieData.Add(data);
                 }
             }
+
+            List<int?> movieIds = context.Schedules.Select(x => x.MovieId).ToList();
+            MovieAiring = movieIds.Distinct().Count();
+
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+            DateOnly weekAgo = DateOnly.FromDateTime(DateTime.Now.AddDays(-7));
+            DateOnly monthAgo = DateOnly.FromDateTime(DateTime.Now.AddDays(-30));
+
+
+            DailySchedule = context.Schedules.Where(x => x.ScheduleDate == today).Count();
+            WeeklySchedule = context.Schedules.Where(x => x.ScheduleDate <= today && x.ScheduleDate >= weekAgo).Count();
+            MonthlySchedule = context.Schedules.Where(x => x.ScheduleDate <= today && x.ScheduleDate >= monthAgo).Count();
 
         }
 
