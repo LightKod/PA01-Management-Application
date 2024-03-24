@@ -10,6 +10,7 @@ public partial class BookingFood
     public int? UserId { get; set; }
 
     public int? ScheduleId { get; set; }
+
     public DateTime? BookingDate { get; set; }
 
     public int? FoodId { get; set; }

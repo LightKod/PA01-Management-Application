@@ -147,6 +147,11 @@ CREATE TABLE bookingFood (
   FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id),
   FOREIGN KEY (FoodId) REFERENCES Food(FoodId),
 );
+CREATE TABLE Voucher (
+  VoucherId INT PRIMARY KEY IDENTITY,
+  VoucherCode NVARCHAR(255),
+  VoucherValue FLOAT
+)
 --Thêm dữ liệu vao Cinema
 INSERT INTO cinemas (cinema_id, cinema_name) VALUES (1, N'CGV - Tân Phú');
 INSERT INTO cinemas (cinema_id, cinema_name) VALUES (2, N'GALAXY - Hoàng Văn Thụ');
@@ -14224,3 +14229,8 @@ INSERT INTO booking (user_id, schedule_id, booking_date, seat_id, price) VALUES 
 INSERT INTO booking (user_id, schedule_id, booking_date, seat_id, price) VALUES (5, 43386, '2024-02-15', 'A2', 8.203653377756485);
 INSERT INTO booking (user_id, schedule_id, booking_date, seat_id, price) VALUES (2, 580839, '2024-02-15', 'A1', 6.91903489574138);
 INSERT INTO booking (user_id, schedule_id, booking_date, seat_id, price) VALUES (5, 43976, '2024-02-15', 'A1', 8.622589544997837);
+INSERT INTO Voucher (VoucherCode, VoucherValue) VALUES  ('VOUCHER123', 50.00);
+INSERT INTO Voucher (VoucherCode, VoucherValue) VALUES  ('DISCOUNT50', 10.00);
+INSERT INTO Voucher (VoucherCode, VoucherValue) VALUES  ('SAVEBIG20', 20.00);
+INSERT INTO Voucher (VoucherCode, VoucherValue) VALUES  ('SPRINGSALE', 15.00);
+INSERT INTO Voucher (VoucherCode, VoucherValue) VALUES  ('FREESHIP', 5.00);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA01_Management_Application.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,15 @@ using System.Windows.Shapes;
 namespace PA01_Management_Application.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for AdminView.xaml
+    /// Interaction logic for VoucherManagementView.xaml
     /// </summary>
-    public partial class AdminView : UserControl
+    public partial class VoucherManagementView : UserControl
     {
-        public AdminView()
+        VoucherManagementViewModel viewModel = new VoucherManagementViewModel();
+        public VoucherManagementView()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = viewModel;
         }
     }
 }

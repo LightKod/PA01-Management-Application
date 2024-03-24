@@ -1,5 +1,6 @@
 ﻿using PA01_Management_Application.Core;
 using PA01_Management_Application.DataManagers;
+using PA01_Management_Application.MVVM.Models;
 using PA01_Management_Application.MVVM.View;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public RelayCommand ReportViewCommand { get; set; }
         public RelayCommand AdminViewCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
+        public RelayCommand VoucherCommand { get; set; }
 
         // Possible view models that can be called from this screen
         public HomeViewModel HomeVM { get; set; }
@@ -28,6 +30,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public AdminViewModel AdminVM { get; set; }
         public LoginPageViewModel LoginPageVM { get; set; }
         public RegisterViewModel RegisterVM { get; set; }
+        public VoucherManagementViewModel VoucherManagementVM { get; set; }
         private object _currentView;
 
         public object CurrentView
@@ -62,6 +65,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             ReportVM = new ReportViewModel();
             LoginPageVM = new LoginPageViewModel();
             RegisterVM = new RegisterViewModel();
+            VoucherManagementVM = new VoucherManagementViewModel();
             CurrentView = HomeVM;
 
             // Handle the command calls
@@ -104,6 +108,10 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 SearchVM.SearchByName();
             });
 
+            VoucherCommand = new RelayCommand(o =>
+            {
+                CurrentView = VoucherManagementVM;
+            });
             IsAdmin = true;
         }
     }

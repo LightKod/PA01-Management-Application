@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PA01_Management_Application.MVVM.ViewModel.Service
 {
@@ -441,6 +436,64 @@ namespace PA01_Management_Application.MVVM.ViewModel.Service
             Debug.WriteLine(check);
             return check;
         }
+
+        public void DeleteMovie(int movieId)
+        {
+            // Xác định phim cần xóa
+            Movie movieToDelete = _context.Movies
+                                .Include(m => m.Director)
+                                .Include(m => m.Genres)
+                                .Include(m => m.Actors)
+                                .Include(m => m.Schedules)
+                                .FirstOrDefault(m => m.MovieId == movieId);
+
+            if (movieToDelete == null)
+            {
+                // Phim không tồn tại trong cơ sở dữ liệu
+                return;
+            }
+
+            // Xóa tất cả các lịch chiếu liên quan đến phim
+            foreach (var schedule in movieToDelete.Schedules.ToList())
+            {
+                var scheduleToDelete = _context.Schedules.Include(m => m.Bookings).FirstOrDefault(m => m.ScheduleId == schedule.ScheduleId);
+                // Xóa tất cả các đặt vé liên quan đến lịch chiếu
+                foreach (var booking in scheduleToDelete.Bookings.ToList())
+                {
+
+                    var bookingToDelete = _context.Bookings.Include(m => m.Schedule).FirstOrDefault(m => m.BookingId == booking.BookingId);
+
+                    if (bookingToDelete != null)
+                    {
+                        _context.Bookings.Remove(bookingToDelete);
+                    }
+                    Debug.WriteLine("aaaa");
+                }
+                foreach (var bookingFood in schedule.BookingFoods.ToList())
+                {
+                    _context.BookingFoods.Remove(bookingFood);
+                }
+
+
+
+            }
+
+            foreach (var schedule in movieToDelete.Schedules.ToList())
+            {
+                _context.Schedules.Remove(schedule);
+            }
+            // Xóa các liên kết với đạo diễn, diễn viên và thể loại
+            movieToDelete.Director = null;
+            movieToDelete.Actors.Clear();
+            movieToDelete.Genres.Clear();
+            movieToDelete.Schedules.Clear();
+            // Xóa phim khỏi cơ sở dữ liệu
+            _context.Movies.Remove(movieToDelete);
+
+            // Lưu các thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+        }
+
 
     }
 }

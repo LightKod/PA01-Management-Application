@@ -64,13 +64,15 @@
             <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
                 <views:RegisterPageView/>
             </DataTemplate>
-
-                <!-- FIX FOR System.Windows.Data Error: 4 -->
+            <DataTemplate DataType="{x:Type viewmodels:VoucherManagementViewModel}">
+                <views:VoucherManagementView/>
+            </DataTemplate>
+            <!-- FIX FOR System.Windows.Data Error: 4 -->
             <Style TargetType="ComboBoxItem">
                 <Setter Property="HorizontalContentAlignment" Value="Left" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>
