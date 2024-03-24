@@ -73,6 +73,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 {
                     if (o is Film film)
                     {
+                        service.DeleteMovie(film.FilmID);
                         FilmList.Remove(film);
                     }
                 }
