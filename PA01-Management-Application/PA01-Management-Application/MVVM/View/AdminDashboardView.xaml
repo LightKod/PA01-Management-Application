@@ -42,7 +42,7 @@
                         <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
                                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Top"
-                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                               Content="{Binding MovieAiring}" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
                                 Icon="Film"
@@ -74,7 +74,7 @@
                         <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
                                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Top"
-                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                               Content="{Binding DailySchedule}" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
                                 Icon="Film"
@@ -107,7 +107,7 @@
                         <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
                                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Top"
-                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                               Content="{Binding WeeklySchedule}" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
                                 Icon="Film"
@@ -140,7 +140,7 @@
                         <Label Grid.Row="1" Grid.Column="0" Margin="20, 0, 0 ,0"
                                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF" 
                                VerticalAlignment="Top"
-                               Content="10" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                               Content="{Binding MonthlySchedule}" Grid.ColumnSpan="2" Grid.RowSpan="2"
                                 />
                         <fa:FontAwesome Grid.Row="0" Grid.Column="1"
                                 Icon="Film"
