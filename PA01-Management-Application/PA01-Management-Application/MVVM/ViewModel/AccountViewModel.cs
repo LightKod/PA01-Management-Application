@@ -8,6 +8,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     public class AccountViewModel : BaseViewModel
     {
+        
         private int _userId;
         public int UserId
         {
@@ -144,6 +145,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        private int _bookingTicketCount;
+        public int BookingTicketCount
+        {
+            get { return _bookingTicketCount; }
+            set
+            {
+                _bookingTicketCount = value;
+                OnPropertyChanged(nameof(BookingTicketCount));
+            }
+        }
+
+
         public void UpdateDataFromUserData()
         {
             UserId = UserData.userData.UserId;
@@ -160,7 +173,13 @@ namespace PA01_Management_Application.MVVM.ViewModel
             City = UserData.userData.City;
             Rules = UserData.userData.Rules;
             Point = UserData.userData.Point;
+
+            using (var context = new MovieManagementContext())
+            {
+                BookingTicketCount = context.Bookings.Count(x => x.UserId == UserData.userData.UserId && x.Price > 0);
+            }
         }
+
 
         public bool SaveChanges()
         {

@@ -38,6 +38,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
             }
         }
 
+        private int _bookingTicketCount;
+
+        public int BookingTicketCount
+        {
+            get { return _bookingTicketCount; }
+            set
+            {
+                _bookingTicketCount = value;
+                OnPropertyChanged();
+            }
+        }
+
         public PurchasedTicketViewModel(IPurchasedTicketService purchasedTicketService, int userId)
         {
             _purchasedTicketService = purchasedTicketService;
@@ -52,6 +64,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 var startIndex = (page - 1) * PageSize;
                 var purchasedTickets = await Task.Run(() => _purchasedTicketService.GetPurchasedTicketsForUser(userId, page, PageSize));
                 PurchasedTickets = new ObservableCollection<PurchasedTicket>(MapToViewModel(purchasedTickets));
+
+                BookingTicketCount = PurchasedTickets.Count;
                 Console.WriteLine($"Tổng số vé mua: {PurchasedTickets.Count}");
             }
             catch (Exception ex)
