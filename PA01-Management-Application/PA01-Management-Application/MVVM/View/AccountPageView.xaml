@@ -44,7 +44,7 @@
                                 <ImageBrush x:Name="avatarImage" ImageSource="/Resources/Icons/icon.png"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <Button x:Name="changeAvatarButton" Content="Thay đổi" Style="{StaticResource MenuItemStyle}" FontSize="24" Width="150" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top"  Margin="47,200,0,20" Background="DarkGray" Click="ChangeAvatarButton_Click"/>
+                        <Button x:Name="changeAvatarButton" Content="Change" Style="{StaticResource MenuItemStyle}" FontSize="24" Width="150" Height="50" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top"  Margin="47,200,0,20" Background="DarkGray" Click="ChangeAvatarButton_Click"/>
                         <TextBlock x:Name="txtUserName" Text="Welcome back!" Foreground="#FFFFFF" FontSize="20" FontWeight="Bold" Margin="5,270,0,0" />
                         <TextBlock Text="You can edit your profile in this page." Foreground="White" FontSize="16" Margin="5,295,0,0"/>
                     </Grid>

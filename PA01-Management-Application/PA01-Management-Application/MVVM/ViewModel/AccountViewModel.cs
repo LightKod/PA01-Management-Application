@@ -8,6 +8,17 @@ namespace PA01_Management_Application.MVVM.ViewModel
 {
     public class AccountViewModel : BaseViewModel
     {
+        private int _userId;
+        public int UserId
+        {
+            get { return _userId; }
+            set
+            {
+                _userId = value;
+                OnPropertyChanged(nameof(UserId));
+            }
+        }
+
         private string _fullname;
         public string Fullname
         {
@@ -135,6 +146,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public void UpdateDataFromUserData()
         {
+            UserId = UserData.userData.UserId;
             Fullname = UserData.userData.Fullname;
             Email = UserData.userData.Email;
             Phone = UserData.userData.Phone;
@@ -175,7 +187,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                         UserData.userData = user;
 
                         return true;
-                        
+
                     }
                     else
                     {
@@ -207,7 +219,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                         {
 
                             user.Password = PasswordHasher.HashPassword(newPassword);
-                            
+
                             context.SaveChanges();
 
                             UserData.userData.Password = PasswordHasher.HashPassword(newPassword);

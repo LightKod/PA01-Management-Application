@@ -85,7 +85,7 @@ namespace PA01_Management_Application.MVVM.View
                         break;
                 }
             }
-            
+
         }
 
         private void DateFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -134,21 +134,21 @@ namespace PA01_Management_Application.MVVM.View
 
             var bookingCounts = new Dictionary<DateTime, double>();
             reportS = await reportService.GetBookingsByMovieIdAndDateRangeAsync(movie.MovieId, startDate.Value, endDate.Value);
-            if(reportS != null)
+            if (reportS != null)
             {
                 foreach (var date in dateRange)
                 {
                     int check = 0;
-                    foreach(var item in reportS)
+                    foreach (var item in reportS)
                     {
                         if (item.date == date.Date)
                         {
                             check = 1;
                             bookingCounts.Add(date, item.price.Value);
                         }
-                        
+
                     }
-                    if(check == 0)
+                    if (check == 0)
                     {
                         bookingCounts.Add(date, 0);
                     }
@@ -215,7 +215,7 @@ namespace PA01_Management_Application.MVVM.View
 
         private async void UpdateChartByMonth()
         {
-            var projectStartDate = new DateTime(2024, 1, 1); 
+            var projectStartDate = new DateTime(2024, 1, 1);
 
             var dateRange = new List<DateTime>();
             for (var date = projectStartDate; date <= DateTime.Today; date = date.AddMonths(1))
@@ -245,7 +245,7 @@ namespace PA01_Management_Application.MVVM.View
 
         private async void UpdateChartByYear()
         {
-            var projectStartDate = new DateTime(2023, 1, 1);
+            var projectStartDate = new DateTime(2010, 1, 1);
 
             var dateRange = new List<DateTime>();
             for (var date = projectStartDate; date <= DateTime.Today; date = date.AddYears(1))

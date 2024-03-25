@@ -111,7 +111,7 @@ namespace PA01_Management_Application.MVVM.View
 
         private void ViewButton4_Click(object sender, RoutedEventArgs e)
         {
-            MVVM.View.PurchasedTicketView purchasedTicketView = new MVVM.View.PurchasedTicketView();
+            MVVM.View.PurchasedTicketView purchasedTicketView = new MVVM.View.PurchasedTicketView(_viewModel);
 
             (App.Current.MainWindow.DataContext as MVVM.ViewModel.AppWindowViewModel).CurrentView = purchasedTicketView;
         }
