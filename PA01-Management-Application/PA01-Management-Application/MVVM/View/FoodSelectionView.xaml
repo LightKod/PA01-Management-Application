@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
+             xmlns:converters="clr-namespace:PA01_Management_Application.Converters"
              xmlns:fa="http://schemas.fontawesome.io/icons/" 
              mc:Ignorable="d" 
              d:DesignHeight="3000" d:DesignWidth="1900"
              Background="#141414">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converters:AddDollarConverter x:Key="AddDollarConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/Foods/FoodDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>

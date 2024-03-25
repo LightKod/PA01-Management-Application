@@ -14,7 +14,7 @@
             <RowDefinition Height="170"/>
             <RowDefinition Height="820"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="0, 0, 400, 0">
+        <Grid Grid.Row="0" Margin="0, 0, 300, 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -155,7 +155,7 @@
         </Grid>
         <Label Grid.Row="1" Margin="0, 50, 0 ,0"
                FontSize="64" FontWeight="Bold" Foreground="#FFFFFF"
-               Content="Movie renenues"
+               Content="Movie revenues"
             >
 
         </Label>
