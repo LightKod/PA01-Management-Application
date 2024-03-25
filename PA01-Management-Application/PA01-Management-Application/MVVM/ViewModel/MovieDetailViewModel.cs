@@ -87,6 +87,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
         }
         private void BookClickCommandExecute(object obj)
         {
+            
+            if(UserData.userData == null)
+            {
+                string messageBoxText = "Please login to continue.";
+                string caption = "Please Login";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new LoginPageViewModel();
+                return;
+            }
 
             (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new BookingScreeningTimeViewModel();
         }

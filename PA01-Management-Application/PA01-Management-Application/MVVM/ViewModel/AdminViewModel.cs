@@ -21,14 +21,23 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
         public FilmManagementViewModel FilmManagementVM { get; set; }
         public VoucherManagementViewModel VoucherManagementVM { get; set; }
+        public AdminDashboardView AdminDashboardVM{ get; set; }
         public ICommand ShowReportPageCommand { get; private set; }
         public RelayCommand VoucherCommand { get; private set; }
         public RelayCommand FilmManagementCommand { get; set; }
+        public RelayCommand DashboardCommand { get; set; }
 
         public AdminViewModel()
         {
             FilmManagementVM = new FilmManagementViewModel();
             VoucherManagementVM = new VoucherManagementViewModel();
+            AdminDashboardVM = new();
+
+            DashboardCommand = new RelayCommand(o =>
+            {
+                CurrentAdminView = AdminDashboardVM;
+            });
+
             FilmManagementCommand = new RelayCommand(o =>
             {
                 CurrentAdminView = FilmManagementVM;
@@ -38,6 +47,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 CurrentAdminView = VoucherManagementVM;
             });
             ShowReportPageCommand = new RelayCommand(ShowReportPage);
+
+            CurrentAdminView = AdminDashboardVM;
         }
 
         private void ShowReportPage(object parameter)

@@ -13,7 +13,8 @@
                 <RadioButton Content="Dashboard"
                          Style="{StaticResource AdminMenuButtonTheme}"
                          Cursor="Hand"
-                         IsChecked="True"/>
+                         IsChecked="True"
+                         Command="{Binding DashboardCommand}"/>
 
                 <RadioButton Content="Films"
                              Style="{StaticResource AdminMenuButtonTheme}"

@@ -17,6 +17,9 @@ namespace PA01_Management_Application.Converters
             {
                 // Format the float value as currency with $ symbol and two decimal places
                 return floatValue.ToString("C", culture);
+            }else if (value is double doubleValue)
+            {
+                return doubleValue.ToString("C", culture);
             }
 
             // Return original value if not a string

@@ -112,7 +112,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 CurrentView = VoucherManagementVM;
             });
-            IsAdmin = true;
+            IsAdmin = false;
         }
     }
 }
