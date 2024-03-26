@@ -1,8 +1,10 @@
-﻿using PA01_Management_Application.DataManagers;
+﻿using PA01_Management_Application.Core;
+using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Models;
 using PA01_Management_Application.MVVM.ViewModel.Service;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace PA01_Management_Application.MVVM.ViewModel
 {
@@ -178,6 +180,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 BookingTicketCount = context.Bookings.Count(x => x.UserId == UserData.userData.UserId && x.Price > 0);
             }
+        }
+
+        public RelayCommand LogOutCommand { get; set; }
+
+        public AccountViewModel()
+        {
+            LogOutCommand = new RelayCommand(o =>
+            {
+                UserData.userData = null;
+                (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = (Application.Current.MainWindow.DataContext as AppWindowViewModel).HomeVM;
+                (Application.Current.MainWindow.DataContext as AppWindowViewModel).IsAdmin = false;
+            });
         }
 
 

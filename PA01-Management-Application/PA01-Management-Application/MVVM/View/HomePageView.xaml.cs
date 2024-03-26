@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PA01_Management_Application.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,28 @@ namespace PA01_Management_Application.MVVM.View
     public partial class HomePageView : UserControl
     {
         // Chỗ này đã xóa code xử lý slider film nổi bật :">
-        private int currentImageIndex = 1;
-        private const int MaxImageIndex = 8;
+        private int currentImageIndex = 0;
+        private const int MaxImageIndex = 5;
         private DispatcherTimer timer;
+
+        string[] posters = new string[]
+      {
+    "https://image.tmdb.org/t/p/original/cAOaUTJzUG8vfXcThFNIC5tUMig.jpg",
+    "https://image.tmdb.org/t/p/original/2q3B90h2hZ6xJTvna9CIFDNaIr4.jpg",
+    "https://image.tmdb.org/t/p/original/d1RHScaZc7I8j0lDke1c4AxI435.jpg",
+    "https://image.tmdb.org/t/p/original/7BdxZXbSkUiVeCRXKD3hi9KYeWm.jpg",
+    "https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vREc0547VKqEv.jpg",
+    "https://image.tmdb.org/t/p/original/uT5G4fA7jKxlJNfwYPMm353f5AI.jpg",
+      };
+        int[] id = new int[]
+        {
+         841,
+         9473,
+         9502,
+         49444,
+         76600,
+         140300,
+        };
 
         public HomePageView()
         {
@@ -51,15 +71,15 @@ namespace PA01_Management_Application.MVVM.View
         {
             currentImageIndex++;
             if (currentImageIndex > MaxImageIndex)
-                currentImageIndex = 1;
+                currentImageIndex = 0;
 
             UpdateSlideshowImage();
         }
 
         private void UpdateSlideshowImage()
         {
-            string imagePath = $"/MVVM/Images/{currentImageIndex}.jpg"; // Định dạng tên file ảnh
-            Uri imageUri = new Uri(imagePath, UriKind.Relative);
+            string imagePath = posters[currentImageIndex]; // Định dạng tên file ảnh
+            Uri imageUri = new Uri(imagePath);
             BitmapImage bitmapImage = new BitmapImage(imageUri);
             SlideshowImage.Source = bitmapImage;
         }
@@ -67,7 +87,7 @@ namespace PA01_Management_Application.MVVM.View
         private void PreviousImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
             currentImageIndex--;
-            if (currentImageIndex < 1)
+            if (currentImageIndex < 0)
                 currentImageIndex = MaxImageIndex;
 
             UpdateSlideshowImage();
@@ -77,9 +97,20 @@ namespace PA01_Management_Application.MVVM.View
         {
             currentImageIndex++;
             if (currentImageIndex > MaxImageIndex)
-                currentImageIndex = 1;
+                currentImageIndex = 0;
 
             UpdateSlideshowImage();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is HomeViewModel viewModel)
+            {
+                if (viewModel.MovieDetailFromSliderCommand.CanExecute(id[currentImageIndex]))
+                {
+                    viewModel.MovieDetailFromSliderCommand.Execute(id[currentImageIndex]);
+                }
+            }
         }
     }
 }

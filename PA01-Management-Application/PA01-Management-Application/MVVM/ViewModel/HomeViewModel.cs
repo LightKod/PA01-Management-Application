@@ -1,4 +1,5 @@
-﻿using PA01_Management_Application.Core;
+﻿using Microsoft.Identity.Client;
+using PA01_Management_Application.Core;
 using PA01_Management_Application.DataManagers;
 using PA01_Management_Application.MVVM.Model;
 using PA01_Management_Application.MVVM.Models;
@@ -21,6 +22,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
         public RelayCommand MovieDetailCommand { get; set; }
         public MovieDetailViewModel MovieDetailVM{ get; set; }
 
+        public RelayCommand MovieDetailFromSliderCommand { get; set; }
+
         public HomeViewModel()
         {
             FilmSets = new ObservableCollection<FilmSet>();
@@ -33,6 +36,15 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 if(o is Film selectedFilm)
                 {
                     BookingDataHolder.movieID = selectedFilm.FilmID;
+                    (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = MovieDetailVM;
+                }
+            });
+
+            MovieDetailFromSliderCommand = new RelayCommand(o =>
+            {
+                if(o is int ID)
+                {
+                    BookingDataHolder.movieID = ID;
                     (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = MovieDetailVM;
                 }
             });
