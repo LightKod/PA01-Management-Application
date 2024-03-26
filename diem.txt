@@ -1,0 +1,42 @@
+#Phân hệ khách
+✓ 0.5 điểm: database và dữ liệu (script + diagram): 100%
+✓ 0.5 điểm: đăng ký và đăng nhập (thông tin password lưu trữ phải xử lý để
+không bị lộ nếu truy suất database): 100%
+✓ 0.5 điểm: có xử lý validation đầy đủ trong phần chức năng tài khoản: 100%
+✓ 0.5 điểm: màn hình chính bao gồm các phần sau: 100%
+o Có background, có shadow cho các phần bố cục nội dung (header,
+navbar,…)
+o Có đầy đủ bố cục rõ ràng cho các phần: header, navbar, slider, side,
+footer,…
+o Có liên kết, menu chức năng cũng như phần nhập tìm kiếm.
+✓ 0.5 điểm: có slider cho phim hot ở màn hình chính: 100%
+✓ 0.5 điểm: Danh sách phim đang bán vé theo dạng CardView: 100%
+✓ 0.5 điểm: Danh sách phim đang bán vé theo dạng slider giống netflix (hoàn
+thành phần này thì sẽ tính luôn 0.5 điểm ở phần dạng CardView): 100%
+✓ 0.5 điểm: hiệu ứng highlight (phóng to mà không làm bể bố cục + thêm
+thông tin phim) khi trỏ chuột vào phim ở danh sách: 100%
+✓ 0.5 điểm: có play trailer khi highlight: 100%
+✓ 0.5 điểm: chức năng tìm kiếm phim (hiển thị kết quả dạng danh sách
+ListView, cho phép sort theo cột): 100%
+✓ 0.5 điểm: chức năng lọc (filter) và phân trang trong danh sách kết quả tìm
+kiếm: 100%
+✓ 0.5 điểm: bố cục màn hình chi tiết phim gồm đầy đủ thông tin của phim
+(tên, phân loại, hình ảnh,…), thông tin suất chiếu (bao gồm số lượng vé còn)
+và phần chọn chức năng đặt vé: 100%
+#Phân hệ người dùng đã đăng nhập
+✓ 0.5 điểm: chức năng đặt vé bao gồm thông tin phim được chọn, sơ đồ
+chọn ghế, giá tiền, voucher, thông báo kết quả: 100%
+✓ 0.5 điểm: chức năng thay đổi thông tin tài khoản và xem danh sách vé đã
+mua của tài khoản (có liên kết xem chi tiết vé tức là chuyển qua giống màn
+hình đặt vé nhưng chỉ xem kết quả): 100%
+#Phân hệ quản trị
+✓ 0.5 điểm: bố cục màn hình dashboard như yêu cầu (là các control, không
+phải là hình ảnh): 100%
+✓ 0.5 điểm: dữ liệu đầy đủ cho dashboard: 100%
+✓ 0.5 điểm: quản lý phim (thêm, xóa, sửa): 100%
+✓ 0.5 điểm: quản lý thông tin phụ cho phim (diễn viên, đạo diễn, phân loại,…)
+✓ 0.5 điểm: quản lý suất chiếu, vé và voucher: 50%
+✓ 0.5 điểm: báo cáo thống kê (kèm biểu đồ) doanh thu theo thời gian lựa
+chọn với các tiêu chí: tất cả, mỗi phim hoặc suất chiếu: 100%
+
+Tổng điểm: 9.75

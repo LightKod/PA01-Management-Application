@@ -168,7 +168,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 PA01_Management_Application.MVVM.Models.Booking booking = new();
                 booking.SeatId = seat.Name;
-                //booking.UserId = 1;
+                booking.UserId = UserData.userData.UserId;
                 booking.ScheduleId = scheduleID;
                 booking.Price = seat.GetPrice();
 
@@ -183,6 +183,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
                     BookingFood bFood = new();
                     bFood.FoodId = food.Key.FoodId;
                     bFood.Price = food.Key.Price;
+                    bFood.UserId = UserData.userData.UserId;
+
                     bFood.ScheduleId = scheduleID;
                     context.BookingFoods.Add(bFood);    
                 }
@@ -193,7 +195,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 PA01_Management_Application.MVVM.Models.Booking booking = new();
                 booking.SeatId = "DISCOUNT";
-                //booking.UserId = 1;
+                booking.UserId = UserData.userData.UserId;
                 booking.ScheduleId = scheduleID;
                 booking.Price = -discount;
 
@@ -212,6 +214,9 @@ namespace PA01_Management_Application.MVVM.ViewModel
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
 
             (Application.Current.MainWindow.DataContext as AppWindowViewModel).CurrentView = new HomeViewModel();
+
+
+            int totalTicket = context.Bookings.Count(x => x.UserId == UserData.userData.UserId && x.Price > 0);
 
         }
 
