@@ -160,7 +160,7 @@
 
         </Label>
         <DataGrid Grid.Row="2" Margin="0, 0, 0, 0"
-                  CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding MovieData}">
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding MovieData}">
 
         </DataGrid>
     </Grid>
