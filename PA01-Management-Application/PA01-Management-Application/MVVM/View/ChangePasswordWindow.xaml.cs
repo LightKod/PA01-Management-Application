@@ -36,7 +36,7 @@ namespace PA01_Management_Application.MVVM.View
             }
 
             // Perform additional password validation
-            if (!PasswordValidationFails(newPassword))
+            if (PasswordValidationFails(newPassword))
             {
                 MessageBox.Show("New password must contain at least one number, one uppercase letter, and be at least 8 characters long.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
