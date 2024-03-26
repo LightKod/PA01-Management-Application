@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PA01_Management_Application.MVVM.Model
 {
+
     public enum SeatType : int
     {
         None = -1,
@@ -48,5 +49,7 @@ namespace PA01_Management_Application.MVVM.Model
                  
             }
         }
+
+        
     }
 }

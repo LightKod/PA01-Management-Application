@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:PA01_Management_Application.MVVM.View"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10">
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Margin="10" Height="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="400" />
+            <RowDefinition Height="600" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Report Statistics" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0"/>

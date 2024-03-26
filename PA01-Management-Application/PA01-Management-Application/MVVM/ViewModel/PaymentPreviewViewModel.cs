@@ -221,6 +221,8 @@ namespace PA01_Management_Application.MVVM.ViewModel
             {
                 if (textBox.IsReadOnly) return;
 
+                MovieManagementContext context = new();
+
                 string messageBoxText = "Apply coupon successfully";
                 string caption = "Success";
                 MessageBoxButton button = MessageBoxButton.OK;
@@ -229,10 +231,18 @@ namespace PA01_Management_Application.MVVM.ViewModel
 
 
                 string txt = textBox.Text;
-                if(txt == "HAPPYBIRTHDAY")
+                Voucher voucher = context.Vouchers.FirstOrDefault(x => x.VoucherCode == txt);
+
+                if(txt == "HAPPYBIRTHDAY" && DateTime.Now.Day == UserData.userData.Birthday.Value.Day 
+                    && DateTime.Now.Month == UserData.userData.Birthday.Value.Month)
                 {
                     textBox.IsReadOnly = true;
-                    Discount = TotalPrice * 0.1f;
+                    Discount = TotalPrice * 0.2f;
+                    FinalPrice = TotalPrice - Discount;
+                }else if (voucher != null)
+                {
+                    textBox.IsReadOnly = true;
+                    Discount = TotalPrice * ((float)voucher.VoucherValue / 100f);
                     FinalPrice = TotalPrice - Discount;
                 }
                 else
@@ -281,5 +291,7 @@ namespace PA01_Management_Application.MVVM.ViewModel
                 }
             }
         }
+
+
     }
 }

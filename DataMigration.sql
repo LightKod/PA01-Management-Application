@@ -5569,22 +5569,22 @@ INSERT INTO Food (FoodName, FoodIdDescription, Price, ImagePath) VALUES(N'Combo 
 
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)
-VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un1', 'New York', NULL, NULL, NULL);
+VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un1', 'New York', NULL, 0, NULL);
 
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)
-VALUES ('ad1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 1, 'ad1', 'New York', NULL, NULL, NULL);
+VALUES ('ad1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 1, 'ad1', 'New York', NULL, 1, NULL);
 
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)
-VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un2', 'New York', NULL, NULL, NULL);
+VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un2', 'New York', NULL, 0, NULL);
 
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)
-VALUES ('ad1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 1, 'ad2', 'New York', NULL, NULL, NULL);
+VALUES ('ad1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 1, 'ad2', 'New York', NULL, 1, NULL);
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)
-VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un3', 'New York', NULL, NULL, NULL);
+VALUES ('un1', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, 'John Doe', '1990-01-01', 0, 'un3', 'New York', NULL, 0, NULL);
 
 
 INSERT INTO users (username, password, avatar, fullname, birthday, gender, email, city, phone, rules, point)

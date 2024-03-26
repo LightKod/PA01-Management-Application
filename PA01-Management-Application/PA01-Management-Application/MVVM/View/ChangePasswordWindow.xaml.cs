@@ -1,6 +1,7 @@
-﻿using PA01_Management_Application.MVVM.Model;
-using PA01_Management_Application.MVVM.ViewModel;
+﻿using PA01_Management_Application.MVVM.ViewModel;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PA01_Management_Application.MVVM.View
 {
@@ -34,20 +35,32 @@ namespace PA01_Management_Application.MVVM.View
                 return;
             }
 
-            Close();
+            // Perform additional password validation
+            if (!PasswordValidationFails(newPassword))
+            {
+                MessageBox.Show("New password must contain at least one number, one uppercase letter, and be at least 8 characters long.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            Close();
 
             bool passwordChanged = _viewModel.ChangePassword(oldPassword, newPassword);
 
             if (passwordChanged)
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close(); // Đóng cửa sổ sau khi thay đổi mật khẩu thành công
+                Close(); // Close the window after successfully changing the password
             }
             else
             {
                 MessageBox.Show("Failed to change password. Please check your old password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private bool PasswordValidationFails(string password)
+        {
+            
+            return !Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
         }
     }
 }

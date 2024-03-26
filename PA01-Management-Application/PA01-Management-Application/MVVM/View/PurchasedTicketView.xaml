@@ -15,15 +15,15 @@
             <StackPanel Margin="10">
                 <!-- Title Border -->
                 <Border Background="Black" CornerRadius="5" Margin="0 0 0 10">
-                    <TextBlock Text="Lịch sử giao dịch" FontWeight="Bold" Foreground="White" FontSize="25" TextAlignment="Center" Margin="10"/>
+                    <TextBlock Text="Transaction History" FontWeight="Bold" Foreground="White" FontSize="25" TextAlignment="Center" Margin="10"/>
                 </Border>
 
-                <!-- Thông tin vé -->
-                <TextBlock Text="Thông tin vé" Foreground="#e50914" Margin="20" FontSize="20" FontWeight="Bold"/>
+                <!-- Ticket Information -->
+                <TextBlock Text="Ticket Information" Foreground="#e50914" Margin="20" FontSize="20" FontWeight="Bold"/>
                 <Rectangle Fill="White" Height="1" Margin="20,0,20,20"/>
 
-                <!-- Danh sách thông tin vé -->
-                <ItemsControl ItemsSource="{Binding Films}">
+                <!-- List of Ticket Information -->
+                <ItemsControl ItemsSource="{Binding PurchasedTickets}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="White" BorderThickness="0,0,0,1" Margin="0 0 0 20" Padding="10">
@@ -35,70 +35,60 @@
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Mã đặt vé -->
-                                    <TextBlock Text="Mã đặt vé: " FontWeight="Bold" FontSize="14" Foreground="White" Margin="0 0 5 10" Grid.Row="0" Grid.Column="0" FontStyle="Italic"/>
+                                    <!-- Movie Poster -->
+                                    <Image Source="{Binding FilmPoster}" Width="120" Height="180" Stretch="UniformToFill" Margin="0 0 10 0" Grid.Column="0" Grid.RowSpan="3"/>
 
-                                    <!-- Binding Mã đặt vé -->
-                                    <TextBlock Text="{Binding BookingCode}" FontWeight="Bold" FontSize="14" Foreground="White" Margin="0 0 10 5" Grid.Row="0" Grid.Column="1" FontStyle="Italic"/>
-
-                                    <!-- Trạng thái -->
-                                    <TextBlock Text="Trạng thái: " FontWeight="Bold" FontSize="14" Foreground="White" Margin="0 0 5 10" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" FontStyle="Italic"/>
-
-                                    <!-- Poster phim -->
-                                    <Image Source="{Binding FilmPoster}" Width="120" Height="180" Stretch="UniformToFill" Margin="20 0" Grid.Column="0" Grid.Row="1"/>
-
-                                    <!-- Thông tin phim -->
-                                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,0,0,0">
+                                    <!-- Movie Information -->
+                                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="20,0,0,0">
                                         <TextBlock Text="{Binding FilmName}" FontWeight="Bold" FontSize="16" Foreground="White"/>
-                                        <TextBlock Text="{Binding FilmGenres}" Foreground="White" FontStyle="Italic"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Thời lượng: " FontWeight="Bold" Foreground="White"/>
+                                        <TextBlock Text="{Binding FilmGenres}" Foreground="White" FontStyle="Italic" Margin="0 5 0 5"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Duration: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding FilmDuration}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Đánh giá: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Rating: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding FilmRating}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Ngày phát hành: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Release Date: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding ReleaseDate}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Thời gian: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Time: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding Time}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Rạp chiếu: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Cinema: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding Cinema}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Địa điểm: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Location: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding CinemaLocation}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Ghế: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Seat: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding Seat}" Foreground="White"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Giá vé: " FontWeight="Bold" Foreground="White"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                                            <TextBlock Text="Price: " FontWeight="Bold" Foreground="White"/>
                                             <TextBlock Text="{Binding Price}" Foreground="White"/>
                                         </StackPanel>
                                     </StackPanel>
 
-                                    <!-- Xem chi tiết button -->
-                                    <Button Content="Xem chi tiết" HorizontalAlignment="Right" Margin="0 10" Grid.Row="2" Grid.ColumnSpan="3"
-        Background="#e50914" Foreground="White" FontWeight="Bold" BorderThickness="0" Padding="10"
-        Cursor="Hand">
+                                    <!-- View Details Button -->
+                                    <Button Content="View Details" HorizontalAlignment="Right" Margin="0 10" Grid.Row="2" Grid.ColumnSpan="2"
+                                            Background="#e50914" Foreground="White" FontWeight="Bold" BorderThickness="0" Padding="10"
+                                            Cursor="Hand" Click="ViewDetailsButton_Click">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        Padding="{TemplateBinding Padding}">
                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
@@ -125,9 +115,16 @@
                                 </Grid>
                             </Border>
                         </DataTemplate>
-
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+
+                <!-- Pagination Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Previous Page" Margin="5" Background="#e50914" Foreground="White" FontWeight="Bold"
+                            Padding="10" Cursor="Hand" Click="PreviousPage_Click"/>
+                    <Button Content="Next Page" Margin="5" Background="#e50914" Foreground="White" FontWeight="Bold"
+                            Padding="10" Cursor="Hand" Click="NextPage_Click"/>
+                </StackPanel>
             </StackPanel>
         </Border>
     </Grid>
