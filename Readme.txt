@@ -5,7 +5,7 @@
 - Đảm bảo rằng SQL Server đã được cài đặt trên thiết bị của bạn.
 - Khởi động SQL Server để chuẩn bị cho việc tạo và quản lý cơ sở dữ liệu.
 
-## Bước 2: Chạy file Data Migration
+## Bước 2: Chạy file Data Migration (db.sql)
 
 - Mở SQL Server Management Studio (SSMS) hoặc công cụ quản lý SQL Server khác.
 - Chạy file Data Migration để tạo hoặc cập nhật cơ sở dữ liệu cho ứng dụng Movie Management.
